@@ -219,6 +219,13 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
 
         #endregion
         // *******************************************************************************************************************************
+        #region -  ClearOrderHeldInventoriesAsync  -
+
+        public Task<string> ClearOrderHeldInventoriesAsync()
+            => base.TryExecuteAsync("INVSP_ClearOrderHeldInventories", commandType: CommandType.StoredProcedure);
+
+        #endregion
+        // *******************************************************************************************************************************
         #region -  GetInventories  -
 
         /// <summary>

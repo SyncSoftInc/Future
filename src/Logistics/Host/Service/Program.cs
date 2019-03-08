@@ -1,9 +1,9 @@
-﻿using SyncSoft.ECP.AspNetCore.Hosting;
+﻿using SyncSoft.ECP.Quartz.Hosting;
 
 namespace SyncSoft.Future.Logistics.Service
 {
     public class Program
     {
-        public static void Main(string[] args) => ECPHost.Run<Startup>(args);
+        public static void Main(string[] args) => QuartzHost.Run<Startup>(args);
     }
 }

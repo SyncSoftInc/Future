@@ -115,6 +115,16 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
 
         #endregion
         // *******************************************************************************************************************************
+        #region -  MyRegion  -
+
+        /// <summary>
+        /// 清理数量为0的订单锁定库存数据
+        /// </summary>
+        public Task<string> ClearOrderHeldInventoriesAsync()
+            => _InventoryMasterDAL.ClearOrderHeldInventoriesAsync();
+
+        #endregion
+        // *******************************************************************************************************************************
         #region -  Validation  -
 
         /// <summary>

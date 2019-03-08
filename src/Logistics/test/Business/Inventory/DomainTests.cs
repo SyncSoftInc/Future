@@ -131,7 +131,7 @@ namespace SyncSoft.Future.Logistics.BusinessTest.Inventory
             var items = _inventories.DeepClone();
             foreach (var item in items)
             {
-                item.Qty = 90;
+                item.Qty = 100;
             }
 
             var cmd = new InventoryShipConfirmCommand
@@ -150,7 +150,7 @@ namespace SyncSoft.Future.Logistics.BusinessTest.Inventory
         // *******************************************************************************************************************************
         #region -  UnholdInventories  -
 
-        [Test, Order(2)]
+        [Test, Order(30)]
         public void UnholdOrderInventories()
         {
             var items = _inventories.DeepClone();
@@ -164,6 +164,17 @@ namespace SyncSoft.Future.Logistics.BusinessTest.Inventory
             };
 
             var msgCode = _InventoryService.UnholdOrderInventoriesAsync(cmd).Execute();
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+        }
+
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  UnholdInventories  -
+
+        [Test, Order(150)]
+        public void ClearOrderHeldInventories()
+        {
+            var msgCode = _InventoryService.ClearOrderHeldInventoriesAsync().Execute();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 

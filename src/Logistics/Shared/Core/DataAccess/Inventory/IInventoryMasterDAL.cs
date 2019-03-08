@@ -29,6 +29,11 @@ namespace SyncSoft.Future.Logistics.DataAccess.Inventory
         Task<IList<InventoryDTO>> InventoryShipCancelAsync(InventoryShipCancelCommand cmd);
 
         /// <summary>
+        /// 清理数量为0的订单锁定库存数据
+        /// </summary>
+        Task<string> ClearOrderHeldInventoriesAsync();
+
+        /// <summary>
         /// 批量获取库存
         /// </summary>
         Task<IList<InventoryDTO>> GetInventoriesAsync(string merchantId, IEnumerable<string> upcs);

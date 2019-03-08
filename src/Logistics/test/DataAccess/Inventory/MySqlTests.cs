@@ -234,5 +234,17 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest.Inventory
         }
 
         #endregion
+
+        // *******************************************************************************************************************************
+        #region -  GetAvailableInventories  -
+
+        [Test, Order(150)]
+        public void ClearOrderHeldInventories()
+        {
+            var msgCode = _InventoryMasterDAL.ClearOrderHeldInventoriesAsync().Execute();
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+        }
+
+        #endregion
     }
 }
