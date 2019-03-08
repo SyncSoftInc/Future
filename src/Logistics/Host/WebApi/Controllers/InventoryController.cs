@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SyncSoft.App.Components;
 using SyncSoft.ECP.AspNetCore.Mvc.Controllers;
 using SyncSoft.Future.Logistics.Command.Inventory;
+using SyncSoft.Future.Logistics.DataFacade.Inventory;
+using System;
 using System.Threading.Tasks;
 
 namespace SyncSoft.Future.Logistics.WebApi.Controllers
@@ -8,12 +11,49 @@ namespace SyncSoft.Future.Logistics.WebApi.Controllers
     [ApiController]
     public class InventoryController : ApiController
     {
-        //[HttpPost("inventories}")]
-        //public Task<string> AddInventoriesAsync(AddInventoriesCommand cmd)
-        //    => base.PublishMsgCodeAsync(cmd);
+        // *******************************************************************************************************************************
+        #region -  Lazy Object(s)  -
 
-        //[HttpDelete("inventories}")]
-        //public Task<string> DeductInventoriesAsync(DeductInventoriesCommand cmd)
-        //    => base.PublishMsgCodeAsync(cmd);
+        private static readonly Lazy<IInventoryDF> _lazyInventoryDF = ObjectContainer.LazyResolve<IInventoryDF>();
+        private IInventoryDF _InventoryDF => _lazyInventoryDF.Value;
+
+        #endregion
+
+        /// <summary>
+        /// Allocate inventories.
+        /// </summary>
+        [HttpPost("inventories")]
+        public Task<string> AllocateInventoriesAsync(AllocateInventoriesCommand cmd)
+            => base.SendMsgCodeAsync(cmd);
+
+        /// <summary>
+        /// Hold order inventory.
+        /// </summary>
+        [HttpPost("inventories/orderhold")]
+        public Task<string> HoldOrderInventoriesAsync(HoldOrderInventoriesCommand cmd)
+            => base.SendMsgCodeAsync(cmd);
+
+        /// <summary>
+        /// Unhold order inventory.
+        /// </summary>
+        [HttpDelete("inventories/orderhold")]
+        public Task<string> UnholdOrderInventoriesAsync(UnholdOrderInventoriesCommand cmd)
+            => base.SendMsgCodeAsync(cmd);
+
+        /// <summary>
+        /// Ship confirm, deduct onhand and safe inventory.
+        /// </summary>
+        [HttpPost("inventories/shipment")]
+        public Task<string> UnholdOrderInventoriesAsync(InventoryShipConfirmCommand cmd)
+            => base.SendMsgCodeAsync(cmd);
+
+        /// <summary>
+        /// Get available inventory
+        /// </summary>
+        /// <param name="merchantId">Merchant ID</param>
+        /// <param name="upc">UPC</param>
+        [HttpGet("inventory")]
+        public Task<int> GetAvailableInventoryAsync(string merchantId, string upc)
+            => _InventoryDF.GetAvailableInventoryAsync(merchantId, upc);
     }
 }

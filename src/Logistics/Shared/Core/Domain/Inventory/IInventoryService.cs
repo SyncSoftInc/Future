@@ -5,9 +5,21 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
 {
     public interface IInventoryService
     {
+        /// <summary>
+        /// 分配库存
+        /// </summary>
         Task<string> AllocateInventoriesAsync(AllocateInventoriesCommand cmd);
+        /// <summary>
+        /// 锁定订单库存
+        /// </summary>
         Task<string> HoldOrderInventoriesAsync(HoldOrderInventoriesCommand cmd);
+        /// <summary>
+        /// 解锁订单库存
+        /// </summary>
         Task<string> UnholdOrderInventoriesAsync(UnholdOrderInventoriesCommand cmd);
+        /// <summary>
+        /// 库存出运确认
+        /// </summary>
         Task<string> InventoryShipConfirmAsync(InventoryShipConfirmCommand cmd);
     }
 }

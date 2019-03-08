@@ -1,6 +1,6 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.EngineConfigs;
-using SyncSoft.Future.Logistics.DataFacade;
+using SyncSoft.Future.Logistics.DataFacade.Inventory;
 using SyncSoft.Future.Logistics.DataFacade.Warehouse;
 
 namespace SyncSoft.App
@@ -13,6 +13,7 @@ namespace SyncSoft.App
             {
                 configurator.Engine.Starting += (o, e) =>
                 {
+                    ObjectContainer.Register<IInventoryDF, InventoryDF>(LifeCycleEnum.Singleton);
                     ObjectContainer.Register<IWarehouseDF, WarehouseDF>(LifeCycleEnum.Singleton);
                 };
             }

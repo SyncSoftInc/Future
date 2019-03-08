@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SyncSoft.ECP.Quartz" Version="2.9.2-alpha3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Host\Core\SyncSoft.Future.Host.csproj" />
     <ProjectReference Include="..\..\Business\CommandHandler\SyncSoft.Future.Logistics.CommandHandler.csproj" />
     <ProjectReference Include="..\..\DataAccess\MySql\SyncSoft.Future.Logistics.MySql.csproj" />

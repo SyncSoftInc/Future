@@ -1,6 +1,6 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.EngineConfigs;
-using SyncSoft.Future.Logistics.API;
+using SyncSoft.Future.Logistics.API.Inventory;
 using SyncSoft.Future.Logistics.API.Warehouse;
 
 namespace SyncSoft.App
@@ -13,6 +13,7 @@ namespace SyncSoft.App
             {
                 configurator.Engine.Starting += (o, e) =>
                 {
+                    ObjectContainer.Register<IInventoryApi, InventoryApi>(LifeCycleEnum.Singleton);
                     ObjectContainer.Register<IWarehouseApi, WarehouseApi>(LifeCycleEnum.Singleton);
                 };
             }

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App;
 
-namespace SyncSoft.Future.Passport.IntegratedTest
+namespace SyncSoft.Future.Passport.DataAccessTest
 {
     [SetUpFixture]
     public class Setup
@@ -11,7 +11,7 @@ namespace SyncSoft.Future.Passport.IntegratedTest
         {
             TestEngine.Init()
                 .UseFutureRedis()
-                .UsePassportAPI()
+                .UsePassportMySql()
                 .Start();
         }
 

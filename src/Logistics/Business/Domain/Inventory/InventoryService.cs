@@ -25,6 +25,12 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
         // *******************************************************************************************************************************
         #region -  AllocateInventories  -
 
+        /// <summary>
+        /// 分配库存
+        /// </summary>
+        /// <remarks>
+        /// 插入库存Qty和SafeQty，如果已经存在则直接更新
+        /// </remarks>
         public async Task<string> AllocateInventoriesAsync(AllocateInventoriesCommand cmd)
         {
             var msgCode = ValidateCommand(cmd);
@@ -50,6 +56,9 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
         // *******************************************************************************************************************************
         #region -  HoldInventories  -
 
+        /// <summary>
+        /// 锁定订单库存
+        /// </summary>
         public async Task<string> HoldOrderInventoriesAsync(HoldOrderInventoriesCommand cmd)
         {
             var msgCode = ValidateCommand(cmd);
@@ -70,6 +79,9 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
         // *******************************************************************************************************************************
         #region -  UnholdInventories  -
 
+        /// <summary>
+        /// 解锁订单库存
+        /// </summary>
         public async Task<string> UnholdOrderInventoriesAsync(UnholdOrderInventoriesCommand cmd)
         {
             var msgCode = ValidateCommand(cmd);
@@ -84,8 +96,11 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
 
         #endregion
         // *******************************************************************************************************************************
-        #region -  InventoryShipConfirmCommand  -
+        #region -  InventoryShipConfirm  -
 
+        /// <summary>
+        /// 库存出运确认
+        /// </summary>
         public async Task<string> InventoryShipConfirmAsync(InventoryShipConfirmCommand cmd)
         {
             var msgCode = ValidateCommand(cmd);

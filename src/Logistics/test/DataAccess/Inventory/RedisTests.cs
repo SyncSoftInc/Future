@@ -26,13 +26,13 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest.Inventory
         };
 
         [Test, Order(0)]
-        public void UpdateInventories()
+        public void SyncInventories()
         {
             _InventorySlaveDAL.SyncInventoriesAsync("AAA", _dic.ToKeyValuePairs()).Execute();
         }
 
         [Test, Order(1)]
-        public void GetInventories()
+        public void GetAvailableInventories()
         {
             var inventories = _InventorySlaveDAL.GetAvailableInventoriesAsync("AAA", _dic.Keys.ToArray()).Execute();
 
@@ -40,7 +40,7 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest.Inventory
         }
 
         [Test, Order(2)]
-        public void GetInventory()
+        public void GetAvailableInventory()
         {
             var qty = _InventorySlaveDAL.GetAvailableInventoryAsync("AAA", "EEE").Execute();
 

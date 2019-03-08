@@ -29,7 +29,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="SyncSoft.ECP.AspNetCore" Version="2.9.2-alpha3" />
+    <PackageReference Include="SyncSoft.ECP.AspNetCore" Version="2.9.2-alpha5" />
     <PackageReference Include="SyncSoft.ECP.MongoDB" Version="2.9.0" />
   </ItemGroup>
 

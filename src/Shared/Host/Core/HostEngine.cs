@@ -3,6 +3,7 @@ using SyncSoft.App;
 using SyncSoft.App.EngineConfigs;
 using SyncSoft.App.Redis.Confgiguration;
 using SyncSoft.App.Securities;
+using SyncSoft.ECP.Securities;
 
 namespace SyncSoft.Future
 {
@@ -23,6 +24,7 @@ namespace SyncSoft.Future
                     options.ConfigECPSecurityComponentsOptions = a =>
                     {
                         a.CoreCertProviderType = typeof(ConfigurationCoreCertProvider);
+                        a.PasswordEncryptorType = typeof(Sha256PasswordEncryptor);
                     };
                 })
                 .UseECPAspNetCore(resourceName)
