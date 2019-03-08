@@ -3,10 +3,10 @@
     "profiles": {
         "SyncSoft.Future.Logistics.Service": {
             "commandName": "Project",
-            "commandLineArgs": "--port:6002",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
-            }
+            },
+            "applicationUrl": "http://localhost:6002"
         }
     }
 }
