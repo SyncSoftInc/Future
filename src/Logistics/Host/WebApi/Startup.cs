@@ -9,7 +9,7 @@ namespace SyncSoft.Future.Logistics.WebApi
 {
     public class Startup : SerilogStartup
     {
-        private const string RESOURE_NAME = "warehouseapi";
+        private const string RESOURE_NAME = "logisticsapi";
 
         public Startup(IConfiguration configuration)
             : base(configuration)
