@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ss.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Certificate\ss.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SyncSoft.ECP" Version="2.9.2-alpha3" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.438
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future", "Core\SyncSoft.Future.csproj", "{1B4AFBAB-2DAE-42DB-8679-CA6525E4A9B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.MySql", "DataAccess\MySql\SyncSoft.Future.MySql.csproj", "{B25D7350-17BE-4CC2-AF99-8781E8B58040}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Redis", "DataAccess\Redis\SyncSoft.Future.Redis.csproj", "{2F269944-3256-41F5-91EE-61D5FDEFEE6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Host", "Host\Core\SyncSoft.Future.Host.csproj", "{97BE858C-D4F2-41A3-BAAB-1820013888FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Serilog", "Log\Serilog\SyncSoft.Future.Serilog.csproj", "{FD467BD5-F0CC-4066-A663-1DBC98FE9935}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.NUnit", "Test\NUnit\SyncSoft.Future.NUnit.csproj", "{215ACECD-20FC-410E-B9F6-44B48285ABB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B4AFBAB-2DAE-42DB-8679-CA6525E4A9B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4AFBAB-2DAE-42DB-8679-CA6525E4A9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4AFBAB-2DAE-42DB-8679-CA6525E4A9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B4AFBAB-2DAE-42DB-8679-CA6525E4A9B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25D7350-17BE-4CC2-AF99-8781E8B58040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25D7350-17BE-4CC2-AF99-8781E8B58040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25D7350-17BE-4CC2-AF99-8781E8B58040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25D7350-17BE-4CC2-AF99-8781E8B58040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F269944-3256-41F5-91EE-61D5FDEFEE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F269944-3256-41F5-91EE-61D5FDEFEE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F269944-3256-41F5-91EE-61D5FDEFEE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F269944-3256-41F5-91EE-61D5FDEFEE6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97BE858C-D4F2-41A3-BAAB-1820013888FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97BE858C-D4F2-41A3-BAAB-1820013888FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97BE858C-D4F2-41A3-BAAB-1820013888FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97BE858C-D4F2-41A3-BAAB-1820013888FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD467BD5-F0CC-4066-A663-1DBC98FE9935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD467BD5-F0CC-4066-A663-1DBC98FE9935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD467BD5-F0CC-4066-A663-1DBC98FE9935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD467BD5-F0CC-4066-A663-1DBC98FE9935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{215ACECD-20FC-410E-B9F6-44B48285ABB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{215ACECD-20FC-410E-B9F6-44B48285ABB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{215ACECD-20FC-410E-B9F6-44B48285ABB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{215ACECD-20FC-410E-B9F6-44B48285ABB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24B994BE-ACE2-48DA-88A4-FA9BC0BE9B0C}
+	EndGlobalSection
+EndGlobal

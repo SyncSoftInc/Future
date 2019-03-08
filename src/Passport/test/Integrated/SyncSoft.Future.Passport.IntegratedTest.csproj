@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\DataAccess\Redis\SyncSoft.Future.Redis.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Test\NUnit\SyncSoft.Future.NUnit.csproj" />
+    <ProjectReference Include="..\..\Client\API\SyncSoft.Future.Passport.API.csproj" />
+    <ProjectReference Include="..\..\Shared\Core\SyncSoft.Future.Passport.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

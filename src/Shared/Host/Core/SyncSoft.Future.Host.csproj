@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SyncSoft.App.RabbitMQ" Version="2.9.2-alpha3" />
+    <PackageReference Include="SyncSoft.ECP.Quartz" Version="2.9.2-alpha3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataAccess\Redis\SyncSoft.Future.Redis.csproj" />
+    <ProjectReference Include="..\..\Log\Serilog\SyncSoft.Future.Serilog.csproj" />
+  </ItemGroup>
+
+</Project>

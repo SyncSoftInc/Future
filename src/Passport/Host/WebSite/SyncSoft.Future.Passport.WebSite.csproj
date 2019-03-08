@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\html\iframeBg\dl\lazysizes.min.js" />
+    <None Include="wwwroot\html\iframeBg\dl\picturefill.min.js" />
+    <None Include="wwwroot\html\iframeBg\olx\lazysizes.min.js" />
+    <None Include="wwwroot\html\iframeBg\olx\picturefill.min.js" />
+    <None Include="wwwroot\img\login_mobile_bg.webp" />
+    <None Include="wwwroot\img\login_pc_bg.webp" />
+    <None Include="wwwroot\js.source\form2.js" />
+    <None Include="wwwroot\js.source\jquery-2.2.0.min.js" />
+    <None Include="wwwroot\js.source\jquery.validate.ex.js" />
+    <None Include="wwwroot\js.source\jquery.validate.js" />
+    <None Include="wwwroot\js.source\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\js.source\signout-redirect.js" />
+    <None Include="wwwroot\js.source\svg4everybody.js" />
+    <None Include="wwwroot\js\jquery.validate.js" />
+    <None Include="wwwroot\js\jquery.validate.min.js" />
+    <None Include="wwwroot\js\signout-redirect.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\site.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="SyncSoft.ECP.AspNetCore" Version="2.9.2-alpha3" />
+    <PackageReference Include="SyncSoft.ECP.MongoDB" Version="2.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\DataAccess\Redis\SyncSoft.Future.Redis.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Host\Core\SyncSoft.Future.Host.csproj" />
+    <ProjectReference Include="..\..\Business\CommandHandler\SyncSoft.Future.Passport.CommandHandler.csproj" />
+    <ProjectReference Include="..\..\Business\Domain\SyncSoft.Future.Passport.Domain.csproj" />
+    <ProjectReference Include="..\..\DataAccess\MySql\SyncSoft.Future.Passport.MySql.csproj" />
+  </ItemGroup>
+
+</Project>

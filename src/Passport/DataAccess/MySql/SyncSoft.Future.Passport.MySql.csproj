@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\DataAccess\MySql\SyncSoft.Future.MySql.csproj" />
+    <ProjectReference Include="..\..\..\Shared\DataAccess\Redis\SyncSoft.Future.Redis.csproj" />
+    <ProjectReference Include="..\..\Shared\Core\SyncSoft.Future.Passport.csproj" />
+  </ItemGroup>
+
+</Project>
