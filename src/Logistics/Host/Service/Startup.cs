@@ -9,7 +9,7 @@ namespace SyncSoft.Future.Logistics.Service
 {
     public class Startup : SerilogStartup
     {
-        private const string RESOURE_NAME = "warehousesvc";
+        private const string RESOURE_NAME = "logisticssvc";
 
         public Startup(IConfiguration configuration) : base(configuration)
         {
