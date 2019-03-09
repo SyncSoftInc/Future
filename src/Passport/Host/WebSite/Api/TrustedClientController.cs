@@ -31,7 +31,7 @@ namespace SyncSoft.Future.Passport.Api
         /// <summary>
         /// 验证用户名密码
         /// </summary>
-        [HttpPost("account/verify")]
+        [HttpPost("account/verification")]
         public Task<AccountDTO> VerifyUsernamePasswordAsync(VerifyUsernamePasswordCommand cmd)
             => RequestAsync<VerifyUsernamePasswordCommand, AccountDTO>(cmd);
 

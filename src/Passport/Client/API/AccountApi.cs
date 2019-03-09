@@ -77,6 +77,6 @@ namespace SyncSoft.Future.Passport.API
         }
 
         public Task<HttpResult<AccountDTO>> VerifyUsernamePasswordAsync(object cmd)
-            => base.PostAsync<AccountDTO>(BearerAuthModeEnum.Client, "account/verify", cmd);
+            => base.PostAsync<AccountDTO>(BearerAuthModeEnum.Client, "account/verification", cmd);
     }
 }
