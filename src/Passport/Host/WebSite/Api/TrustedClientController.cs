@@ -32,14 +32,31 @@ namespace SyncSoft.Future.Passport.Api
         /// 验证用户名密码
         /// </summary>
         [HttpPost("account/verification")]
-        public Task<AccountDTO> VerifyUsernamePasswordAsync(VerifyUsernamePasswordCommand cmd)
+        public Task<AccountDTO> VerifyUsernamePassword(VerifyUsernamePasswordCommand cmd)
             => RequestAsync<VerifyUsernamePasswordCommand, AccountDTO>(cmd);
 
         /// <summary>
-        /// 创建账户
+        /// Account login
         /// </summary>
-        [HttpPost("account")]
-        public Task<string> CreateAccountAsync(CreateAccountCommand cmd)
-            => RequestMsgCodeAsync(cmd);
+        [HttpPost("account/login")]
+        public Task<string> Login(LoginCommand cmd) => RequestMsgCodeAsync(cmd);
+
+        /// <summary>
+        /// Reset Account password
+        /// </summary>
+        [HttpPut("account/password")]
+        public Task<string> ResetPassword(ResetPasswordCommand cmd) => RequestMsgCodeAsync(cmd);
+
+        /// <summary>
+        /// Create Account login token
+        /// </summary>
+        [HttpPost("account/loginToken")]
+        public Task<string> CreateLoginToken(CreateLoginTokenCommand cmd) => RequestMsgCodeAsync(cmd);
+
+        /// <summary>
+        /// Create Account reset password token
+        /// </summary>
+        [HttpPost("account/passwordToken")]
+        public Task<string> CreateResetPasswordToken(CreateResetPasswordTokenCommand cmd) => RequestMsgCodeAsync(cmd);
     }
 }

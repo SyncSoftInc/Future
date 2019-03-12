@@ -15,68 +15,43 @@ namespace SyncSoft.Future.Passport.API
         public Task<HttpResult<string>> CreateAccountAsync(object cmd)
             => base.PostAsync<string>(BearerAuthModeEnum.Client, "account", cmd);
 
+        public Task<HttpResult<string>> DeleteAccountAsync(object cmd)
+            => base.DeleteAsync<string>(BearerAuthModeEnum.Client, "account", cmd);
+
         public Task<HttpResult<string>> ChangePasswordAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PatchAsync<string>(BearerAuthModeEnum.Client, "account/password", cmd);
 
         public Task<HttpResult<string>> ChangePasswordDirectlyAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PostAsync<string>(BearerAuthModeEnum.Client, "account/password", cmd);
 
         public Task<HttpResult<string>> ChangeStatusAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PatchAsync<string>(BearerAuthModeEnum.Client, "account/status", cmd);
 
         public Task<HttpResult<string>> ChangeUsernameDirectlyAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
-
+            => base.PatchAsync<string>(BearerAuthModeEnum.Client, "account/username", cmd);
 
         public Task<HttpResult<string>> CreateLoginTokenAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PostAsync<string>(BearerAuthModeEnum.Client, "account/loginToken", cmd);
 
         public Task<HttpResult<string>> CreateResetPasswordTokenAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<HttpResult<string>> DeleteAccountAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<HttpResult<AccountDTO>> GetAccountAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<HttpResult<AccountDTO>> GetAccountAsync(string username)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PostAsync<string>(BearerAuthModeEnum.Client, "account/passwordToken", cmd);
 
         public Task<HttpResult<MsgResult<AccountDTO>>> LoginAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PostAsync<MsgResult<AccountDTO>>(BearerAuthModeEnum.Client, "account/login", cmd);
 
         public Task<HttpResult<string>> ResetLoginFailedCountAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PatchAsync<string>(BearerAuthModeEnum.Client, "account/failedCount", cmd);
 
         public Task<HttpResult<string>> ResetPasswordAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PutAsync<string>(BearerAuthModeEnum.Client, "account/password", cmd);
 
         public Task<HttpResult<AccountDTO>> VerifyUsernamePasswordAsync(object cmd)
             => base.PostAsync<AccountDTO>(BearerAuthModeEnum.Client, "account/verification", cmd);
+
+        public Task<HttpResult<AccountDTO>> GetAccountAsync(Guid id)
+            => base.GetAsync<AccountDTO>(BearerAuthModeEnum.Client, "account", id);
+
+        public Task<HttpResult<AccountDTO>> GetAccountAsync(string username)
+            => base.GetAsync<AccountDTO>(BearerAuthModeEnum.Client, "account", username);
     }
 }
