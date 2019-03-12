@@ -15,9 +15,9 @@ namespace SyncSoft.Future.Logistics.Service
         {
             HostEngine.Init(configuration, RESOURE_NAME)
                 .UseQuartz()
-                .UseWarehouseRedis()
-                .UseWarehouseDomain()
-                .UseWarehouseMySql()
+                .UseLogisticsRedis()
+                .UseLogisticsDomain()
+                .UseLogisticsMySql()
                 .Start();
         }
 

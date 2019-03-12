@@ -3,7 +3,7 @@
 namespace SyncSoft.Future.Enum.User
 {
     [Flags]
-    public enum ShowRoleEnum
+    public enum UserRoleEnum
     {
         TrustedClient = (int)ECP.Enums.User.UserRoleEnum.TrustedClient,
         PublicClient = (int)ECP.Enums.User.UserRoleEnum.PublicClient,

@@ -13,6 +13,8 @@ namespace SyncSoft.App
                 {
                     ObjectContainer.Register<SyncSoft.ECP.Domains.Account.IAccountService, SyncSoft.Future.Passport.Domain.AccountService>(LifeCycleEnum.Singleton);
                     ObjectContainer.Register<SyncSoft.Future.Passport.Domain.IAccountService, SyncSoft.Future.Passport.Domain.AccountService>(LifeCycleEnum.Singleton);
+
+                    ObjectContainer.Register<SyncSoft.Future.Passport.Domain.IUserService, SyncSoft.Future.Passport.Domain.UserService>(LifeCycleEnum.Singleton);
                 };
             }
 

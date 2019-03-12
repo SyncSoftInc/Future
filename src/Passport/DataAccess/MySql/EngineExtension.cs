@@ -1,6 +1,7 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.EngineConfigs;
 using SyncSoft.ECP.DALs.Account;
+using SyncSoft.ECP.Identity;
 using SyncSoft.Future.Passport.MySql;
 using System;
 
@@ -22,6 +23,7 @@ namespace SyncSoft.App
                     ObjectContainer.Register<IPassportDB>(() => new PassportDB(options.ConnStrName), LifeCycleEnum.Singleton);
 
                     ObjectContainer.Register<IAccountDAL, AccountDAL>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<IUserProfileProvider, UserDAL>(LifeCycleEnum.Singleton);
                 };
             }
 

@@ -6,7 +6,7 @@ namespace SyncSoft.App
 {
     public static class EngineExtension
     {
-        public static CommonConfigurator UseWarehouseCore(this CommonConfigurator configurator)
+        public static CommonConfigurator UseLogisticsCore(this CommonConfigurator configurator)
         {
             if (!Engine.IsStarted)
             {

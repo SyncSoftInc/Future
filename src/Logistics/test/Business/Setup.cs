@@ -10,9 +10,9 @@ namespace SyncSoft.Future.Logistics.BusinessTest
         public static void Startup()
         {
             TestEngine.Init()
-                .UseWarehouseDomain()
-                .UseWarehouseRedis()
-                .UseWarehouseMySql()
+                .UseLogisticsDomain()
+                .UseLogisticsRedis()
+                .UseLogisticsMySql()
                 .Start();
         }
 

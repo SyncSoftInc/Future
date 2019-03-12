@@ -7,7 +7,7 @@ namespace SyncSoft.App
 {
     public static class EngineExtensions
     {
-        public static CommonConfigurator UseWarehouseRedis(this CommonConfigurator configurator)
+        public static CommonConfigurator UseLogisticsRedis(this CommonConfigurator configurator)
         {
             configurator.UseFutureRedis();
 

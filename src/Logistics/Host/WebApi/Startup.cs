@@ -15,9 +15,9 @@ namespace SyncSoft.Future.Logistics.WebApi
             : base(configuration)
         {
             HostEngine.Init(configuration, RESOURE_NAME)
-                .UseWarehouseRedis()
-                .UseWarehouseMySql()
-                .UseWarehouseDF()
+                .UseLogisticsRedis()
+                .UseLogisticsMySql()
+                .UseLogisticsDF()
                 .Start();
         }
 

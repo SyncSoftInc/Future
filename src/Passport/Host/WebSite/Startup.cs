@@ -13,12 +13,16 @@ namespace SyncSoft.Future.Passport
 
         public Startup(IConfiguration configuration) : base(configuration)
         {
-            HostEngine.Init(configuration, RESOURE_NAME, false)
+            HostEngine.Init(configuration
+                , RESOURE_NAME
+                , useRabbitMQ: false                    // 简化Passport部署
+                , allowOverridingRegistrations: true    // 重载了IUserProfileProvider
+            )
                 .UseApiClient()
                 .UseMongoDBGrantStore(options => options.GrantStoreConnStrName = "MONGO_PASSPORT")
                 .UseFutureRedis()
-                .UsePassportMySql()
                 .UsePassportDomain()
+                .UsePassportMySql()
                 .Start();
         }
 

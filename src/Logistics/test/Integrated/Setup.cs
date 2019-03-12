@@ -10,9 +10,9 @@ namespace SyncSoft.Future.Logistics.IntegratedTest
         public static void Startup()
         {
             TestEngine.Init()
-                .UseWarehouseRedis()
-                .UseWarehouseAPI()
-                .UseWarehouseCore()
+                .UseLogisticsRedis()
+                .UseLogisticsApi()
+                .UseLogisticsCore()
                 .Start();
         }
 
