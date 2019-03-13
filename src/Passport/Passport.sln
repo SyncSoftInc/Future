@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Passport.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Passport.BusinessTest", "test\Business\SyncSoft.Future.Passport.BusinessTest.csproj", "{83D6372E-C263-4C13-9E3D-B8F4A7DAD595}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Passport.DataFacade", "DataAccess\DataFacade\SyncSoft.Future.Passport.DataFacade.csproj", "{B752673B-5566-4C8D-8727-EC95BB158D12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{83D6372E-C263-4C13-9E3D-B8F4A7DAD595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83D6372E-C263-4C13-9E3D-B8F4A7DAD595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83D6372E-C263-4C13-9E3D-B8F4A7DAD595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B752673B-5566-4C8D-8727-EC95BB158D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B752673B-5566-4C8D-8727-EC95BB158D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B752673B-5566-4C8D-8727-EC95BB158D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B752673B-5566-4C8D-8727-EC95BB158D12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{8D539056-9276-4654-A4E5-C3FC39BC4145} = {37EFA8A0-5615-4593-91EA-DAC893316CE7}
 		{3A592DD6-18BD-47ED-A945-C2711C2CAB9A} = {C852C064-F0C2-4AC6-BEEE-309A329273DA}
 		{83D6372E-C263-4C13-9E3D-B8F4A7DAD595} = {C852C064-F0C2-4AC6-BEEE-309A329273DA}
+		{B752673B-5566-4C8D-8727-EC95BB158D12} = {2122395B-FE35-402F-8118-F198A8711E57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ADF17528-7506-4641-BE58-AD5D9DECF674}

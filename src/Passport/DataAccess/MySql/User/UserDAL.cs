@@ -1,7 +1,8 @@
 ﻿using SyncSoft.ECP;
-using SyncSoft.ECP.DTOs.Users;
 using SyncSoft.ECP.Identity;
 using SyncSoft.ECP.MySql;
+using SyncSoft.Future.DTO.User;
+using SyncSoft.Future.Passport.DAL.User;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SyncSoft.Future.Passport.MySql
 {
-    public class UserDAL : ECPMySqlDAL, IUserProfileProvider
+    public class UserDAL : ECPMySqlDAL, IUserProfileProvider, IUserDAL
     {
         // *******************************************************************************************************************************
         #region -  Constructor(s)  -
@@ -26,8 +27,7 @@ namespace SyncSoft.Future.Passport.MySql
         {
             var claims = new List<Claim>(7);
 
-            var mr = await base.TryQueryFirstOrDefaultAsync<UserBasicInfoDTO>("SELECT * FROM SYS_Users WHERE ID = @ID", new { ID = userId }).ConfigureAwait(false);
-            var dto = mr.Result;
+            var dto = await GetUserAsync(new Guid(userId)).ConfigureAwait(false);
             if (null != dto)
             {
                 // 添加角色
@@ -87,6 +87,16 @@ namespace SyncSoft.Future.Passport.MySql
             }
 
             return claims;
+        }
+
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  GetUserAsync  -
+
+        public async Task<UserDTO> GetUserAsync(Guid id)
+        {
+            var mr = await base.TryQueryFirstOrDefaultAsync<UserDTO>("SELECT * FROM SYS_Users WHERE ID = @ID", new { ID = id }).ConfigureAwait(false);
+            return mr.Result;
         }
 
         #endregion

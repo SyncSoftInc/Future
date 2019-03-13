@@ -1,7 +1,7 @@
-﻿using SyncSoft.Future.Passport.Command;
+﻿using SyncSoft.Future.Passport.Command.User;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.Domain
+namespace SyncSoft.Future.Passport.Domain.User
 {
     public interface IUserService
     {

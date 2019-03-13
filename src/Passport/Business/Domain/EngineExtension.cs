@@ -11,10 +11,10 @@ namespace SyncSoft.App
             {
                 configurator.Engine.Starting += (o, e) =>
                 {
-                    ObjectContainer.Register<SyncSoft.ECP.Domains.Account.IAccountService, SyncSoft.Future.Passport.Domain.AccountService>(LifeCycleEnum.Singleton);
-                    ObjectContainer.Register<SyncSoft.Future.Passport.Domain.IAccountService, SyncSoft.Future.Passport.Domain.AccountService>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<SyncSoft.ECP.Domains.Account.IAccountService, SyncSoft.Future.Passport.Domain.Account.AccountService>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<SyncSoft.Future.Passport.Domain.Account.IAccountService, SyncSoft.Future.Passport.Domain.Account.AccountService>(LifeCycleEnum.Singleton);
 
-                    ObjectContainer.Register<SyncSoft.Future.Passport.Domain.IUserService, SyncSoft.Future.Passport.Domain.UserService>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<SyncSoft.Future.Passport.Domain.User.IUserService, SyncSoft.Future.Passport.Domain.User.UserService>(LifeCycleEnum.Singleton);
                 };
             }
 

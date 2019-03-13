@@ -3,10 +3,11 @@ using SyncSoft.App.Http;
 using SyncSoft.App.WebApi.Auth;
 using SyncSoft.ECP.DTOs.Account;
 using SyncSoft.ECP.WebApi.ApiProxies;
+using SyncSoft.Future.Passport.API.Account;
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.API
+namespace SyncSoft.Future.Passport.API.Account
 {
     public class AccountApi : ECPApiProxyBase, IAccountApi
     {

@@ -1,7 +1,7 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.Messaging;
-using SyncSoft.Future.Passport.Command;
-using SyncSoft.Future.Passport.Domain;
+using SyncSoft.Future.Passport.Command.User;
+using SyncSoft.Future.Passport.Domain.User;
 using System;
 using System.Threading.Tasks;
 
