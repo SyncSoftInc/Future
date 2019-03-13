@@ -5,6 +5,7 @@ using SyncSoft.Future.DTO.User;
 using SyncSoft.Future.Passport.DAL.User;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -93,27 +94,18 @@ namespace SyncSoft.Future.Passport.MySql
         // *******************************************************************************************************************************
         #region -  GetUserAsync  -
 
-        public Task<string> InsertUserAsync(UserDTO dto)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<UserDTO> GetUserAsync(Guid id)
         {
             var mr = await base.TryQueryFirstOrDefaultAsync<UserDTO>("SELECT * FROM SYS_Users WHERE ID = @ID", new { ID = id }).ConfigureAwait(false);
             return mr.Result;
         }
 
-        public Task<string> UpdateUserAsync(UserDTO dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<string> DeleteUserAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
+
+        public Task<string> InsertUserAsync(UserDTO dto) => base.TryExecuteAsync("PASSP_InsertUser", dto, commandType: CommandType.StoredProcedure);
+
+        public Task<string> UpdateUserAsync(UserDTO dto) => base.TryExecuteAsync("PASSP_UpdateUser", dto, commandType: CommandType.StoredProcedure);
+
+        public Task<string> DeleteUserAsync(Guid id) => base.TryExecuteAsync("PASSP_DeleteUser", new { ID = id }, commandType: CommandType.StoredProcedure);
     }
 }
