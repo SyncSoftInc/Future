@@ -22,6 +22,7 @@ namespace SyncSoft.App
                     ObjectContainer.Register<IPassportDB>(() => new PassportDB(options.ConnStrName), LifeCycleEnum.Singleton);
 
                     ObjectContainer.Register<IAccountDAL, AccountDAL>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<IUserDAL, UserDAL>(LifeCycleEnum.Singleton);
                 };
             }
 
