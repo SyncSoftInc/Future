@@ -18,13 +18,13 @@
         public string WarehouseDbSuffix { get; set; }
 
         /// <summary>
-        /// 最多允许的仓库个数
+        /// 默认最多允许的仓库个数
         /// </summary>
         public int MaxWarehouseLimit { get; set; } = 1;
 
         /// <summary>
-        /// 最多允许的商品项个数
+        /// 默认最多允许的商品项个数
         /// </summary>
-        public int MaxUpcLimit { get; set; } = 100;
+        public int MaxUpcLimit { get; set; } = 50;
     }
 }

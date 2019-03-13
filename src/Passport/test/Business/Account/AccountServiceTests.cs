@@ -3,7 +3,7 @@ using SyncSoft.App.Components;
 using SyncSoft.ECP.Commands.Account;
 using SyncSoft.ECP.DTOs.Account;
 using SyncSoft.ECP.Enums.Account;
-using SyncSoft.Future.Passport.Domain;
+using SyncSoft.Future.Passport.Domain.Account;
 using System;
 using System.Threading.Tasks;
 
@@ -46,7 +46,7 @@ namespace SyncSoft.Future.Passport.BusinessTest.Account
         [Test]
         public void VerifyUsernamePassword()
         {
-            var dto = _AccountService.VerifyUsernamePasswordAsync(_accountDto.Username,_accountDto.Password).Execute();
+            var dto = _AccountService.VerifyUsernamePasswordAsync(_accountDto.Username, _accountDto.Password).Execute();
             Assert.IsNotNull(dto);
         }
     }

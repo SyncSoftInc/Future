@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SyncSoft.App.RabbitMQ" Version="2.9.2-alpha5" />
-    <PackageReference Include="SyncSoft.ECP.Quartz" Version="2.9.2-alpha5" />
+    <PackageReference Include="SyncSoft.App.RabbitMQ" Version="2.9.2-alpha6" />
+    <PackageReference Include="SyncSoft.ECP.Quartz" Version="2.9.2-alpha6" />
   </ItemGroup>
 
   <ItemGroup>

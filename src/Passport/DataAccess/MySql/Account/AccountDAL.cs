@@ -1,10 +1,9 @@
-﻿using System;
+﻿using SyncSoft.ECP.DTOs.Account;
+using System;
 using System.Data;
 using System.Threading.Tasks;
-using SyncSoft.App;
-using SyncSoft.ECP.DTOs.Account;
 
-namespace SyncSoft.Future.Passport.MySql
+namespace SyncSoft.Future.Passport.MySql.Account
 {
     public class AccountDAL : SyncSoft.ECP.MySql.Account.AccountDAL
     {

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Host\Core\SyncSoft.Future.Host.csproj" />
+    <ProjectReference Include="..\..\DataAccess\DataFacade\SyncSoft.Future.Product.DataFacade.csproj" />
+    <ProjectReference Include="..\..\DataAccess\MySql\SyncSoft.Future.Product.MySql.csproj" />
+    <ProjectReference Include="..\..\DataAccess\Redis\SyncSoft.Future.Product.Redis.csproj" />
+  </ItemGroup>
+
+</Project>

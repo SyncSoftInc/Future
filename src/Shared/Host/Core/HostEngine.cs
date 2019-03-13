@@ -9,9 +9,13 @@ namespace SyncSoft.Future
 {
     public static class HostEngine
     {
-        public static CommonConfigurator Init(IConfiguration configuration, string resourceName, bool useRabbitMQ = true)
+        public static CommonConfigurator Init(IConfiguration configuration, string resourceName, bool useRabbitMQ = true, bool allowOverridingRegistrations = false)
         {
-            var configurator = Engine.Init(configuration)
+            var configurator = Engine.Init(options =>
+            {
+                options.Configuration = configuration;
+                options.AllowOverridingRegistrations = allowOverridingRegistrations;
+            })
                 .UseECPSeriglogLoggerQuickSettings(options =>
                 {
                     options.ConfigSerilogLoggerAppQuickSettingOptions = b =>

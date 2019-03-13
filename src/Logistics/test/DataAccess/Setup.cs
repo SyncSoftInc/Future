@@ -10,8 +10,8 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest
         public static void Startup()
         {
             TestEngine.Init()
-                .UseWarehouseRedis()
-                .UseWarehouseMySql()
+                .UseLogisticsRedis()
+                .UseLogisticsMySql()
                 .Start();
         }
 

@@ -10,7 +10,6 @@
     <ProjectReference Include="..\..\Business\CommandHandler\SyncSoft.Future.Logistics.CommandHandler.csproj" />
     <ProjectReference Include="..\..\DataAccess\MySql\SyncSoft.Future.Logistics.MySql.csproj" />
     <ProjectReference Include="..\..\DataAccess\Redis\SyncSoft.Future.Logistics.Redis.csproj" />
-    <ProjectReference Include="..\..\Shared\Core\SyncSoft.Future.Logistics.csproj" />
   </ItemGroup>
 
   <ItemGroup>

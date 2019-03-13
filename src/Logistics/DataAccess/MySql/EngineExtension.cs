@@ -11,7 +11,7 @@ namespace SyncSoft.App
 {
     public static class EngineExtension
     {
-        public static CommonConfigurator UseWarehouseMySql(this CommonConfigurator configurator
+        public static CommonConfigurator UseLogisticsMySql(this CommonConfigurator configurator
             , Action<LogisticsMySqlOptions> configOptions = null
             , LogisticsMySqlOptions options = null)
         {

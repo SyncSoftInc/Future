@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Core\SyncSoft.Future.Logistics.csproj" />
     <ProjectReference Include="..\Domain\SyncSoft.Future.Logistics.Domain.csproj" />
   </ItemGroup>
 

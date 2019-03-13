@@ -11,8 +11,8 @@ namespace SyncSoft.App
             {
                 configurator.Engine.Starting += (o, e) =>
                 {
-                    ObjectContainer.Register<SyncSoft.ECP.APIs.Account.IAccountApi, SyncSoft.Future.Passport.API.AccountApi>(LifeCycleEnum.Singleton);
-                    ObjectContainer.Register<SyncSoft.Future.Passport.API.IAccountApi, SyncSoft.Future.Passport.API.AccountApi>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<SyncSoft.ECP.APIs.Account.IAccountApi, SyncSoft.Future.Passport.API.Account.AccountApi>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<SyncSoft.Future.Passport.API.Account.IAccountApi, SyncSoft.Future.Passport.API.Account.AccountApi>(LifeCycleEnum.Singleton);
                 };
             }
 

@@ -7,7 +7,7 @@ namespace SyncSoft.App
 {
     public static class EngineExtension
     {
-        public static CommonConfigurator UseWarehouseDF(this CommonConfigurator configurator)
+        public static CommonConfigurator UseLogisticsDF(this CommonConfigurator configurator)
         {
             if (!Engine.IsStarted)
             {
