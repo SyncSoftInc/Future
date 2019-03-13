@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App.Components;
 using SyncSoft.ECP.DTOs.Users;
+using SyncSoft.Future.DTO.User;
 using SyncSoft.Future.Passport.MySql;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace SyncSoft.Future.Passport.DataAccessTest.User
         private static readonly Lazy<IUserDAL> _lazyUserDAL = ObjectContainer.LazyResolve<IUserDAL>();
         private IUserDAL _UserDAL => _lazyUserDAL.Value;
 
-        private UserBasicInfoDTO _userDto = new UserBasicInfoDTO
+        private UserDTO _userDto = new UserDTO
         {
             ID = new Guid("ec35e329dac34842af18f0028763a059"),
             FirstName = "first",
