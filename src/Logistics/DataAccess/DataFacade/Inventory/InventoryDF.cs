@@ -15,7 +15,7 @@ namespace SyncSoft.Future.Logistics.DataFacade.Inventory
 
         #endregion
 
-        public Task<int> GetAvailableInventoryAsync(string merchantId, string upc)
-            => _InventoryQueryDAL.GetAvailableInventoryAsync(merchantId, upc);
+        public Task<int> GetAvailableInventoryAsync(string merchantId, string itemNo)
+            => _InventoryQueryDAL.GetAvailableInventoryAsync(merchantId, itemNo);
     }
 }

@@ -148,8 +148,8 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
         /// </summary>
         private async Task<string> EnsureInventoriesSufficientAsync(string merchantId, IEnumerable<InventoryDTO> operationInventories)
         {
-            var availableInventories = await _InventoryMasterDAL.GetAvailableInventoriesAsync(merchantId, operationInventories.Select(x => x.UPC)).ConfigureAwait(false);
-            var hasInsufficientInventory = operationInventories.Any(x => x.Qty > availableInventories[x.UPC]);
+            var availableInventories = await _InventoryMasterDAL.GetAvailableInventoriesAsync(merchantId, operationInventories.Select(x => x.ItemNo)).ConfigureAwait(false);
+            var hasInsufficientInventory = operationInventories.Any(x => x.Qty > availableInventories[x.ItemNo]);
             if (hasInsufficientInventory) return MsgCodes.WH_0000000007;
             // ^^^^^^^^^^ 库存不足
 

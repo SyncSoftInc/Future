@@ -48,7 +48,7 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.TranShared
             // ^^^^^^^^^^
 
             // 更新库存
-            var kvps = availableInventories.ToKeyValuePairs(x => x.UPC, x => x.Qty);
+            var kvps = availableInventories.ToKeyValuePairs(x => x.ItemNo, x => x.Qty);
             await _InventoryQueryDAL.SyncInventoriesAsync(cmd.Merchant_ID, kvps).ConfigureAwait(false);
         }
 

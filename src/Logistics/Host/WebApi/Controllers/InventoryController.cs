@@ -51,9 +51,9 @@ namespace SyncSoft.Future.Logistics.WebApi.Controllers
         /// Get available inventory
         /// </summary>
         /// <param name="merchantId">Merchant ID</param>
-        /// <param name="upc">UPC</param>
+        /// <param name="itemNo">ItemNo</param>
         [HttpGet("inventory")]
-        public Task<int> GetAvailableInventoryAsync(string merchantId, string upc)
-            => _InventoryDF.GetAvailableInventoryAsync(merchantId, upc);
+        public Task<int> GetAvailableInventoryAsync(string merchantId, string itemNo)
+            => _InventoryDF.GetAvailableInventoryAsync(merchantId, itemNo);
     }
 }

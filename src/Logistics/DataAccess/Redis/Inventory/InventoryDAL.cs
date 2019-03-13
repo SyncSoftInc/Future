@@ -15,16 +15,16 @@ namespace SyncSoft.Future.Logistics.Redis.Inventory
             _db = db;
         }
 
-        public async Task<int> GetAvailableInventoryAsync(string merchantId, string upc)
+        public async Task<int> GetAvailableInventoryAsync(string merchantId, string itemNo)
         {
-            return await _db.HGetAsync<int>(_Prefix + merchantId, upc).ConfigureAwait(false);
+            return await _db.HGetAsync<int>(_Prefix + merchantId, itemNo).ConfigureAwait(false);
         }
 
-        public async Task<IDictionary<string, int>> GetAvailableInventoriesAsync(string merchantId, params string[] upcs)
+        public async Task<IDictionary<string, int>> GetAvailableInventoriesAsync(string merchantId, params string[] itemNos)
         {
-            var results = await _db.HMGetAsync<int>(_Prefix + merchantId, upcs).ConfigureAwait(false);
+            var results = await _db.HMGetAsync<int>(_Prefix + merchantId, itemNos).ConfigureAwait(false);
 
-            return Enumerable.Range(0, upcs.Length).ToDictionary(i => upcs[i], i => results[i]);
+            return Enumerable.Range(0, itemNos.Length).ToDictionary(i => itemNos[i], i => results[i]);
         }
 
         public async Task SyncInventoriesAsync(string merchantId, KeyValuePair<string, int>[] inventories)

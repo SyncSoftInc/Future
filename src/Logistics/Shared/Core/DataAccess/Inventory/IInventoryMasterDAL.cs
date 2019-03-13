@@ -36,10 +36,10 @@ namespace SyncSoft.Future.Logistics.DataAccess.Inventory
         /// <summary>
         /// 批量获取库存
         /// </summary>
-        Task<IList<InventoryDTO>> GetInventoriesAsync(string merchantId, IEnumerable<string> upcs);
+        Task<IList<InventoryDTO>> GetInventoriesAsync(string merchantId, IEnumerable<string> itemNos);
         /// <summary>
         /// 批量获取可用库存
         /// </summary>
-        Task<IDictionary<string, int>> GetAvailableInventoriesAsync(string merchantId, IEnumerable<string> upcs);
+        Task<IDictionary<string, int>> GetAvailableInventoriesAsync(string merchantId, IEnumerable<string> itemNos);
     }
 }

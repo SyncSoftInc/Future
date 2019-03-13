@@ -33,11 +33,11 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
         private string _orderNo = "99e7ee2ba9ba435da8a8c28ad55cc77d";
         private IList<InventoryDTO> _inventories = new List<InventoryDTO>
         {
-            new InventoryDTO { UPC = "ITEM1", Qty = 0 },
-            new InventoryDTO { UPC = "ITEM2", Qty = 0 },
-            new InventoryDTO { UPC = "ITEM3", Qty = 0 },
-            new InventoryDTO { UPC = "ITEM4", Qty = 0 },
-            new InventoryDTO { UPC = "ITEM5", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM1", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM2", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM3", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM4", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM5", Qty = 0 },
         };
 
         #endregion
@@ -98,11 +98,13 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             };
 
             var correlationId = Guid.NewGuid();
-            _InventoryApi.AllocateInventoriesAsync(cmd, correlationId).ResultForTest();
+            var msgCode = _InventoryApi.AllocateInventoriesAsync(cmd, correlationId).ResultForTest();
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
             var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
             Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
         }
+
         [Test]
         public void GetAvailableInventory()
         {

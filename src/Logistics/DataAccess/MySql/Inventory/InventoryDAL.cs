@@ -46,7 +46,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
 
                         para.Add("Merchant_ID", cmd.Merchant_ID, DbType.String);
                         para.Add("Warehouse_ID", cmd.Warehouse_ID, DbType.String);
-                        para.Add("UPC", x.UPC, DbType.String);
+                        para.Add("ItemNo", x.ItemNo, DbType.String);
                         para.Add("Qty", x.Qty, DbType.Int32);
                         para.Add("SafeQty", x.SafeQty, DbType.Int32);
                         para.Add("AvailableQty", 0, DbType.Int32, ParameterDirection.Output);
@@ -76,7 +76,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
 
                         para.Add("Merchant_ID", cmd.Merchant_ID, DbType.String);
                         para.Add("Warehouse_ID", cmd.Warehouse_ID, DbType.String);
-                        para.Add("UPC", x.UPC, DbType.String);
+                        para.Add("ItemNo", x.ItemNo, DbType.String);
                         para.Add("OrderNo", cmd.OrderNo, DbType.String);
                         para.Add("Qty", x.Qty, DbType.Int32);
                         para.Add("CreatedOnUtc", utcNow, DbType.DateTime);
@@ -105,7 +105,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
 
                         para.Add("Merchant_ID", cmd.Merchant_ID, DbType.String);
                         para.Add("Warehouse_ID", cmd.Warehouse_ID, DbType.String);
-                        para.Add("UPC", x.UPC, DbType.String);
+                        para.Add("ItemNo", x.ItemNo, DbType.String);
                         para.Add("OrderNo", cmd.OrderNo, DbType.String);
                         para.Add("AvailableQty", 0, DbType.Int32, ParameterDirection.Output);
 
@@ -131,7 +131,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
 
                         para.Add("Merchant_ID", cmd.Merchant_ID, DbType.String);
                         para.Add("Warehouse_ID", cmd.Warehouse_ID, DbType.String);
-                        para.Add("UPC", x.UPC, DbType.String);
+                        para.Add("ItemNo", x.ItemNo, DbType.String);
                         para.Add("OrderNo", cmd.OrderNo, DbType.String);
                         para.Add("Qty", x.Qty, DbType.Int32);
                         para.Add("AvailableQty", 0, DbType.Int32, ParameterDirection.Output);
@@ -158,7 +158,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
 
                         para.Add("Merchant_ID", cmd.Merchant_ID, DbType.String);
                         para.Add("Warehouse_ID", cmd.Warehouse_ID, DbType.String);
-                        para.Add("UPC", x.UPC, DbType.String);
+                        para.Add("ItemNo", x.ItemNo, DbType.String);
                         para.Add("OrderNo", cmd.OrderNo, DbType.String);
                         para.Add("Qty", x.Qty, DbType.Int32);
                         para.Add("AvailableQty", 0, DbType.Int32, ParameterDirection.Output);
@@ -202,7 +202,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
 
                         return new InventoryDTO
                         {
-                            UPC = x.Get<string>("UPC"),
+                            ItemNo = x.Get<string>("ItemNo"),
                             Qty = availableQty.GetValueOrDefault()
                         };
                     }).ToArray();
@@ -231,15 +231,15 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
         /// <summary>
         /// 从库存表读取数据
         /// </summary>
-        public async Task<IList<InventoryDTO>> GetInventoriesAsync(string merchantId, IEnumerable<string> upcs)
+        public async Task<IList<InventoryDTO>> GetInventoriesAsync(string merchantId, IEnumerable<string> itemNos)
         {
             using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
             {
-                return await conn.QueryListAsync<InventoryDTO>("SELECT UPC, Qty, SafeQty FROM Inventories WHERE Merchant_ID = @Merchant_ID AND UPC IN @UPCs",
+                return await conn.QueryListAsync<InventoryDTO>("SELECT ItemNo, Qty, SafeQty FROM Inventories WHERE Merchant_ID = @Merchant_ID AND ItemNo IN @ItemNos",
                     new
                     {
                         Merchant_ID = merchantId,
-                        UPCs = upcs
+                        ItemNos = itemNos
                     }).ConfigureAwait(false);
             }
         }
@@ -251,15 +251,15 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
         /// <summary>
         /// 计算并获取Item的可用库存
         /// </summary>
-        public async Task<IDictionary<string, int>> GetAvailableInventoriesAsync(string merchantId, IEnumerable<string> upcs)
+        public async Task<IDictionary<string, int>> GetAvailableInventoriesAsync(string merchantId, IEnumerable<string> itemNos)
         {
-            var upcQueryBuilder = new StringBuilder("'");
-            foreach (var upc in upcs)
+            var itemNoQueryBuilder = new StringBuilder("'");
+            foreach (var itemNo in itemNos)
             {
-                upcQueryBuilder.Append(_StringHelper.SafeSql(upc));
-                upcQueryBuilder.Append("','");
+                itemNoQueryBuilder.Append(_StringHelper.SafeSql(itemNo));
+                itemNoQueryBuilder.Append("','");
             }
-            upcQueryBuilder.Remove(upcQueryBuilder.Length - 2, 2);
+            itemNoQueryBuilder.Remove(itemNoQueryBuilder.Length - 2, 2);
 
             using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
             {
@@ -267,7 +267,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
                     , new
                     {
                         Merchant_ID = _StringHelper.SafeSql(merchantId),
-                        UPCs = upcQueryBuilder.ToString()
+                        ItemNos = itemNoQueryBuilder.ToString()
                     }
                     , commandType: CommandType.StoredProcedure
                 ).ConfigureAwait(false);
@@ -276,10 +276,10 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
                 {
                     var rs = mr.Result;
                     var dic = rs.ToDictionary(x => x.Key, x => x.Value);
-                    if (dic.Count != upcs.Count())
+                    if (dic.Count != itemNos.Count())
                     {
                         // 得出差集，补齐结果
-                        var exceptedUpcs = upcs.Except(rs.Select(x => x.Key));
+                        var exceptedUpcs = itemNos.Except(rs.Select(x => x.Key));
                         foreach (var excpedUpc in exceptedUpcs)
                         {
                             dic.Add(excpedUpc, 0);
@@ -290,7 +290,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
                 }
                 else
                 {
-                    return upcs.ToDictionary(x => x, x => 0);
+                    return itemNos.ToDictionary(x => x, x => 0);
                 }
             }
         }
