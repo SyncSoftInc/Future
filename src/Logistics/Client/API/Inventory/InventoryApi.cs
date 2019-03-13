@@ -12,5 +12,14 @@ namespace SyncSoft.Future.Logistics.API.Inventory
 
         public Task<HttpResult<string>> AllocateInventoriesAsync(object cmd, Guid? correlationId, CancellationToken? cancellationToken)
            => base.PostAsync<string>(App.WebApi.Auth.BearerAuthModeEnum.User, "inventories", cmd, correlationId, cancellationToken);
+
+        public Task<HttpResult<string>> HoldOrderInventoriesAsync(object cmd, Guid? correlationId = null, CancellationToken? cancellationToken = null)
+           => base.PostAsync<string>(App.WebApi.Auth.BearerAuthModeEnum.User, "inventories/orderhold", cmd, correlationId, cancellationToken);
+
+        public Task<HttpResult<string>> InventoryShipConfirmAsync(object cmd, Guid? correlationId = null, CancellationToken? cancellationToken = null)
+           => base.PostAsync<string>(App.WebApi.Auth.BearerAuthModeEnum.User, "inventories/shipment", cmd, correlationId, cancellationToken);
+
+        public Task<HttpResult<string>> UnholdOrderInventoriesAsync(object cmd, Guid? correlationId = null, CancellationToken? cancellationToken = null)
+           => base.PostAsync<string>(App.WebApi.Auth.BearerAuthModeEnum.User, "inventories/orderhold", cmd, correlationId, cancellationToken);
     }
 }

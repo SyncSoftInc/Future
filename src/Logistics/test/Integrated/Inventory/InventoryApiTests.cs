@@ -105,6 +105,80 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
         }
 
+        [Test, Order(10)]
+        public void HoldOrderInventories()
+        {
+            var items = _inventories.DeepClone();
+            foreach (var item in items)
+            {
+                item.Qty = 100;
+            }
+
+            var cmd = new
+            {
+                Merchant_ID = MerchantID,
+                Warehouse_ID = WarehouseID,
+                OrderNo = OrderNo,
+                Inventories = items
+            };
+
+            var correlationId = Guid.NewGuid();
+            var msgCode = _InventoryApi.HoldOrderInventoriesAsync(cmd, correlationId).ResultForTest();
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+
+            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+        }
+
+        #region -  InventoryShipConfirm  -
+
+        [Test, Order(20)]
+        public void InventoryShipConfirm()
+        {
+            var items = _inventories.DeepClone();
+            foreach (var item in items)
+            {
+                item.Qty = 100;
+            }
+
+            var cmd = new
+            {
+                Merchant_ID = MerchantID,
+                Warehouse_ID = WarehouseID,
+                OrderNo = OrderNo,
+                Inventories = items
+            };
+
+            var correlationId = Guid.NewGuid();
+            var msgCode = _InventoryApi.InventoryShipConfirmAsync(cmd, correlationId).ResultForTest();
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+
+            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+        }
+
+        #endregion
+
+        [Test, Order(30)]
+        public void UnholdOrderInventories()
+        {
+            var items = _inventories.DeepClone();
+
+            var cmd = new
+            {
+                Merchant_ID = MerchantID,
+                Warehouse_ID = WarehouseID,
+                OrderNo = OrderNo,
+                Inventories = items
+            };
+
+            var correlationId = Guid.NewGuid();
+            var msgCode = _InventoryApi.UnholdOrderInventoriesAsync(cmd, correlationId).ResultForTest();
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+
+            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+        }
         [Test]
         public void GetAvailableInventory()
         {
