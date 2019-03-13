@@ -23,10 +23,10 @@ namespace SyncSoft.Future.Passport.WebApi
         #endregion
 
         /// <summary>
-        /// Create account
+        /// Get single user
         /// </summary>
         [HttpGet("api/user/{id}")]
-        public async Task<UserDTO> GetSingleUser(Guid? id)
+        public async Task<UserDTO> GetSingleUserAsync(Guid? id)
         {
             if (id.HasValue)
             {
@@ -37,20 +37,28 @@ namespace SyncSoft.Future.Passport.WebApi
         }
 
         /// <summary>
-        /// Create account
+        /// Create user
         /// </summary>
         [HttpPost("api/user")]
-        public Task<string> CreateUser(CreateUserCommand cmd) => RequestMsgCodeAsync(cmd);
+        public Task<string> CreateUserAsync(CreateUserCommand cmd) => RequestMsgCodeAsync(cmd);
+
         /// <summary>
-        /// Update account
+        /// Update user
         /// </summary>
         [HttpPut("api/user")]
-        public Task<string> UpdateUser(UpdateUserCommand cmd) => RequestMsgCodeAsync(cmd);
+        public Task<string> UpdateUserAsync(UpdateUserCommand cmd) => RequestMsgCodeAsync(cmd);
+
         /// <summary>
-        /// Create account
+        /// User save profile
+        /// </summary>
+        [HttpPut("api/user/profile")]
+        public Task<string> UserSaveProfileAsync(UserSaveProfileCommand cmd) => RequestMsgCodeAsync(cmd);
+
+        /// <summary>
+        /// Delete user
         /// </summary>
         [HttpDelete("api/user/{id}")]
-        public async Task<string> CreateUser(Guid? id)
+        public async Task<string> DeleteUserAsync(Guid? id)
         {
             if (id.HasValue)
             {

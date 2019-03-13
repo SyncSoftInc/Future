@@ -93,10 +93,25 @@ namespace SyncSoft.Future.Passport.MySql
         // *******************************************************************************************************************************
         #region -  GetUserAsync  -
 
+        public Task<string> InsertUserAsync(UserDTO dto)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<UserDTO> GetUserAsync(Guid id)
         {
             var mr = await base.TryQueryFirstOrDefaultAsync<UserDTO>("SELECT * FROM SYS_Users WHERE ID = @ID", new { ID = id }).ConfigureAwait(false);
             return mr.Result;
+        }
+
+        public Task<string> UpdateUserAsync(UserDTO dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> DeleteUserAsync(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
