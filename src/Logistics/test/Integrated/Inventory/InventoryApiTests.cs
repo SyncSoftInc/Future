@@ -79,6 +79,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
         }
 
         #endregion
+        // *******************************************************************************************************************************
+        #region -  AllocateInventories  -
 
         [Test]
         public void AllocateInventories()
@@ -105,6 +107,10 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
         }
 
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  HoldOrderInventories  -
+
         [Test, Order(10)]
         public void HoldOrderInventories()
         {
@@ -130,6 +136,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
         }
 
+        #endregion
+        // *******************************************************************************************************************************
         #region -  InventoryShipConfirm  -
 
         [Test, Order(20)]
@@ -158,6 +166,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
         }
 
         #endregion
+        // *******************************************************************************************************************************
+        #region -  UnholdOrderInventories  -
 
         [Test, Order(30)]
         public void UnholdOrderInventories()
@@ -179,6 +189,11 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
             Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
         }
+
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  GetAvailableInventory  -
+
         [Test]
         public void GetAvailableInventory()
         {
@@ -190,5 +205,7 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
 
             Assert.IsTrue(a.IsSuccess, a.GetMsgCodeAsync().Execute());
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SyncSoft.ECP.Redis" Version="2.9.2-alpha6" />
+    <PackageReference Include="SyncSoft.ECP.Redis" Version="2.9.2-alpha6.1" />
   </ItemGroup>
 
   <ItemGroup>
