@@ -12,5 +12,13 @@
         /// Create user failed.
         /// </summary>
         public const string PASS_0000000002 = nameof(PASS_0000000002);
+        /// <summary>
+        /// Old password cannot be empty.
+        /// </summary>
+        public const string PASS_0000000003 = nameof(PASS_0000000003);
+        /// <summary>
+        /// Invalid Old password.
+        /// </summary>
+        public const string PASS_0000000004 = nameof(PASS_0000000004);
     }
 }

@@ -22,6 +22,16 @@ namespace SyncSoft.Future.Passport.MySql
 
         #endregion
         // *******************************************************************************************************************************
+        #region -  CRUD  -
+
+        public Task<string> InsertUserAsync(UserDTO dto) => base.TryExecuteAsync("PASSP_InsertUser", dto, commandType: CommandType.StoredProcedure);
+
+        public Task<string> UpdateUserAsync(UserDTO dto) => base.TryExecuteAsync("PASSP_UpdateUser", dto, commandType: CommandType.StoredProcedure);
+
+        public Task<string> DeleteUserAsync(Guid id) => base.TryExecuteAsync("PASSP_DeleteUser", new { ID = id }, commandType: CommandType.StoredProcedure);
+
+        #endregion
+        // *******************************************************************************************************************************
         #region -  GetClaims  -
 
         public async Task<IEnumerable<Claim>> GetClaimsAsync(string clientId, string userId, string username)
@@ -101,11 +111,5 @@ namespace SyncSoft.Future.Passport.MySql
         }
 
         #endregion
-
-        public Task<string> InsertUserAsync(UserDTO dto) => base.TryExecuteAsync("PASSP_InsertUser", dto, commandType: CommandType.StoredProcedure);
-
-        public Task<string> UpdateUserAsync(UserDTO dto) => base.TryExecuteAsync("PASSP_UpdateUser", dto, commandType: CommandType.StoredProcedure);
-
-        public Task<string> DeleteUserAsync(Guid id) => base.TryExecuteAsync("PASSP_DeleteUser", new { ID = id }, commandType: CommandType.StoredProcedure);
     }
 }

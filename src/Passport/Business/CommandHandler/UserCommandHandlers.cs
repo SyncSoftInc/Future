@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 namespace SyncSoft.Future.Passport.CommandHandler
 {
     public class UserCommandHandlers
-            : IConsumer<CreateUserCommand>
+        : IConsumer<CreateUserCommand>
+        , IConsumer<UpdateUserCommand>
+        , IConsumer<UserSaveProfileCommand>
+        , IConsumer<DeleteUserCommand>
     {
         // *******************************************************************************************************************************
         #region -  Lazy Object(s)  -
@@ -23,6 +26,33 @@ namespace SyncSoft.Future.Passport.CommandHandler
         public async Task<object> HandleAsync(IContext<CreateUserCommand> context)
         {
             return await _UserService.CreateUserAsync(context.Message).ConfigureAwait(false);
+        }
+
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  UpdateUserCommand  -
+
+        public async Task<object> HandleAsync(IContext<UpdateUserCommand> context)
+        {
+            return await _UserService.UpdateUserAsync(context.Message).ConfigureAwait(false);
+        }
+
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  UserSaveProfileCommand  -
+
+        public async Task<object> HandleAsync(IContext<UserSaveProfileCommand> context)
+        {
+            return await _UserService.UserSaveProfileAsync(context.Message).ConfigureAwait(false);
+        }
+
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  DeleteUserCommand  -
+
+        public async Task<object> HandleAsync(IContext<DeleteUserCommand> context)
+        {
+            return await _UserService.DeleteUserAsync(context.Message).ConfigureAwait(false);
         }
 
         #endregion

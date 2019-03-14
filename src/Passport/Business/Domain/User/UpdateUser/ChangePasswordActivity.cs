@@ -8,7 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
+namespace SyncSoft.Future.Passport.Domain.User.UpdateUser
 {
     public class ChangePasswordActivity : RrTransactionActivity
     {
@@ -24,21 +24,16 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
 
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
-            var cmd = (UserSaveProfileCommand)Context.Items[UserSaveProfileTransaction.Parameters_Command];
+            var cmd = (UpdateUserCommand)Context.Items[UpdateUserTransaction.Parameters_Command];
             if (cmd.Password.IsMissing()) return;
-            // ^^^^^^^^^^
-            if (cmd.OldPassword.IsMissing()) throw new Exception(MsgCodes.PASS_0000000003);
             // ^^^^^^^^^^
 
             var oldDto = await _AccountDAL.GetAccountAsync(cmd.ID).ConfigureAwait(false);
             if (oldDto.IsNull()) throw new Exception(MsgCODES.FUT_0000000002);
-
-            // Validate old password
-            var oldPassword = _PasswordEncryptor.HashEncodePassword(cmd.OldPassword, oldDto.PasswordSalt);
-            if (oldDto.Password != oldPassword) throw new Exception(MsgCodes.PASS_0000000004);
-            // ^^^^^^^^^^
-
-            Context.Items.Add(UserSaveProfileTransaction.Parameters_Account_Backup, oldDto);
+            if (!Context.Items.ContainsKey(UpdateUserTransaction.Parameters_Account_BackUp))
+            {
+                Context.Items.Add(UpdateUserTransaction.Parameters_Account_BackUp, oldDto);
+            }
 
             var dto = new AccountDTO
             {
@@ -48,14 +43,13 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
             };
             dto.PasswordSalt = _PasswordEncryptor.GeneratePasswordSalt();
             dto.Password = _PasswordEncryptor.HashEncodePassword(cmd.Password, dto.PasswordSalt);
-
-            var msgCode = await _AccountDAL.UpdatePasswordAsync(dto).ConfigureAwait(false);
+            var msgCode = await _AccountDAL.UpdateLoginInfoAsync(dto).ConfigureAwait(false);
             if (!msgCode.IsSuccess()) throw new Exception(msgCode);
         }
 
         protected override async Task RollbackAsync()
         {
-            var dto = (AccountDTO)Context.Items[UserSaveProfileTransaction.Parameters_Account_Backup];
+            var dto = (AccountDTO)Context.Items[UpdateUserTransaction.Parameters_Account_BackUp];
             var msgCode = await _AccountDAL.UpdatePasswordAsync(dto).ConfigureAwait(false);
             if (!msgCode.IsSuccess()) throw new Exception(msgCode);
         }
