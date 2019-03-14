@@ -28,9 +28,9 @@ namespace SyncSoft.Future.Passport.Domain.User.UpdateUser
 
             var oldDto = await _AccountDAL.GetAccountAsync(cmd.ID).ConfigureAwait(false);
             if (oldDto.IsNull()) throw new Exception(MsgCODES.FUT_0000000002);
-            if (!Context.Items.ContainsKey(UpdateUserTransaction.Parameters_Account_BackUp))
+            if (!Context.Items.ContainsKey(UpdateUserTransaction.Parameters_Account_Backup))
             {
-                Context.Items.Add(UpdateUserTransaction.Parameters_Account_BackUp, oldDto);
+                Context.Items.Add(UpdateUserTransaction.Parameters_Account_Backup, oldDto);
             }
 
             var dto = new AccountDTO
@@ -45,7 +45,7 @@ namespace SyncSoft.Future.Passport.Domain.User.UpdateUser
 
         protected override async Task RollbackAsync()
         {
-            var dto = (AccountDTO)Context.Items[UpdateUserTransaction.Parameters_Account_BackUp];
+            var dto = (AccountDTO)Context.Items[UpdateUserTransaction.Parameters_Account_Backup];
             var msgCode = await _AccountDAL.UpdateUsernameAsync(dto).ConfigureAwait(false);
             if (!msgCode.IsSuccess()) throw new Exception(msgCode);
         }

@@ -11,6 +11,7 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
     {
         public const string Parameters_Command = "Command";
         public const string Parameters_Account_Backup = "AccountBackup";
+        public const string Parameters_User_Backup = "UserBackup";
 
         private static readonly Lazy<ILogger> _lazyLogger = ObjectContainer.LazyResolveLogger<UserSaveProfileTransaction>();
         protected override ILogger Logger => _lazyLogger.Value;
@@ -22,6 +23,7 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
 
         protected override IEnumerable<RrTransactionActivity> BuildActivities()
         {
+            yield return new UpdateUserActivity(Context);
             yield return new ChangePasswordActivity(Context);
         }
     }

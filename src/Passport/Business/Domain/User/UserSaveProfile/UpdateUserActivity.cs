@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.Domain.User.UpdateUser
+namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
 {
     public class UpdateUserActivity : RrTransactionActivity
     {
@@ -22,11 +22,11 @@ namespace SyncSoft.Future.Passport.Domain.User.UpdateUser
 
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
-            var cmd = (UpdateUserCommand)Context.Items[UpdateUserTransaction.Parameters_Command];
+            var cmd = (UserSaveProfileCommand)Context.Items[UserSaveProfileTransaction.Parameters_Command];
 
             var oldDto = await _UserDAL.GetUserAsync(cmd.ID).ConfigureAwait(false);
             if (oldDto.IsNull()) throw new Exception(MsgCODES.FUT_0000000002);
-            Context.Items.Add(UpdateUserTransaction.Parameters_User_Backup, oldDto);
+            Context.Items.Add(UserSaveProfileTransaction.Parameters_User_Backup, oldDto);
 
             var dto = new UserDTO
             {
@@ -35,9 +35,6 @@ namespace SyncSoft.Future.Passport.Domain.User.UpdateUser
                 MiddleName = cmd.MiddleName,
                 LastName = cmd.LastName,
                 Email = cmd.Email,
-                Status = (ECP.Enums.User.UserStatusEnum)cmd.Status,
-                Roles = cmd.Roles,
-                PermissionLevel = cmd.PermissionLevel,
             };
 
             var msgCode = await _UserDAL.UpdateUserAsync(dto).ConfigureAwait(false);
@@ -46,7 +43,7 @@ namespace SyncSoft.Future.Passport.Domain.User.UpdateUser
 
         protected override async Task RollbackAsync()
         {
-            var dto = (UserDTO)Context.Items[UpdateUserTransaction.Parameters_User_Backup];
+            var dto = (UserDTO)Context.Items[UserSaveProfileTransaction.Parameters_User_Backup];
             var msgCode = await _UserDAL.UpdateUserAsync(dto).ConfigureAwait(false);
             if (!msgCode.IsSuccess()) throw new Exception(msgCode);
         }

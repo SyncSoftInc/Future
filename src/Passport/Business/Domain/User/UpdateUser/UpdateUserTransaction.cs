@@ -11,8 +11,8 @@ namespace SyncSoft.Future.Passport.Domain.User.UpdateUser
     public class UpdateUserTransaction : RrTransaction
     {
         public const string Parameters_Command = "Command";
-        public const string Parameters_User_BackUp = "UserBackup";
-        public const string Parameters_Account_BackUp = "AccountBackup";
+        public const string Parameters_User_Backup = "UserBackup";
+        public const string Parameters_Account_Backup = "AccountBackup";
 
         private static readonly Lazy<ILogger> _lazyLogger = ObjectContainer.LazyResolveLogger<UpdateUserTransaction>();
         protected override ILogger Logger => _lazyLogger.Value;
