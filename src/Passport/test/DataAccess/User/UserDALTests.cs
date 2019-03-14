@@ -1,11 +1,8 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App.Components;
-using SyncSoft.ECP.DTOs.Users;
 using SyncSoft.Future.DTO.User;
-using SyncSoft.Future.Passport.MySql;
+using SyncSoft.Future.Passport.DAL.User;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SyncSoft.Future.Passport.DataAccessTest.User
