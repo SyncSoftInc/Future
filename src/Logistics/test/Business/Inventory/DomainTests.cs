@@ -26,11 +26,11 @@ namespace SyncSoft.Future.Logistics.BusinessTest.Inventory
         private string _orderNo = "99e7ee2ba9ba435da8a8c28ad55cc77d";
         private IList<InventoryDTO> _inventories = new List<InventoryDTO>
         {
-            new InventoryDTO { UPC = "ITEM1", Qty = 0 },
-            new InventoryDTO { UPC = "ITEM2", Qty = 0 },
-            new InventoryDTO { UPC = "ITEM3", Qty = 0 },
-            new InventoryDTO { UPC = "ITEM4", Qty = 0 },
-            new InventoryDTO { UPC = "ITEM5", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM1", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM2", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM3", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM4", Qty = 0 },
+            new InventoryDTO { ItemNo = "ITEM5", Qty = 0 },
         };
 
         #endregion

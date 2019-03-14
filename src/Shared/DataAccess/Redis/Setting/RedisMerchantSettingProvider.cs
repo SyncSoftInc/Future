@@ -1,6 +1,6 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.Logging;
-using SyncSoft.ECP.Redis.Setting;
+using SyncSoft.App.Redis.Generic;
 using SyncSoft.Future.Setting;
 using SyncSoft.Future.Setting.Merchant;
 using System;

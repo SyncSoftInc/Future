@@ -8,11 +8,11 @@ namespace SyncSoft.Future.Logistics.DataAccess.Inventory
         /// <summary>
         /// 获取可用库存
         /// </summary>
-        Task<int> GetAvailableInventoryAsync(string merchantId, string upc);
+        Task<int> GetAvailableInventoryAsync(string merchantId, string itemNo);
         /// <summary>
         /// 批量获取可用库存
         /// </summary>
-        Task<IDictionary<string, int>> GetAvailableInventoriesAsync(string merchantId, params string[] upcs);
+        Task<IDictionary<string, int>> GetAvailableInventoriesAsync(string merchantId, params string[] itemNos);
         /// <summary>
         /// 同步库存
         /// </summary>

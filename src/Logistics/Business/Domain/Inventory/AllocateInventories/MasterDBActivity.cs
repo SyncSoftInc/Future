@@ -31,7 +31,7 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.AllocateInventories
             // ^^^^^^^^^^
 
             // 备份当前库存
-            var backup = await _InventoryMasterDAL.GetInventoriesAsync(cmd.Merchant_ID, cmd.Inventories.Select(x => x.UPC)).ConfigureAwait(false);
+            var backup = await _InventoryMasterDAL.GetInventoriesAsync(cmd.Merchant_ID, cmd.Inventories.Select(x => x.ItemNo)).ConfigureAwait(false);
             Context.Items.Add(TranConstants.Context_Items_BackupInventories, backup);
 
             // 分配库存，得到分配后计算得到的可用库存

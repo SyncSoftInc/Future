@@ -4,6 +4,6 @@
     {
         public string Merchant_ID { get; set; }
         public string Warehouse_ID { get; set; }
-        public string UPC { get; set; }
+        public string ItemNo { get; set; }
     }
 }
