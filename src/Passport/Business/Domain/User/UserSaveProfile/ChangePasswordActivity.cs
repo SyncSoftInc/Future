@@ -27,7 +27,7 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
             var cmd = (UserSaveProfileCommand)Context.Items[UserSaveProfileTransaction.Parameters_Command];
             if (cmd.Password.IsMissing()) return;
             // ^^^^^^^^^^
-            if (cmd.OldPassword.IsMissing()) throw new Exception(MsgCodes.PASS_0000000003);
+            if (cmd.OldPassword.IsMissing()) throw new Exception(MsgCodes.PASS_0000000006);
             // ^^^^^^^^^^
 
             var oldDto = await _AccountDAL.GetAccountAsync(cmd.ID).ConfigureAwait(false);
@@ -35,7 +35,7 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
 
             // Validate old password
             var oldPassword = _PasswordEncryptor.HashEncodePassword(cmd.OldPassword, oldDto.PasswordSalt);
-            if (oldDto.Password != oldPassword) throw new Exception(MsgCodes.PASS_0000000004);
+            if (oldDto.Password != oldPassword) throw new Exception(MsgCodes.PASS_0000000007);
             // ^^^^^^^^^^
 
             Context.Items.Add(UserSaveProfileTransaction.Parameters_Account_Backup, oldDto);
