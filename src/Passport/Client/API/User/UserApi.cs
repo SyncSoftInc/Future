@@ -26,7 +26,7 @@ namespace SyncSoft.Future.Passport.API.User
         public Task<HttpResult<string>> UserSaveProfileAsync(object cmd)
             => base.PutAsync<string>(BearerAuthModeEnum.Client, $"api/user/profile", cmd);
 
-        public Task<HttpResult<string>> DeleteUserAsync(object cmd)
-            => base.DeleteAsync<string>(BearerAuthModeEnum.Client, $"api/user", cmd);
+        public Task<HttpResult<string>> DeleteUserAsync(Guid id)
+            => base.DeleteAsync<string>(BearerAuthModeEnum.Client, $"api/user/{id}");
     }
 }

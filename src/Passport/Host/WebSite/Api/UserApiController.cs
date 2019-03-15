@@ -12,8 +12,8 @@ namespace SyncSoft.Future.Passport.WebApi
 {
     [Area("Api")]
     [Route("api")]
-    //[BearerAuthorize]
-    public abstract class UserApiController : ApiController
+    [BearerAuthorize]
+    public class UserApiController : ApiController
     {
         // *******************************************************************************************************************************
         #region -  Lazy Object(s)  -

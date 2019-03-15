@@ -24,7 +24,7 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
             MiddleName = "middle",
             Email = "test@syncsoftinc.co",
             Status = ECP.Enums.User.UserStatusEnum.Active,
-            Roles = 1,
+            Roles = 68,
             PermissionLevel = 5
         };
 

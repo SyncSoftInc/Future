@@ -10,6 +10,6 @@ namespace SyncSoft.Future.Passport.API.User
     {
         Task<HttpResult<string>> CreateUserAsync(object cmd);
         Task<HttpResult<string>> UserSaveProfileAsync(object cmd);
-        Task<HttpResult<string>> DeleteUserAsync(object cmd);
+        Task<HttpResult<string>> DeleteUserAsync(Guid id);
     }
 }

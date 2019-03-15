@@ -101,11 +101,11 @@ namespace SyncSoft.Future.Passport.IntegratedTest.User
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
-        //[Test, Order(75)]
-        //public void DeleteUser()
-        //{
-        //    var msgCode = _UserApi.DeleteUserAsync(_userDto.ID).ResultForTest();
-        //    Assert.IsTrue(msgCode.IsSuccess(), msgCode);
-        //}
+        [Test, Order(75)]
+        public void DeleteUser()
+        {
+            var msgCode = _UserApi.DeleteUserAsync(_userDto.ID).ResultForTest();
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+        }
     }
 }
