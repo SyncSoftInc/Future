@@ -48,7 +48,7 @@ namespace SyncSoft.Future.Passport.Domain.User
         {
             var tran = new UpdateUserTransaction(cmd);
             bool success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000002;
+            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000003;
         }
 
         #endregion
@@ -59,7 +59,7 @@ namespace SyncSoft.Future.Passport.Domain.User
         {
             var tran = new UserSaveProfileTransaction(cmd);
             bool success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000002;
+            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000004;
         }
 
         #endregion
@@ -70,7 +70,7 @@ namespace SyncSoft.Future.Passport.Domain.User
         {
             var tran = new DeleteUserTransaction(cmd);
             bool success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000002;
+            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000005;
         }
 
         #endregion
