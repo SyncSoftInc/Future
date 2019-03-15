@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SyncSoft.Future.Logistics.WebApi.Controllers
 {
+    [Area("Inventory")]
     [ApiController]
     public class InventoryController : ApiController
     {

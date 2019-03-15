@@ -42,7 +42,7 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
             LastLoginUtc = DateTime.UtcNow,
         };
 
-        [Test]
+        [Test, Order(0)]
         public void InsertUser()
         {
             var cmd = new CreateUserCommand
@@ -63,7 +63,25 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
-        [Test]
+        [Test, Order(50)]
+        public void UserSaveProfile()
+        {
+            var cmd = new UserSaveProfileCommand
+            {
+                ID = _userDto.ID,
+                OldPassword = _accountDto.Password,
+                Password = _accountDto.Password + "_UPDATE",
+                FirstName = _userDto.FirstName + "_UPDATE",
+                MiddleName = _userDto.MiddleName + "_UPDATE",
+                LastName = _userDto.LastName + "_UPDATE",
+                Email = _userDto.Email + "_UPDATE",
+            };
+
+            var msgCode = _UserService.UserSaveProfileAsync(cmd).Execute();
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+        }
+
+        [Test, Order(75)]
         public void UpdateUser()
         {
             var cmd = new UpdateUserCommand
@@ -84,25 +102,7 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
-        [Test]
-        public void UserSaveProfile()
-        {
-            var cmd = new UserSaveProfileCommand
-            {
-                ID = _userDto.ID,
-                OldPassword = _accountDto.Password,
-                Password = _accountDto.Password + "_UPDATE",
-                FirstName = _userDto.FirstName + "_UPDATE",
-                MiddleName = _userDto.MiddleName + "_UPDATE",
-                LastName = _userDto.LastName + "_UPDATE",
-                Email = _userDto.Email + "_UPDATE",
-            };
-
-            var msgCode = _UserService.UserSaveProfileAsync(cmd).Execute();
-            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
-        }
-
-        [Test]
+        [Test, Order(100)]
         public void DeleteUser()
         {
             var cmd = new DeleteUserCommand { ID = _userDto.ID, };
