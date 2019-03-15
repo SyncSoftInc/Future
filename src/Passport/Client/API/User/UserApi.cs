@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.API.Account
+namespace SyncSoft.Future.Passport.API.User
 {
     public class UserApi : ECPApiProxyBase, IUserApi
     {
@@ -17,9 +17,16 @@ namespace SyncSoft.Future.Passport.API.Account
         public Task<HttpResult<UserBasicInfoDTO>> GetUserBasicInfoAsync(Guid id)
             => base.PostAsync<UserBasicInfoDTO>(BearerAuthModeEnum.Client, $"api/user/{id}");
 
+        public Task<HttpResult<string>> CreateUserAsync(object cmd)
+            => base.PostAsync<string>(BearerAuthModeEnum.Client, $"api/user", cmd);
+
         public Task<HttpResult<string>> UpdateUserAsync(object cmd)
-        {
-            throw new NotImplementedException();
-        }
+            => base.PutAsync<string>(BearerAuthModeEnum.Client, $"api/user", cmd);
+
+        public Task<HttpResult<string>> UserSaveProfileAsync(object cmd)
+            => base.PutAsync<string>(BearerAuthModeEnum.Client, $"api/user/profile", cmd);
+
+        public Task<HttpResult<string>> DeleteUserAsync(object cmd)
+            => base.DeleteAsync<string>(BearerAuthModeEnum.Client, $"api/user", cmd);
     }
 }

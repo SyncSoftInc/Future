@@ -2,19 +2,18 @@
 using SyncSoft.App.Components;
 using SyncSoft.ECP.DTOs.Account;
 using SyncSoft.Future.DTO.User;
-using SyncSoft.Future.Passport.Command.User;
-using SyncSoft.Future.Passport.Domain.User;
+using SyncSoft.Future.Passport.API.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.BusinessTest.User
+namespace SyncSoft.Future.Passport.IntegratedTest.User
 {
-    public class UserServiceTests
+    public class UserApiTests
     {
-        private static readonly Lazy<IUserService> _lazyUserService = ObjectContainer.LazyResolve<IUserService>();
-        private IUserService _UserService => _lazyUserService.Value;
+        private static readonly Lazy<IUserApi> _lazyUserApi = ObjectContainer.LazyResolve<IUserApi>();
+        private IUserApi _UserApi => _lazyUserApi.Value;
 
         private UserDTO _userDto = new UserDTO
         {
@@ -31,7 +30,7 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
         private AccountDTO _accountDto = new AccountDTO
         {
             ID = new Guid("{2FA77635-63E4-493C-8930-BCC186AD0326}"),
-            Username = "unittest",
+            Username = "sa",
             Password = "Famous901",
             PasswordSalt = "ABCDEFG",
             LoginFailedCount = 0,
@@ -43,9 +42,9 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
         };
 
         [Test, Order(0)]
-        public void InsertUser()
+        public void CreateUser()
         {
-            var cmd = new CreateUserCommand
+            var cmd = new
             {
                 ID = _userDto.ID,
                 Username = _accountDto.Username,
@@ -59,32 +58,14 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
                 PermissionLevel = _userDto.PermissionLevel
             };
 
-            var msgCode = _UserService.CreateUserAsync(cmd).Execute();
+            var msgCode = _UserApi.CreateUserAsync(cmd).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
-        [Test, Order(50)]
-        public void UserSaveProfile()
-        {
-            var cmd = new UserSaveProfileCommand
-            {
-                ID = _userDto.ID,
-                OldPassword = _accountDto.Password,
-                Password = _accountDto.Password + "_UPDATE",
-                FirstName = _userDto.FirstName + "_UPDATE",
-                MiddleName = _userDto.MiddleName + "_UPDATE",
-                LastName = _userDto.LastName + "_UPDATE",
-                Email = _userDto.Email + "_UPDATE",
-            };
-
-            var msgCode = _UserService.UserSaveProfileAsync(cmd).Execute();
-            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
-        }
-
-        [Test, Order(75)]
+        [Test, Order(25)]
         public void UpdateUser()
         {
-            var cmd = new UpdateUserCommand
+            var cmd = new
             {
                 ID = _userDto.ID,
                 Username = _accountDto.Username + "_UPDATE",
@@ -98,16 +79,33 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
                 PermissionLevel = 1
             };
 
-            var msgCode = _UserService.UpdateUserAsync(cmd).Execute();
+            var msgCode = _UserApi.UpdateUserAsync(cmd).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
-        [Test, Order(100)]
-        public void DeleteUser()
+        [Test, Order(50)]
+        public void UserSaveProfile()
         {
-            var cmd = new DeleteUserCommand { ID = _userDto.ID, };
-            var msgCode = _UserService.DeleteUserAsync(cmd).Execute();
+            var cmd = new
+            {
+                ID = _userDto.ID,
+                OldPassword = _accountDto.Password,
+                Password = _accountDto.Password + "_UPDATE",
+                FirstName = _userDto.FirstName + "_UPDATE",
+                MiddleName = _userDto.MiddleName + "_UPDATE",
+                LastName = _userDto.LastName + "_UPDATE",
+                Email = _userDto.Email + "_UPDATE",
+            };
+
+            var msgCode = _UserApi.UserSaveProfileAsync(cmd).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
+
+        //[Test, Order(75)]
+        //public void DeleteUser()
+        //{
+        //    var msgCode = _UserApi.DeleteUserAsync(_userDto.ID).ResultForTest();
+        //    Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+        //}
     }
 }

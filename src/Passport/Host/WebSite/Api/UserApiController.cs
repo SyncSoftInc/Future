@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 namespace SyncSoft.Future.Passport.WebApi
 {
     [Area("Api")]
-    [BearerAuthorize]
-    public abstract class PassportApiController : ApiController
+    [Route("api")]
+    //[BearerAuthorize]
+    public abstract class UserApiController : ApiController
     {
         // *******************************************************************************************************************************
         #region -  Lazy Object(s)  -
@@ -25,7 +26,7 @@ namespace SyncSoft.Future.Passport.WebApi
         /// <summary>
         /// Get single user
         /// </summary>
-        [HttpGet("api/user/{id}")]
+        [HttpGet("user/{id}")]
         public async Task<UserDTO> GetSingleUserAsync(Guid? id)
         {
             if (id.HasValue)
@@ -39,25 +40,25 @@ namespace SyncSoft.Future.Passport.WebApi
         /// <summary>
         /// Create user
         /// </summary>
-        [HttpPost("api/user")]
+        [HttpPost("user")]
         public Task<string> CreateUserAsync(CreateUserCommand cmd) => RequestMsgCodeAsync(cmd);
 
         /// <summary>
         /// Update user
         /// </summary>
-        [HttpPut("api/user")]
+        [HttpPut("user")]
         public Task<string> UpdateUserAsync(UpdateUserCommand cmd) => RequestMsgCodeAsync(cmd);
 
         /// <summary>
         /// User save profile
         /// </summary>
-        [HttpPut("api/user/profile")]
+        [HttpPut("user/profile")]
         public Task<string> UserSaveProfileAsync(UserSaveProfileCommand cmd) => RequestMsgCodeAsync(cmd);
 
         /// <summary>
         /// Delete user
         /// </summary>
-        [HttpDelete("api/user/{id}")]
+        [HttpDelete("user/{id}")]
         public async Task<string> DeleteUserAsync(Guid? id)
         {
             if (id.HasValue)

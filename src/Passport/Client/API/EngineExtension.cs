@@ -13,6 +13,9 @@ namespace SyncSoft.App
                 {
                     ObjectContainer.Register<SyncSoft.ECP.APIs.Account.IAccountApi, SyncSoft.Future.Passport.API.Account.AccountApi>(LifeCycleEnum.Singleton);
                     ObjectContainer.Register<SyncSoft.Future.Passport.API.Account.IAccountApi, SyncSoft.Future.Passport.API.Account.AccountApi>(LifeCycleEnum.Singleton);
+
+                    ObjectContainer.Register<SyncSoft.ECP.APIs.User.IUserApi, SyncSoft.Future.Passport.API.User.UserApi>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<SyncSoft.Future.Passport.API.User.IUserApi, SyncSoft.Future.Passport.API.User.UserApi>(LifeCycleEnum.Singleton);
                 };
             }
 
