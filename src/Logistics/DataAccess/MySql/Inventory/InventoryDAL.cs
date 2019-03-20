@@ -263,7 +263,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
 
             using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
             {
-                var mr = await conn.TryQueryListAsync<KeyValuePair<string, int>>("INVSP_GetAvailableInventories"
+                var list = await conn.QueryListAsync<KeyValuePair<string, int>>("INVSP_GetAvailableInventories"
                     , new
                     {
                         Merchant_ID = _StringHelper.SafeSql(merchantId),
@@ -272,9 +272,9 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
                     , commandType: CommandType.StoredProcedure
                 ).ConfigureAwait(false);
 
-                if (mr.IsSuccess)
+                if (null != list)
                 {
-                    var rs = mr.Result;
+                    var rs = list;
                     var dic = rs.ToDictionary(x => x.Key, x => x.Value);
                     if (dic.Count != itemNos.Count())
                     {

@@ -4,6 +4,7 @@ using SyncSoft.Future.Logistics.DataAccess.Warehouse;
 using SyncSoft.Future.Logistics.DTO.Warehouse;
 using SyncSoft.Future.Logistics.Query.Warehouse;
 using System;
+using System.Data.Common;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,37 +21,69 @@ namespace SyncSoft.Future.Logistics.MySql.Warehouse
 
         public async Task<string> InsertAsync(MerchantWarehouseDTO dto)
         {
-            using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
+            var sql = "INSERT INTO Warehouses(ID, Merchant_ID, Name) VALUES(@ID, @Merchant_ID, @Name)";
+            try
             {
-                return await conn.TryExecuteAsync("INSERT INTO Warehouses(ID, Merchant_ID, Name) VALUES(@ID, @Merchant_ID, @Name)"
-                    , dto).ConfigureAwait(false);
+                using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
+                {
+                    await conn.ExecuteAsync(sql, parameters: dto).ConfigureAwait(false);
+                    return MsgCodes.SUCCESS;
+                }
+            }
+            catch (DbException ex)
+            {
+                return base.HandleException(null, ex, sql, dto);
             }
         }
 
         public async Task<MerchantWarehouseDTO> GetAsync(string merchantId, string warehouseId)
         {
-            using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
+            var sql = "SELECT * FROM Warehouses WHERE ID = @id LIMIT 1";
+            try
             {
-                var mr = await conn.TryQueryFirstOrDefaultAsync<MerchantWarehouseDTO>("SELECT * FROM Warehouses WHERE ID = @id LIMIT 1"
-                    , new { ID = warehouseId }).ConfigureAwait(false);
-                return mr.Result;
+                using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
+                {
+                    return await conn.QueryFirstOrDefaultAsync<MerchantWarehouseDTO>(sql, parameters: new { ID = warehouseId }).ConfigureAwait(false);
+                }
+            }
+            catch (DbException ex)
+            {
+                var rs = base.HandleException<MerchantWarehouseDTO>(null, ex, sql, null);
+                return rs.Result;
             }
         }
 
         public async Task<string> UpdateAsync(MerchantWarehouseDTO dto)
         {
-            using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
+            var sql = "UPDATE Warehouses SET Name = @Name WHERE ID = @ID";
+            try
             {
-                return await conn.TryExecuteAsync("UPDATE Warehouses SET Name = @Name WHERE ID = @ID"
-                    , dto).ConfigureAwait(false);
+                using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
+                {
+                    await conn.ExecuteAsync(sql, parameters: dto).ConfigureAwait(false);
+                    return MsgCODES.SUCCESS;
+                }
+            }
+            catch (DbException ex)
+            {
+                return base.HandleException(null, ex, sql, dto);
             }
         }
 
         public async Task<string> DeleteAsync(MerchantWarehouseDTO dto)
         {
-            using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
+            var sql = "DELETE FROM Warehouses WHERE ID = @ID";
+            try
             {
-                return await conn.TryExecuteAsync("DELETE FROM Warehouses WHERE ID = @ID", dto).ConfigureAwait(false);
+                using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
+                {
+                    await conn.ExecuteAsync(sql, parameters: dto).ConfigureAwait(false);
+                    return MsgCODES.SUCCESS;
+                }
+            }
+            catch (DbException ex)
+            {
+                return base.HandleException(null, ex, sql, dto);
             }
         }
 
@@ -72,11 +105,17 @@ namespace SyncSoft.Future.Logistics.MySql.Warehouse
                 sql.Append(" AND ID <> @Warehouse_ID");
             }
 
-            using (var conn = await CreateConn(query.Merchant_ID).ConfigureAwait(false))
+            try
             {
-                var mr = await conn.TryExecuteScalarAsync<int>(sql.ToString(), query).ConfigureAwait(false);
-
-                return mr;
+                using (var conn = await CreateConn(query.Merchant_ID).ConfigureAwait(false))
+                {
+                    var rs = await conn.ExecuteScalarAsync<int>(sql.ToString(), parameters: query).ConfigureAwait(false);
+                    return new MsgResult<int>(MsgCodes.SUCCESS, rs);
+                }
+            }
+            catch (DbException ex)
+            {
+                return base.HandleException<int>(null, ex, sql.ToString(), query);
             }
         }
 
