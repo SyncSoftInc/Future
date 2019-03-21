@@ -16,9 +16,9 @@ namespace SyncSoft.Future.NUnit.ServiceTest
 
         #endregion
 
-        protected abstract JobTestCase CreateTestCase();
+        protected abstract ServiceTestCase CreateTestCase();
 
-        [Test]
+        [Test, Order(0)]
         public void Create()
         {
             var testCase = CreateTestCase();
@@ -37,7 +37,7 @@ namespace SyncSoft.Future.NUnit.ServiceTest
             Assert.IsTrue(msgCode.IsSuccess());
         }
 
-        [Test]
+        [Test, Order(25)]
         public void Get()
         {
             var testCase = CreateTestCase();
@@ -50,14 +50,14 @@ namespace SyncSoft.Future.NUnit.ServiceTest
             Assert.IsTrue(rs.IsNotNull());
         }
 
-        [Test]
+        [Test, Order(50)]
         public void GetGroups()
         {
             var rs = _JobApi.GetGroupsAsync().ResultForTest();
             Assert.IsTrue(rs.IsNotNull());
         }
 
-        [Test]
+        [Test, Order(75)]
         public void GetTriggers()
         {
             var testCase = CreateTestCase();
@@ -69,43 +69,7 @@ namespace SyncSoft.Future.NUnit.ServiceTest
             Assert.IsTrue(rs.IsNotNull());
         }
 
-        [Test]
-        public void Interrupt()
-        {
-            var testCase = CreateTestCase();
-            var msgCode = _JobApi.InterruptAsync(new
-            {
-                Name = testCase.JobName,
-                GroupName = testCase.JobGroupName
-            }).ResultForTest();
-            Assert.IsTrue(msgCode.IsSuccess());
-        }
-
-        [Test]
-        public void Pause()
-        {
-            var testCase = CreateTestCase();
-            var msgCode = _JobApi.PauseAsync(new
-            {
-                Name = testCase.JobName,
-                GroupName = testCase.JobGroupName
-            }).ResultForTest();
-            Assert.IsTrue(msgCode.IsSuccess());
-        }
-
-        [Test]
-        public void Resume()
-        {
-            var testCase = CreateTestCase();
-            var msgCode = _JobApi.ResumeAsync(new
-            {
-                Name = testCase.JobName,
-                GroupName = testCase.JobGroupName
-            }).ResultForTest();
-            Assert.IsTrue(msgCode.IsSuccess());
-        }
-
-        [Test]
+        [Test, Order(100)]
         public void Trigger()
         {
             var testCase = CreateTestCase();
@@ -117,7 +81,43 @@ namespace SyncSoft.Future.NUnit.ServiceTest
             Assert.IsTrue(msgCode.IsSuccess());
         }
 
-        [Test]
+        [Test, Order(125)]
+        public void Interrupt()
+        {
+            var testCase = CreateTestCase();
+            var msgCode = _JobApi.InterruptAsync(new
+            {
+                Name = testCase.JobName,
+                GroupName = testCase.JobGroupName
+            }).ResultForTest();
+            Assert.IsTrue(msgCode.IsSuccess());
+        }
+
+        [Test, Order(150)]
+        public void Resume()
+        {
+            var testCase = CreateTestCase();
+            var msgCode = _JobApi.ResumeAsync(new
+            {
+                Name = testCase.JobName,
+                GroupName = testCase.JobGroupName
+            }).ResultForTest();
+            Assert.IsTrue(msgCode.IsSuccess());
+        }
+
+        [Test, Order(175)]
+        public void Pause()
+        {
+            var testCase = CreateTestCase();
+            var msgCode = _JobApi.PauseAsync(new
+            {
+                Name = testCase.JobName,
+                GroupName = testCase.JobGroupName
+            }).ResultForTest();
+            Assert.IsTrue(msgCode.IsSuccess());
+        }
+
+        [Test, Order(200)]
         public void Delete()
         {
             var testCase = CreateTestCase();

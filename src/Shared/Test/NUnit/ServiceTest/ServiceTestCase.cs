@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SyncSoft.Future.NUnit.ServiceTest
 {
-    public class JobTestCase
+    public class ServiceTestCase
     {
         public string JobName { get; set; }
         public string JobType { get; set; }
