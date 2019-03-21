@@ -7,7 +7,7 @@ namespace SyncSoft.Future.Logistics.Redis.Inventory
 {
     public class InventoryDAL : IInventoryQueryDAL
     {
-        private const string _Prefix = "INVENTORY_";
+        private const string _Prefix = "INVENTORY:";
         private readonly IInventoryDB _db;
 
         public InventoryDAL(IInventoryDB db)

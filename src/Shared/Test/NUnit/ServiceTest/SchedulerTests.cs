@@ -17,7 +17,7 @@ namespace SyncSoft.Future.NUnit.ServiceTest
         #endregion
 
         [Test]
-        public void Run()
+        public void Get()
         {
             var ar = _SchedulerApi.GetAsync().Execute();
             Assert.IsTrue(ar.IsSuccess);
