@@ -1,6 +1,8 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.EngineConfigs;
+using SyncSoft.ECP.APIs.Service;
 using SyncSoft.Future.Logistics.API.Inventory;
+using SyncSoft.Future.Logistics.API.Service;
 using SyncSoft.Future.Logistics.API.Warehouse;
 
 namespace SyncSoft.App
@@ -15,6 +17,10 @@ namespace SyncSoft.App
                 {
                     ObjectContainer.Register<IInventoryApi, InventoryApi>(LifeCycleEnum.Singleton);
                     ObjectContainer.Register<IWarehouseApi, WarehouseApi>(LifeCycleEnum.Singleton);
+
+                    ObjectContainer.Register<ISchedulerApi, SchedulerApi>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<IJobApi, JobApi>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<ITriggerApi, TriggerApi>(LifeCycleEnum.Singleton);
                 };
             }
 
