@@ -3,6 +3,7 @@ using SyncSoft.App.Components;
 using SyncSoft.ECP.APIs.Service;
 using System;
 using System.Threading.Tasks;
+using SyncSoft.App.Logging;
 
 namespace SyncSoft.Future.NUnit.ServiceTest
 {
@@ -14,16 +15,20 @@ namespace SyncSoft.Future.NUnit.ServiceTest
         private static readonly Lazy<ISchedulerApi> _lazySchedulerApi = ObjectContainer.LazyResolve<ISchedulerApi>();
         private ISchedulerApi _SchedulerApi => _lazySchedulerApi.Value;
 
+        private static readonly Lazy<ILogger> _lazyLogger = ObjectContainer.LazyResolveLogger<SchedulerTests>();
+        private ILogger _Logger => _lazyLogger.Value;
+
         #endregion
 
         [Test]
         public void Get()
         {
             var ar = _SchedulerApi.GetAsync().Execute();
-            Assert.IsTrue(ar.IsSuccess);
+            var rs = ar.GetResultAsync().Execute();
 
-            var a = ar.GetResultAsync().Execute();
-            Assert.IsNotNull(a);
+            _Logger.Debug($"{rs.SchedulerName}");
+
+            Assert.IsNotNull(rs);
         }
 
         [Test]

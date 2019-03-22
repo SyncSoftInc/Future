@@ -3,6 +3,8 @@ using SyncSoft.App.Components;
 using SyncSoft.ECP.APIs.Service;
 using System;
 using System.Threading.Tasks;
+using SyncSoft.App.Logging;
+using System.Linq;
 
 namespace SyncSoft.Future.NUnit.ServiceTest
 {
@@ -13,6 +15,9 @@ namespace SyncSoft.Future.NUnit.ServiceTest
 
         private static readonly Lazy<IJobApi> _lazyJobApi = ObjectContainer.LazyResolve<IJobApi>();
         private IJobApi _JobApi => _lazyJobApi.Value;
+
+        private static readonly Lazy<ILogger> _lazyLogger = ObjectContainer.LazyResolveLogger<JobTests>();
+        private ILogger _Logger => _lazyLogger.Value;
 
         #endregion
 
@@ -47,6 +52,8 @@ namespace SyncSoft.Future.NUnit.ServiceTest
                 GroupName = testCase.JobGroupName
             }).ResultForTest();
 
+            _Logger.Debug($"{rs.Name}\t{rs.TriggersCount}\t{rs.TypeName}");
+
             Assert.IsTrue(rs.IsNotNull());
         }
 
@@ -54,6 +61,16 @@ namespace SyncSoft.Future.NUnit.ServiceTest
         public void GetGroups()
         {
             var rs = _JobApi.GetGroupsAsync().ResultForTest();
+
+            foreach (var group in rs)
+            {
+                _Logger.Debug(group.Name);
+                foreach (var jog in group.Jobs)
+                {
+                    _Logger.Debug($"{jog.Name}\t{jog.TypeName}");
+                }
+            }
+
             Assert.IsTrue(rs.IsNotNull());
         }
 
@@ -66,6 +83,12 @@ namespace SyncSoft.Future.NUnit.ServiceTest
                 Name = testCase.JobName,
                 GroupName = testCase.JobGroupName
             }).ResultForTest();
+
+            foreach (var trigger in rs)
+            {
+                _Logger.Debug($"{trigger.GroupName}\t{trigger.Name}\t{trigger.State}");
+            }
+
             Assert.IsTrue(rs.IsNotNull());
         }
 
