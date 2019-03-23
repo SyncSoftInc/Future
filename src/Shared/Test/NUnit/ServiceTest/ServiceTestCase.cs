@@ -14,5 +14,6 @@ namespace SyncSoft.Future.NUnit.ServiceTest
         public string CronExpression { get; set; }
         public int IntervalSeconds { get; set; }
         public bool ReplaceExists { get; set; }
+        public bool UseCronExpression { get; set; }
     }
 }
