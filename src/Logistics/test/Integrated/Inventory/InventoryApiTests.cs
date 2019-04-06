@@ -103,8 +103,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             var msgCode = _InventoryApi.AllocateInventoriesAsync(cmd, correlationId).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess(), mr);
         }
 
         #endregion
@@ -132,8 +132,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             var msgCode = _InventoryApi.HoldOrderInventoriesAsync(cmd, correlationId).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess(), mr);
         }
 
         #endregion
@@ -161,8 +161,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             var msgCode = _InventoryApi.InventoryShipConfirmAsync(cmd, correlationId).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess(), mr);
         }
 
         #endregion
@@ -186,8 +186,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
             var msgCode = _InventoryApi.UnholdOrderInventoriesAsync(cmd, correlationId).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess(), mr);
         }
 
         #endregion

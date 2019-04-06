@@ -25,28 +25,28 @@ namespace SyncSoft.Future.Logistics.WebApi.Controllers
         /// </summary>
         [HttpPost("inventories")]
         public Task<string> AllocateInventoriesAsync(AllocateInventoriesCommand cmd)
-            => base.SendMsgCodeAsync(cmd);
+            => base.SendAsync(cmd);
 
         /// <summary>
         /// Hold order inventory.
         /// </summary>
         [HttpPost("inventories/orderhold")]
         public Task<string> HoldOrderInventoriesAsync(HoldOrderInventoriesCommand cmd)
-            => base.SendMsgCodeAsync(cmd);
+            => base.SendAsync(cmd);
 
         /// <summary>
         /// Unhold order inventory.
         /// </summary>
         [HttpDelete("inventories/orderhold")]
         public Task<string> UnholdOrderInventoriesAsync(UnholdOrderInventoriesCommand cmd)
-            => base.SendMsgCodeAsync(cmd);
+            => base.SendAsync(cmd);
 
         /// <summary>
         /// Ship confirm, deduct onhand and safe inventory.
         /// </summary>
         [HttpPost("inventories/shipment")]
         public Task<string> UnholdOrderInventoriesAsync(InventoryShipConfirmCommand cmd)
-            => base.SendMsgCodeAsync(cmd);
+            => base.SendAsync(cmd);
 
         /// <summary>
         /// Get available inventory

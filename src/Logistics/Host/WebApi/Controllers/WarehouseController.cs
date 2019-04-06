@@ -31,21 +31,21 @@ namespace SyncSoft.Future.Logistics.WebApi.Controllers
         public async Task<string> CreateAsync(CreateWarehouseCommand cmd)
         {
             var mr = await base.PublishAsync(cmd).ConfigureAwait(false);
-            return mr.MsgCode;
+            return mr;
         }
 
         [HttpPut("warehouse")]
         public async Task<string> UpdateAsync(UpdateWarehouseCommand cmd)
         {
             var mr = await base.PublishAsync(cmd).ConfigureAwait(false);
-            return mr.MsgCode;
+            return mr;
         }
 
         [HttpDelete("warehouse")]
         public async Task<string> DeleteAsync(DeleteWarehouseCommand cmd)
         {
             var mr = await base.PublishAsync(cmd).ConfigureAwait(false);
-            return mr.MsgCode;
+            return mr;
         }
     }
 }
