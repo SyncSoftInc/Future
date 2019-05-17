@@ -13,18 +13,14 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.UnholdOrderInventories
     /// <summary>
     /// 主数据库操作
     /// </summary>
-    public class MasterDBActivity : RrTransactionActivity
+    public class MasterDBActivity : TccActivity
     {
         private static readonly Lazy<IInventoryMasterDAL> _lazyInventoryMasterDAL = ObjectContainer.LazyResolve<IInventoryMasterDAL>();
         private IInventoryMasterDAL _InventoryMasterDAL => _lazyInventoryMasterDAL.Value;
 
-        public MasterDBActivity(RrTransactionContext context) : base(context)
-        {
-        }
-
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
-            var cmd = (UnholdOrderInventoriesCommand)Context.Items[TranConstants.Context_Items_Command];
+            var cmd = Context.Get<UnholdOrderInventoriesCommand>(TranConstants.Context_Items_Command);
             if (cmd.Inventories.IsMissing()) return;
             // ^^^^^^^^^^
 
@@ -32,12 +28,12 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.UnholdOrderInventories
             var availableInventories = await _InventoryMasterDAL.UnholdOrderInventoriesAsync(cmd).ConfigureAwait(false);
 
             // 将可用库存放入上下文给下一步使用
-            Context.Items.Add(TranConstants.Context_Items_AvailableInventories, availableInventories);
+            Context.Set(TranConstants.Context_Items_AvailableInventories, availableInventories);
         }
 
         protected override async Task RollbackAsync()
         {
-            var cmd = (UnholdOrderInventoriesCommand)Context.Items[TranConstants.Context_Items_Command];
+            var cmd = Context.Get<UnholdOrderInventoriesCommand>(TranConstants.Context_Items_Command);
             var rollabckCmd = new HoldOrderInventoriesCommand
             {
                 Merchant_ID = cmd.Merchant_ID,

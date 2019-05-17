@@ -9,7 +9,7 @@ namespace SyncSoft.Future.Password.WebApi
 {
     public class Startup : SerilogStartup
     {
-        private const string RESOURE_NAME = "passportapi";
+        private const string RESOURE_NAME = "passport";
 
         public Startup(IConfiguration configuration) : base(configuration)
         {

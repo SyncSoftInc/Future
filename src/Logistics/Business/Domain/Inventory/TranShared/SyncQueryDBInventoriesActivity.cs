@@ -14,7 +14,7 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.TranShared
     /// <summary>
     /// 读取数据库操作
     /// </summary>
-    public class SyncQueryDBInventoriesActivity : RrTransactionActivity
+    public class SyncQueryDBInventoriesActivity : TccActivity
     {
         // *******************************************************************************************************************************
         #region -  Lazy Object(s)  -
@@ -30,20 +30,12 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.TranShared
 
         #endregion
         // *******************************************************************************************************************************
-        #region -  Constructor(s)  -
-
-        public SyncQueryDBInventoriesActivity(RrTransactionContext context) : base(context)
-        {
-        }
-
-        #endregion
-        // *******************************************************************************************************************************
         #region -  Run  -
 
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
-            var cmd = (InventoriesOperationCommand)Context.Items[TranConstants.Context_Items_Command];
-            var availableInventories = (IList<InventoryDTO>)Context.Items[TranConstants.Context_Items_AvailableInventories];
+            var cmd = Context.Get<InventoriesOperationCommand>(TranConstants.Context_Items_Command);
+            var availableInventories = Context.Get<IList<InventoryDTO>>(TranConstants.Context_Items_AvailableInventories);
             if (availableInventories.IsMissing()) return;
             // ^^^^^^^^^^
 

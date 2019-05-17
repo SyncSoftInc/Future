@@ -9,18 +9,14 @@ using System.Threading.Tasks;
 
 namespace SyncSoft.Future.Passport.Domain.User.CreateUser
 {
-    public class CreateUserActivity : RrTransactionActivity
+    public class CreateUserActivity : TccActivity
     {
         private static readonly Lazy<IUserDAL> _lazyUserDAL = ObjectContainer.LazyResolve<IUserDAL>();
         private IUserDAL _UserDAL => _lazyUserDAL.Value;
 
-        public CreateUserActivity(RrTransactionContext context) : base(context)
-        {
-        }
-
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
-            var cmd = (CreateUserCommand)Context.Items[CreateUserTransaction.Parameters_Command];
+            var cmd = Context.Get<CreateUserCommand>(CreateUserTransaction.Parameters_Command);
             var dto = new UserDTO
             {
                 ID = cmd.ID,
@@ -39,7 +35,7 @@ namespace SyncSoft.Future.Passport.Domain.User.CreateUser
 
         protected override async Task RollbackAsync()
         {
-            var cmd = (CreateUserCommand)Context.Items[CreateUserTransaction.Parameters_Command];
+            var cmd = Context.Get<CreateUserCommand>(CreateUserTransaction.Parameters_Command);
             var msgCode = await _UserDAL.DeleteUserAsync(cmd.ID).ConfigureAwait(false);
             if (!msgCode.IsSuccess()) throw new Exception(msgCode);
         }

@@ -48,8 +48,10 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
 
             // 开始执行事务
             var tran = new AllocateInventoriesTransaction(cmd);
-            var success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.WH_0000000003;
+            await tran.RunAsync().ConfigureAwait(false);
+
+
+            return MsgCodes.SUCCESS;
         }
 
         #endregion
@@ -71,8 +73,8 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
 
             // 开始执行事务
             var tran = new HoldOrderInventoriesTransaction(cmd);
-            var success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.WH_0000000005;
+            await tran.RunAsync().ConfigureAwait(false);
+            return MsgCodes.SUCCESS;
         }
 
         #endregion
@@ -90,8 +92,8 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
 
             // 开始执行事务
             var tran = new UnholdOrderInventoriesTransaction(cmd);
-            var success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.WH_0000000006;
+            await tran.RunAsync().ConfigureAwait(false);
+            return MsgCodes.SUCCESS;
         }
 
         #endregion
@@ -109,8 +111,8 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
 
             // 开始执行事务
             var tran = new InventoryShipCancelTransaction(cmd);
-            var success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.WH_0000000008;
+            await tran.RunAsync().ConfigureAwait(false);
+            return MsgCodes.SUCCESS;
         }
 
         #endregion

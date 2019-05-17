@@ -36,8 +36,8 @@ namespace SyncSoft.Future.Passport.Domain.User
 
             // 开始创建事务
             var tran = new CreateUserTransaction(cmd);
-            bool success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000002;
+            await tran.RunAsync().ConfigureAwait(false);
+            return MsgCodes.SUCCESS;
         }
 
         #endregion
@@ -47,8 +47,8 @@ namespace SyncSoft.Future.Passport.Domain.User
         public async Task<string> UpdateUserAsync(UpdateUserCommand cmd)
         {
             var tran = new UpdateUserTransaction(cmd);
-            bool success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000003;
+            await tran.RunAsync().ConfigureAwait(false);
+            return MsgCodes.SUCCESS;
         }
 
         #endregion
@@ -58,8 +58,8 @@ namespace SyncSoft.Future.Passport.Domain.User
         public async Task<string> UserSaveProfileAsync(UserSaveProfileCommand cmd)
         {
             var tran = new UserSaveProfileTransaction(cmd);
-            bool success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000004;
+            await tran.RunAsync().ConfigureAwait(false);
+            return MsgCodes.SUCCESS;
         }
 
         #endregion
@@ -69,8 +69,8 @@ namespace SyncSoft.Future.Passport.Domain.User
         public async Task<string> DeleteUserAsync(DeleteUserCommand cmd)
         {
             var tran = new DeleteUserTransaction(cmd);
-            bool success = await tran.RunAsync().ConfigureAwait(false);
-            return success ? MsgCodes.SUCCESS : MsgCodes.PASS_0000000005;
+            await tran.RunAsync().ConfigureAwait(false);
+            return MsgCodes.SUCCESS;
         }
 
         #endregion

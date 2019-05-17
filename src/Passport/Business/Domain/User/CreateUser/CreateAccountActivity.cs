@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SyncSoft.Future.Passport.Domain.User.CreateUser
 {
-    public class CreateAccountActivity : RrTransactionActivity
+    public class CreateAccountActivity : TccActivity
     {
         private static readonly Lazy<IAccountDAL> _lazyAccountDAL = ObjectContainer.LazyResolve<IAccountDAL>();
         private IAccountDAL _AccountDAL => _lazyAccountDAL.Value;
@@ -18,13 +18,9 @@ namespace SyncSoft.Future.Passport.Domain.User.CreateUser
         private static readonly Lazy<IPasswordEncryptor> _lazyPasswordEncryptor = ObjectContainer.LazyResolve<IPasswordEncryptor>();
         private IPasswordEncryptor _PasswordEncryptor => _lazyPasswordEncryptor.Value;
 
-        public CreateAccountActivity(RrTransactionContext context) : base(context)
-        {
-        }
-
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
-            var cmd = (CreateUserCommand)Context.Items[CreateUserTransaction.Parameters_Command];
+            var cmd = Context.Get<CreateUserCommand>(CreateUserTransaction.Parameters_Command);
             var dto = new AccountDTO
             {
                 ID = cmd.ID,
@@ -42,7 +38,7 @@ namespace SyncSoft.Future.Passport.Domain.User.CreateUser
 
         protected override async Task RollbackAsync()
         {
-            var cmd = (CreateUserCommand)Context.Items[CreateUserTransaction.Parameters_Command];
+            var cmd = Context.Get<CreateUserCommand>(CreateUserTransaction.Parameters_Command);
             var msgCode = await _AccountDAL.DeleteAccountAsync(cmd.ID).ConfigureAwait(false);
             if (!msgCode.IsSuccess()) throw new Exception(msgCode);
         }

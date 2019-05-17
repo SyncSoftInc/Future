@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
 {
-    public class ChangePasswordActivity : RrTransactionActivity
+    public class ChangePasswordActivity : TccActivity
     {
         private static readonly Lazy<IAccountDAL> _lazyAccountDAL = ObjectContainer.LazyResolve<IAccountDAL>();
         private IAccountDAL _AccountDAL => _lazyAccountDAL.Value;
@@ -18,13 +18,9 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
         private static readonly Lazy<IPasswordEncryptor> _lazyPasswordEncryptor = ObjectContainer.LazyResolve<IPasswordEncryptor>();
         private IPasswordEncryptor _PasswordEncryptor => _lazyPasswordEncryptor.Value;
 
-        public ChangePasswordActivity(RrTransactionContext context) : base(context)
-        {
-        }
-
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
-            var cmd = (UserSaveProfileCommand)Context.Items[UserSaveProfileTransaction.Parameters_Command];
+            var cmd = Context.Get<UserSaveProfileCommand>(UserSaveProfileTransaction.Parameters_Command);
             if (cmd.Password.IsMissing()) return;
             // ^^^^^^^^^^
             if (cmd.OldPassword.IsMissing()) throw new Exception(MsgCodes.PASS_0000000006);
@@ -38,7 +34,7 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
             if (oldDto.Password != oldPassword) throw new Exception(MsgCodes.PASS_0000000007);
             // ^^^^^^^^^^
 
-            Context.Items.Add(UserSaveProfileTransaction.Parameters_Account_Backup, oldDto);
+            Context.Set(UserSaveProfileTransaction.Parameters_Account_Backup, oldDto);
 
             var dto = new AccountDTO
             {
@@ -55,7 +51,7 @@ namespace SyncSoft.Future.Passport.Domain.User.UserSaveProfile
 
         protected override async Task RollbackAsync()
         {
-            var dto = (AccountDTO)Context.Items[UserSaveProfileTransaction.Parameters_Account_Backup];
+            var dto = Context.Get<AccountDTO>(UserSaveProfileTransaction.Parameters_Account_Backup);
             var msgCode = await _AccountDAL.UpdatePasswordAsync(dto).ConfigureAwait(false);
             if (!msgCode.IsSuccess()) throw new Exception(msgCode);
         }

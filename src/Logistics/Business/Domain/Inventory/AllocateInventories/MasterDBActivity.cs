@@ -15,36 +15,32 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.AllocateInventories
     /// <summary>
     /// 主数据库操作
     /// </summary>
-    public class MasterDBActivity : RrTransactionActivity
+    public class MasterDBActivity : TccActivity
     {
         private static readonly Lazy<IInventoryMasterDAL> _lazyInventoryMasterDAL = ObjectContainer.LazyResolve<IInventoryMasterDAL>();
         private IInventoryMasterDAL _InventoryMasterDAL => _lazyInventoryMasterDAL.Value;
 
-        public MasterDBActivity(RrTransactionContext context) : base(context)
-        {
-        }
-
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
-            var cmd = (AllocateInventoriesCommand)Context.Items[TranConstants.Context_Items_Command];
+            var cmd = Context.Get<AllocateInventoriesCommand>(TranConstants.Context_Items_Command);
             if (cmd.Inventories.IsMissing()) return;
             // ^^^^^^^^^^
 
             // 备份当前库存
             var backup = await _InventoryMasterDAL.GetInventoriesAsync(cmd.Merchant_ID, cmd.Inventories.Select(x => x.ItemNo)).ConfigureAwait(false);
-            Context.Items.Add(TranConstants.Context_Items_BackupInventories, backup);
+            Context.Set(TranConstants.Context_Items_BackupInventories, backup);
 
             // 分配库存，得到分配后计算得到的可用库存
             var availableInventories = await _InventoryMasterDAL.AllocateInventoriesAsync(cmd).ConfigureAwait(false);
 
             // 将可用库存放入上下文给下一步使用
-            Context.Items.Add(TranConstants.Context_Items_AvailableInventories, availableInventories);
+            Context.Set(TranConstants.Context_Items_AvailableInventories, availableInventories);
         }
 
         protected override async Task RollbackAsync()
         {
-            var cmd = (AllocateInventoriesCommand)Context.Items[TranConstants.Context_Items_Command];
-            var backup = (IList<InventoryDTO>)Context.Items[TranConstants.Context_Items_BackupInventories];
+            var cmd = Context.Get<AllocateInventoriesCommand>(TranConstants.Context_Items_Command);
+            var backup = Context.Get<IList<InventoryDTO>>(TranConstants.Context_Items_BackupInventories);
             var rollabckCmd = new AllocateInventoriesCommand
             {
                 Merchant_ID = cmd.Merchant_ID,
