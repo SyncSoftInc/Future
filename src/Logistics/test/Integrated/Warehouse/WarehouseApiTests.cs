@@ -74,8 +74,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Warehouse
             var msgCode = _WarehouseApi.CreateAsync(cmd, correlationId).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess(), mr);
         }
 
         [Test, Order(1)]
@@ -100,8 +100,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Warehouse
             var msgCode = _WarehouseApi.UpdateAsync(cmd, correlationId).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess(), mr);
         }
 
         [Test, Order(3)]
@@ -117,8 +117,8 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Warehouse
             var msgCode = _WarehouseApi.DeleteAsync(cmd, correlationId).ResultForTest();
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess, mr.MsgCode);
+            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
+            Assert.IsTrue(mr.IsSuccess(), mr);
         }
     }
 }

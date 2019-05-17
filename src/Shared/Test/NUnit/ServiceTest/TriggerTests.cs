@@ -31,6 +31,8 @@ namespace SyncSoft.Future.NUnit.ServiceTest
                 testCase.TriggerGroupName,
                 testCase.TriggerName,
                 testCase.IntervalSeconds
+                //testCase.CronExpression,
+                //testCase.UseCronExpression
             };
 
             var msgCode = _TriggerApi.CreateAsync(cmd).ResultForTest();
@@ -72,6 +74,8 @@ namespace SyncSoft.Future.NUnit.ServiceTest
                 GroupName = testCase.TriggerGroupName,
                 NewGroupName = testCase.TriggerGroupName + "_UPDATE",
                 IntervalSeconds = testCase.IntervalSeconds + 10
+                //testCase.CronExpression,
+                //testCase.UseCronExpression
             };
 
             var msgCode = _TriggerApi.UpdateAsync(cmd).ResultForTest();

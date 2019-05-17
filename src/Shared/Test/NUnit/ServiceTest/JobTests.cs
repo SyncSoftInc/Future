@@ -35,7 +35,8 @@ namespace SyncSoft.Future.NUnit.ServiceTest
                 testCase.JobGroupName,
                 testCase.TriggerGroupName,
                 testCase.TriggerName,
-                testCase.IntervalSeconds,
+                //testCase.IntervalSeconds,
+                testCase.CronExpression,
                 testCase.ReplaceExists
             };
             var msgCode = _JobApi.CreateAsync(cmd).ResultForTest();

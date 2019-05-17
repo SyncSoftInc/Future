@@ -14,6 +14,7 @@ namespace SyncSoft.Future.Logistics.IntegratedTest.Service
                 TriggerGroupName = "TEST_TRIGGER_GROUP",
                 TriggerName = "TEST_TRIGGER",
                 IntervalSeconds = 10,
+                CronExpression = "0/5 * * * * ? *",
                 ReplaceExists = true
             };
         }
