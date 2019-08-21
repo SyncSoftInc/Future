@@ -1,29 +1,31 @@
-﻿using Microsoft.Extensions.Configuration;
-using SyncSoft.App;
+﻿using SyncSoft.App;
 using SyncSoft.App.EngineConfigs;
-using SyncSoft.App.Redis.Confgiguration;
+using SyncSoft.App.Redis.Messaging;
+using SyncSoft.App.Redis.Transaction;
 using SyncSoft.App.Securities;
 using SyncSoft.ECP.Securities;
 
 namespace SyncSoft.Future
 {
-    public static class HostEngine
+    public static class FutureEngine
     {
-        public static CommonConfigurator Init(IConfiguration configuration, string resourceName, bool useRabbitMQ = true, bool allowOverridingRegistrations = false)
+        public static CommonConfigurator Init(string projectName
+            , bool useRabbitMQ = true
+            , bool allowOverridingRegistrations = false
+            , params string[] args
+        )
         {
             var configurator = Engine.Init(options =>
             {
-                options.Configuration = configuration;
                 options.AllowOverridingRegistrations = allowOverridingRegistrations;
+                options.ConsoleArguments = args;
             })
-                .UseECPSeriglogLoggerQuickSettings(options =>
+                .UseEcpHostQuickSettings(options =>
                 {
-                    options.ConfigSerilogLoggerAppQuickSettingOptions = b =>
+                    options.ConfigAppDefaultComponentsOptions = d =>
                     {
-                        b.ConfigAppDefaultComponentsOptions = d =>
-                        {
-                            d.ConnectionStringProviderType = typeof(RedisConnectionStringProvider);
-                        };
+                        d.MsgResultStoreType = typeof(RedisMsgResultStore);
+                        d.TransactionStateStoreType = typeof(RedisTransactionStateStore);
                     };
                     options.ConfigECPSecurityComponentsOptions = a =>
                     {
@@ -31,7 +33,7 @@ namespace SyncSoft.Future
                         a.PasswordEncryptorType = typeof(Sha256PasswordEncryptor);
                     };
                 })
-                .UseECPAspNetCore(resourceName)
+                .UseECPAspNetCore(projectName)
                 .UseMessageQueue();
 
             return useRabbitMQ ? configurator.UseRabbitMQ() : configurator.UseDefaultMessageComponents();

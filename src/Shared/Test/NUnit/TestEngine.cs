@@ -1,6 +1,5 @@
 ﻿using SyncSoft.App;
 using SyncSoft.App.EngineConfigs;
-using SyncSoft.App.Redis.Confgiguration;
 
 namespace SyncSoft.Future
 {
@@ -10,15 +9,9 @@ namespace SyncSoft.Future
         {
             return Engine.Init()
                 .UseSimpleInjector()
-                .UseSerilogLoggerAppQuickSettings(options =>
-                {
-                    options.ConfigAppDefaultComponentsOptions = d =>
-                    {
-                        d.ConnectionStringProviderType = typeof(RedisConnectionStringProvider);
-                    };
-                })
+                .UseAppDefaultComponents()
                 .UseJsonNet()
-                .AsUnitTestApiClient();
+                .UseUnitTestApiClient();
         }
     }
 }

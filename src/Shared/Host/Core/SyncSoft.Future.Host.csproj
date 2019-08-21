@@ -1,17 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\..\..\build\common.props" />
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="SyncSoft.App.RabbitMQ" Version="2.9.5.1" />
-    <PackageReference Include="SyncSoft.ECP.Quartz" Version="2.9.5.2" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="SyncSoft.App.RabbitMQ" Version="2.9.9" />
+        <PackageReference Include="SyncSoft.ECP.Hosting" Version="2.9.9" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\DataAccess\Redis\SyncSoft.Future.Redis.csproj" />
-    <ProjectReference Include="..\..\Log\Serilog\SyncSoft.Future.Serilog.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\DataAccess\Redis\SyncSoft.Future.Redis.csproj" />
+        <ProjectReference Include="..\..\Log\Serilog\SyncSoft.Future.Serilog.csproj" />
+    </ItemGroup>
 
 </Project>
