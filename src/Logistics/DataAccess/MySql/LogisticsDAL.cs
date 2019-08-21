@@ -11,11 +11,7 @@ namespace SyncSoft.Future.Logistics.MySql
         {
         }
 
-        protected Task<IDbConnection> CreateConn(string merchantId, bool openConnection = false)
-            => DB.CreateConnectionAsync(o =>
-            {
-                o.OpenConnection = openConnection;
-                o.AddParameter(LogisticsDB.Parameter_MerchantId, merchantId);
-            });
+        protected Task<IDbConnection> CreateConn(string merchantId)
+            => DB.CreateConnectionAsync();
     }
 }

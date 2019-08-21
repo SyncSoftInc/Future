@@ -181,7 +181,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
         {
             var parameters = createParameterFunc();
 
-            using (var conn = await CreateConn(merchantId, true).ConfigureAwait(false))
+            using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
             using (var tran = conn.BeginTransaction())
             {
                 var commandDefinition = new CommandDefinition(commandText: sql

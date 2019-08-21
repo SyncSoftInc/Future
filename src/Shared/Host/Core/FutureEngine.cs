@@ -10,14 +10,11 @@ namespace SyncSoft.Future
     public static class FutureEngine
     {
         public static CommonConfigurator Init(string projectName
-            , bool useRabbitMQ = true
-            , bool allowOverridingRegistrations = false
             , params string[] args
         )
         {
-            var configurator = Engine.Init(options =>
+            return Engine.Init(options =>
             {
-                options.AllowOverridingRegistrations = allowOverridingRegistrations;
                 options.ConsoleArguments = args;
             })
                 .UseEcpHostQuickSettings(options =>
@@ -33,10 +30,7 @@ namespace SyncSoft.Future
                         a.PasswordEncryptorType = typeof(Sha256PasswordEncryptor);
                     };
                 })
-                .UseECPAspNetCore(projectName)
-                .UseMessageQueue();
-
-            return useRabbitMQ ? configurator.UseRabbitMQ() : configurator.UseDefaultMessageComponents();
+                .UseECPAspNetCore(projectName);
         }
     }
 }

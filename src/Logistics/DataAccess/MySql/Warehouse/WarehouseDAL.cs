@@ -26,7 +26,7 @@ namespace SyncSoft.Future.Logistics.MySql.Warehouse
             {
                 using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
                 {
-                    await conn.ExecuteAsync(sql, parameters: dto).ConfigureAwait(false);
+                    await conn.ExecuteAsync(sql).ConfigureAwait(false);
                     return MsgCodes.SUCCESS;
                 }
             }
@@ -60,7 +60,7 @@ namespace SyncSoft.Future.Logistics.MySql.Warehouse
             {
                 using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
                 {
-                    await conn.ExecuteAsync(sql, parameters: dto).ConfigureAwait(false);
+                    await conn.ExecuteAsync(sql).ConfigureAwait(false);
                     return MsgCODES.SUCCESS;
                 }
             }
@@ -77,7 +77,7 @@ namespace SyncSoft.Future.Logistics.MySql.Warehouse
             {
                 using (var conn = await CreateConn(dto.Merchant_ID).ConfigureAwait(false))
                 {
-                    await conn.ExecuteAsync(sql, parameters: dto).ConfigureAwait(false);
+                    await conn.ExecuteAsync(sql).ConfigureAwait(false);
                     return MsgCODES.SUCCESS;
                 }
             }
@@ -109,7 +109,7 @@ namespace SyncSoft.Future.Logistics.MySql.Warehouse
             {
                 using (var conn = await CreateConn(query.Merchant_ID).ConfigureAwait(false))
                 {
-                    var rs = await conn.ExecuteScalarAsync<int>(sql.ToString(), parameters: query).ConfigureAwait(false);
+                    var rs = await conn.ExecuteScalarAsync<int>(sql.ToString()).ConfigureAwait(false);
                     return new MsgResult<int>(MsgCodes.SUCCESS, rs);
                 }
             }

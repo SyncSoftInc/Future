@@ -11,8 +11,7 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest
         {
             TestEngine.Init()
                 .UseLogisticsRedis()
-                .UseLogisticsMySql()
-                .Start();
+                .UseLogisticsMySql();
         }
 
         //[OneTimeTearDown]

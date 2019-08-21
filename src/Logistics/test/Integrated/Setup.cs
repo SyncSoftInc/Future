@@ -12,8 +12,7 @@ namespace SyncSoft.Future.Logistics.IntegratedTest
             TestEngine.Init()
                 .UseLogisticsRedis()
                 .UseLogisticsApi()
-                .UseLogisticsCore()
-                .Start();
+                .UseLogisticsCore();
         }
 
         //[OneTimeTearDown]

@@ -1,29 +1,15 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SyncSoft.App;
 using SyncSoft.ECP.AspNetCore.Hosting;
 
 namespace SyncSoft.Future.Logistics.Service
 {
     public class Startup : SerilogStartup
     {
-        private const string RESOURE_NAME = "logisticssvc";
-
-        public Startup(IConfiguration configuration) : base(configuration)
-        {
-            HostEngine.Init(configuration, RESOURE_NAME)
-                .UseQuartz()
-                .UseLogisticsRedis()
-                .UseLogisticsDomain()
-                .UseLogisticsMySql()
-                .Start();
-        }
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApiServer(RESOURE_NAME);
+            services.AddApiServer(Program.PROJECT);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -35,7 +21,7 @@ namespace SyncSoft.Future.Logistics.Service
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseApiServer(RESOURE_NAME);
+            app.UseApiServer(Program.PROJECT);
         }
     }
 }

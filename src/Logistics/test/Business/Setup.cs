@@ -12,8 +12,7 @@ namespace SyncSoft.Future.Logistics.BusinessTest
             TestEngine.Init()
                 .UseLogisticsDomain()
                 .UseLogisticsRedis()
-                .UseLogisticsMySql()
-                .Start();
+                .UseLogisticsMySql();
         }
 
         //[OneTimeTearDown]
