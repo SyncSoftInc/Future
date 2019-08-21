@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.DAL.User
+namespace SyncSoft.Future.Passport.DataAccess.User
 {
     public interface IUserDAL
     {

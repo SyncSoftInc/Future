@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Logistics.DataFacade.Inventory
+namespace SyncSoft.Future.Logistics.DataAccess.Inventory
 {
     public interface IInventoryDF
     {

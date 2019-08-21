@@ -1,7 +1,7 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.ECP.DALs.Account;
 using SyncSoft.Future.Passport.Command.User;
-using SyncSoft.Future.Passport.DAL.User;
+using SyncSoft.Future.Passport.DataAccess.User;
 using SyncSoft.Future.Passport.Domain.User.CreateUser;
 using SyncSoft.Future.Passport.Domain.User.DeleteUser;
 using SyncSoft.Future.Passport.Domain.User.UpdateUser;

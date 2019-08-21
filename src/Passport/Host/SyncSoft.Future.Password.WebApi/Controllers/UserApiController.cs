@@ -4,7 +4,7 @@ using SyncSoft.App.Components;
 using SyncSoft.ECP.AspNetCore.Mvc.Controllers;
 using SyncSoft.Future.DTO.User;
 using SyncSoft.Future.Passport.Command.User;
-using SyncSoft.Future.Passport.DF.User;
+using SyncSoft.Future.Passport.DataAccess.User;
 using System;
 using System.Threading.Tasks;
 

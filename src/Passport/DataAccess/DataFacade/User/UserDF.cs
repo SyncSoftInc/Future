@@ -1,6 +1,6 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.Future.DTO.User;
-using SyncSoft.Future.Passport.DAL.User;
+using SyncSoft.Future.Passport.DataAccess.User;
 using System;
 using System.Threading.Tasks;
 

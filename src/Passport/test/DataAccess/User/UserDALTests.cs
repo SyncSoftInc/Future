@@ -2,7 +2,7 @@
 using SyncSoft.App.Components;
 using SyncSoft.ECP.Enums.User;
 using SyncSoft.Future.DTO.User;
-using SyncSoft.Future.Passport.DAL.User;
+using SyncSoft.Future.Passport.DataAccess.User;
 using System;
 using System.Threading.Tasks;
 

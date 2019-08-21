@@ -2,7 +2,7 @@
 using SyncSoft.App.Components;
 using SyncSoft.ECP.AspNetCore.Mvc.Controllers;
 using SyncSoft.Future.Logistics.Command.Inventory;
-using SyncSoft.Future.Logistics.DataFacade.Inventory;
+using SyncSoft.Future.Logistics.DataAccess.Inventory;
 using System;
 using System.Threading.Tasks;
 

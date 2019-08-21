@@ -2,7 +2,7 @@
 using SyncSoft.App.Components;
 using SyncSoft.ECP.AspNetCore.Mvc.Controllers;
 using SyncSoft.Future.Logistics.Command.Warehouse;
-using SyncSoft.Future.Logistics.DataFacade.Warehouse;
+using SyncSoft.Future.Logistics.DataAccess.Warehouse;
 using SyncSoft.Future.Logistics.DTO.Warehouse;
 using System;
 using System.Threading.Tasks;

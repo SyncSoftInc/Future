@@ -1,5 +1,7 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.EngineConfigs;
+using SyncSoft.Future.Logistics.DataAccess.Inventory;
+using SyncSoft.Future.Logistics.DataAccess.Warehouse;
 using SyncSoft.Future.Logistics.DataFacade.Inventory;
 using SyncSoft.Future.Logistics.DataFacade.Warehouse;
 

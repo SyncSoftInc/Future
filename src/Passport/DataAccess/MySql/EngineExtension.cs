@@ -2,7 +2,7 @@
 using SyncSoft.App.EngineConfigs;
 using SyncSoft.ECP.DALs.Account;
 using SyncSoft.ECP.Identity;
-using SyncSoft.Future.Passport.DAL.User;
+using SyncSoft.Future.Passport.DataAccess.User;
 using SyncSoft.Future.Passport.MySql;
 using SyncSoft.Future.Passport.MySql.Account;
 using System;

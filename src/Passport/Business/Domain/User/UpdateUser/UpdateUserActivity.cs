@@ -2,7 +2,7 @@
 using SyncSoft.App.Transactions;
 using SyncSoft.Future.DTO.User;
 using SyncSoft.Future.Passport.Command.User;
-using SyncSoft.Future.Passport.DAL.User;
+using SyncSoft.Future.Passport.DataAccess.User;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
