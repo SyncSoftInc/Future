@@ -8,7 +8,7 @@ using SyncSoft.Future.Passport.DataAccess.User;
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.WebApi
+namespace SyncSoft.Future.Passport.Api
 {
     [Area("Api")]
     [Route("api")]
@@ -41,19 +41,19 @@ namespace SyncSoft.Future.Passport.WebApi
         /// Create user
         /// </summary>
         [HttpPost("user")]
-        public Task<string> CreateUserAsync(CreateUserCommand cmd) => RequestMsgCodeAsync(cmd);
+        public Task<string> CreateUserAsync(CreateUserCommand cmd) => RequestAsync(cmd);
 
         /// <summary>
         /// Update user
         /// </summary>
         [HttpPut("user")]
-        public Task<string> UpdateUserAsync(UpdateUserCommand cmd) => RequestMsgCodeAsync(cmd);
+        public Task<string> UpdateUserAsync(UpdateUserCommand cmd) => RequestAsync(cmd);
 
         /// <summary>
         /// User save profile
         /// </summary>
         [HttpPut("user/profile")]
-        public Task<string> UserSaveProfileAsync(UserSaveProfileCommand cmd) => RequestMsgCodeAsync(cmd);
+        public Task<string> UserSaveProfileAsync(UserSaveProfileCommand cmd) => RequestAsync(cmd);
 
         /// <summary>
         /// Delete user
@@ -63,7 +63,7 @@ namespace SyncSoft.Future.Passport.WebApi
         {
             if (id.HasValue)
             {
-                return await base.RequestMsgCodeAsync(new DeleteUserCommand { ID = id.Value }).ConfigureAwait(false);
+                return await base.RequestAsync(new DeleteUserCommand { ID = id.Value }).ConfigureAwait(false);
             }
 
             return MsgCODES.FUT_0000000002;

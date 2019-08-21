@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using SyncSoft.ECP.AspNetCore.Hosting;
 
-namespace SyncSoft.Future.Password.WebApi
+namespace SyncSoft.Future.Passport.WebSite
 {
     public class Startup : SerilogStartup
     {

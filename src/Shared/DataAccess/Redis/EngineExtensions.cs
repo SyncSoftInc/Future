@@ -12,8 +12,6 @@ namespace SyncSoft.App
         {
             Engine.PreventDuplicateRegistration(nameof(UseFutureRedis));
 
-            configurator.UseECPRedis();
-
             configurator.Engine.Starting += (o, e) =>
             {
                 ObjectContainer.Register<IMerchantSettingProvider, RedisMerchantSettingProvider>(LifeCycleEnum.Singleton);

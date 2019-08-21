@@ -10,15 +10,18 @@ namespace SyncSoft.Future
     public static class FutureEngine
     {
         public static CommonConfigurator Init(string projectName
-            , params string[] args
+            , string[] args
+            , bool allowOverridingRegistrations = false
         )
         {
             return Engine.Init(options =>
             {
+                options.AllowOverridingRegistrations = allowOverridingRegistrations;
                 options.ConsoleArguments = args;
             })
                 .UseEcpHostQuickSettings(options =>
                 {
+                    options.ProjectName = projectName;
                     options.ConfigAppDefaultComponentsOptions = d =>
                     {
                         d.MsgResultStoreType = typeof(RedisMsgResultStore);
@@ -29,8 +32,7 @@ namespace SyncSoft.Future
                         a.CoreCertProviderType = typeof(ConfigurationCoreCertProvider);
                         a.PasswordEncryptorType = typeof(Sha256PasswordEncryptor);
                     };
-                })
-                .UseECPAspNetCore(projectName);
+                });
         }
     }
 }

@@ -5,7 +5,7 @@ namespace SyncSoft.Future.Logistics.Service
 {
     public class Program
     {
-        public static string PROJECT = "logistcsvc";
+        public static string PROJECT = "logisticssvc";
 
         public static void Main(string[] args)
         {
@@ -13,11 +13,10 @@ namespace SyncSoft.Future.Logistics.Service
                 .UseApiClient()
                 .UseMessageQueue()
                 .UseRabbitMQ()
-                .UseQuartz()
                 .UseLogisticsRedis()
                 .UseLogisticsDomain()
                 .UseLogisticsMySql()
-                .UseConfigurations()
+                .UseJsonConfiguration()
                 .Start();
 
             QuartzHost.Run<Startup>(args);
