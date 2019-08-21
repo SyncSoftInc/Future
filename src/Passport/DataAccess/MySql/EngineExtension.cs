@@ -15,20 +15,19 @@ namespace SyncSoft.App
             , Action<PassportMySqlOptions> configOptions = null
             , PassportMySqlOptions options = null)
         {
+            Engine.PreventDuplicateRegistration(nameof(UsePassportMySql));
+
             options = options ?? new PassportMySqlOptions();
             configOptions?.Invoke(options);
 
-            if (!Engine.IsStarted)
+            configurator.Engine.Starting += (o, e) =>
             {
-                configurator.Engine.Starting += (o, e) =>
-                {
-                    ObjectContainer.Register<IPassportDB>(() => new PassportDB(options.ConnStrName), LifeCycleEnum.Singleton);
+                ObjectContainer.Register<IPassportDB>(() => new PassportDB(options.ConnStrName), LifeCycleEnum.Singleton);
 
-                    ObjectContainer.Register<IAccountDAL, AccountDAL>(LifeCycleEnum.Singleton);
-                    ObjectContainer.Register<IUserProfileProvider, UserDAL>(LifeCycleEnum.Singleton);
-                    ObjectContainer.Register<IUserDAL, UserDAL>(LifeCycleEnum.Singleton);
-                };
-            }
+                ObjectContainer.Register<IAccountDAL, AccountDAL>(LifeCycleEnum.Singleton);
+                ObjectContainer.Register<IUserProfileProvider, UserDAL>(LifeCycleEnum.Singleton);
+                ObjectContainer.Register<IUserDAL, UserDAL>(LifeCycleEnum.Singleton);
+            };
 
             return configurator;
         }

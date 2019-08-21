@@ -7,7 +7,7 @@ using SyncSoft.Future.Passport.Domain.Account;
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.BusinessTest.Account
+namespace BusinessTest.Account
 {
     public class AccountServiceTests
     {

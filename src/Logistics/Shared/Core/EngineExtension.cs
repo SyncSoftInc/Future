@@ -8,13 +8,12 @@ namespace SyncSoft.App
     {
         public static CommonConfigurator UseLogisticsCore(this CommonConfigurator configurator)
         {
-            if (!Engine.IsStarted)
+            Engine.PreventDuplicateRegistration(nameof(UseLogisticsCore));
+
+            configurator.Engine.Starting += (o, e) =>
             {
-                configurator.Engine.Starting += (o, e) =>
-                {
-                    ObjectContainer.Register<IWarehouseIdFactory, WarehouseIdFactory>(LifeCycleEnum.Singleton);
-                };
-            }
+                ObjectContainer.Register<IWarehouseIdFactory, WarehouseIdFactory>(LifeCycleEnum.Singleton);
+            };
 
             return configurator;
         }

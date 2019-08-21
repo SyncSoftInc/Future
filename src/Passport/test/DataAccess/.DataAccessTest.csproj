@@ -7,13 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.0" />
+    <Content Include="..\Integrated\appsettings.json" Link="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\DataAccess\Redis\SyncSoft.Future.Redis.csproj" />
     <ProjectReference Include="..\..\..\Shared\Test\NUnit\SyncSoft.Future.NUnit.csproj" />
-    <ProjectReference Include="..\..\Client\API\SyncSoft.Future.Passport.API.csproj" />
+    <ProjectReference Include="..\..\DataAccess\MySql\SyncSoft.Future.Passport.MySql.csproj" />
     <ProjectReference Include="..\..\Shared\Core\SyncSoft.Future.Passport.csproj" />
   </ItemGroup>
 

@@ -1,8 +1,10 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App;
+using SyncSoft.App.Components;
 using SyncSoft.ECP.Securities;
+using SyncSoft.Future;
 
-namespace SyncSoft.Future.Passport.BusinessTest
+namespace BusinessTest
 {
     [SetUpFixture]
     public class Setup
@@ -14,7 +16,8 @@ namespace SyncSoft.Future.Passport.BusinessTest
                 .UseFutureRedis()
                 .UsePassportDomain()
                 .UsePassportMySql()
-                .RegisterComponent<IPasswordEncryptor, Sha256PasswordEncryptor>(App.Components.LifeCycleEnum.Singleton)
+                .RegisterComponent<IPasswordEncryptor, Sha256PasswordEncryptor>(LifeCycleEnum.Singleton)
+                .UseJsonConfiguration()
                 .Start();
         }
 

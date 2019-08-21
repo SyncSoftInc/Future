@@ -4,7 +4,7 @@ using SyncSoft.Future.Passport.API.Account;
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.IntegratedTest.Account
+namespace IntegratedTest.Account
 {
     public class AccountApiTest
     {

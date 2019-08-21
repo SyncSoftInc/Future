@@ -10,19 +10,18 @@ namespace SyncSoft.App
     {
         public static CommonConfigurator UseFutureRedis(this CommonConfigurator configurator)
         {
+            Engine.PreventDuplicateRegistration(nameof(UseFutureRedis));
+
             configurator.UseECPRedis();
 
-            if (!Engine.IsStarted)
+            configurator.Engine.Starting += (o, e) =>
             {
-                configurator.Engine.Starting += (o, e) =>
-                {
-                    ObjectContainer.Register<IMerchantSettingProvider, RedisMerchantSettingProvider>(LifeCycleEnum.Singleton);
-                    ObjectContainer.Register<IMerchantSettingDB>(() => new MerchantSettingDB(CONSTANTS.CONNECTION_STRINGS.REDIS_DEFAULT), LifeCycleEnum.Singleton);
+                ObjectContainer.Register<IMerchantSettingProvider, RedisMerchantSettingProvider>(LifeCycleEnum.Singleton);
+                ObjectContainer.Register<IMerchantSettingDB>(() => new MerchantSettingDB(CONSTANTS.CONNECTION_STRINGS.REDIS_DEFAULT), LifeCycleEnum.Singleton);
 
                     //ObjectContainer.Register<IShowConnStrProvider, RedisShowConnStrProvider>(LifeCycleEnum.Singleton);
                     //ObjectContainer.Register<IConnStrDB>(() => new ConnStrDB(CONSTANTS.CONNECTION_STRINGS.REDIS_DEFAULT), LifeCycleEnum.Singleton);
                 };
-            }
 
             return configurator;
         }

@@ -1,7 +1,7 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.Transactions;
 using SyncSoft.Future.Logistics.Command.Inventory;
-using SyncSoft.Future.Logistics.DataAccess.Inventory;
+using SyncSoft.Future.Logistics.DataAccess;
 using SyncSoft.Future.Logistics.Domain.Inventory.TranShared;
 using System;
 using System.Linq;
@@ -15,8 +15,8 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.UnholdOrderInventories
     /// </summary>
     public class MasterDBActivity : TccActivity
     {
-        private static readonly Lazy<IInventoryMasterDAL> _lazyInventoryMasterDAL = ObjectContainer.LazyResolve<IInventoryMasterDAL>();
-        private IInventoryMasterDAL _InventoryMasterDAL => _lazyInventoryMasterDAL.Value;
+        private static readonly Lazy<ILogisticsMasterDALFactory> _lazyLogisticsMasterDALFactory = ObjectContainer.LazyResolve<ILogisticsMasterDALFactory>();
+        private ILogisticsMasterDALFactory LogisticsMasterDALFactory => _lazyLogisticsMasterDALFactory.Value;
 
         protected override async Task RunAsync(CancellationToken? cancellationToken)
         {
@@ -24,8 +24,9 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.UnholdOrderInventories
             if (cmd.Inventories.IsMissing()) return;
             // ^^^^^^^^^^
 
+            var inventoryMasterDAL = await LogisticsMasterDALFactory.CreateInventoryDALAsync(cmd.Merchant_ID).ConfigureAwait(false);
             // 解锁库存，得到分配后计算得到的可用库存
-            var availableInventories = await _InventoryMasterDAL.UnholdOrderInventoriesAsync(cmd).ConfigureAwait(false);
+            var availableInventories = await inventoryMasterDAL.UnholdOrderInventoriesAsync(cmd).ConfigureAwait(false);
 
             // 将可用库存放入上下文给下一步使用
             Context.Set(TranConstants.Context_Items_AvailableInventories, availableInventories);
@@ -41,8 +42,9 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory.UnholdOrderInventories
                 Inventories = cmd.Inventories
             };
 
+            var inventoryMasterDAL = await LogisticsMasterDALFactory.CreateInventoryDALAsync(cmd.Merchant_ID).ConfigureAwait(false);
             // 回滚，锁库存
-            await _InventoryMasterDAL.HoldOrderInventoriesAsync(rollabckCmd).ConfigureAwait(false);
+            await inventoryMasterDAL.HoldOrderInventoriesAsync(rollabckCmd).ConfigureAwait(false);
         }
     }
 }

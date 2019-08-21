@@ -1,11 +1,12 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App.Components;
+using SyncSoft.ECP.Enums.User;
 using SyncSoft.Future.DTO.User;
 using SyncSoft.Future.Passport.DAL.User;
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.DataAccessTest.User
+namespace DataAccessTest.User
 {
     public class UserDALTests
     {
@@ -19,7 +20,7 @@ namespace SyncSoft.Future.Passport.DataAccessTest.User
             LastName = "last",
             MiddleName = "middle",
             Email = "email",
-            Status = ECP.Enums.User.UserStatusEnum.Active,
+            Status = UserStatusEnum.Active,
             Roles = 1,
             PermissionLevel = 5
         };
@@ -41,7 +42,7 @@ namespace SyncSoft.Future.Passport.DataAccessTest.User
             dto.LastName = "updated last";
             dto.MiddleName = "updated middle";
             dto.Email = "updated email";
-            dto.Status = ECP.Enums.User.UserStatusEnum.Inactive;
+            dto.Status = UserStatusEnum.Inactive;
             dto.PermissionLevel = 0;
 
             var msgCode = _UserDAL.UpdateUserAsync(dto).Execute();

@@ -1,7 +1,8 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App;
+using SyncSoft.Future;
 
-namespace SyncSoft.Future.Passport.DataAccessTest
+namespace DataAccessTest
 {
     [SetUpFixture]
     public class Setup
@@ -12,6 +13,7 @@ namespace SyncSoft.Future.Passport.DataAccessTest
             TestEngine.Init()
                 .UseFutureRedis()
                 .UsePassportMySql()
+                .UseJsonConfiguration()
                 .Start();
         }
 

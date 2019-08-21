@@ -2,6 +2,7 @@ using NUnit.Framework;
 using SyncSoft.App.Components;
 using SyncSoft.App.Logging;
 using SyncSoft.Future.Logistics.Command.Inventory;
+using SyncSoft.Future.Logistics.DataAccess;
 using SyncSoft.Future.Logistics.DataAccess.Inventory;
 using SyncSoft.Future.Logistics.DTO.Inventory;
 using System;
@@ -16,8 +17,8 @@ namespace DataAccessTest.Inventory
         // *******************************************************************************************************************************
         #region -  Lazy Object(s)  -
 
-        private static readonly Lazy<IInventoryMasterDAL> _lazyInventoryMasterDAL = ObjectContainer.LazyResolve<IInventoryMasterDAL>();
-        private IInventoryMasterDAL _InventoryMasterDAL => _lazyInventoryMasterDAL.Value;
+        private static readonly Lazy<ILogisticsMasterDALFactory> _lazyLogisticsMasterDALFactory = ObjectContainer.LazyResolve<ILogisticsMasterDALFactory>();
+        private ILogisticsMasterDALFactory LogisticsMasterDALFactory => _lazyLogisticsMasterDALFactory.Value;
 
         private static readonly Lazy<ILogger> _lazyLogger = ObjectContainer.LazyResolveLogger(nameof(MySqlTests));
         private ILogger _Logger => _lazyLogger.Value;
@@ -37,6 +38,8 @@ namespace DataAccessTest.Inventory
             new InventoryDTO { ItemNo = "ITEM4", Qty = 0 },
             new InventoryDTO { ItemNo = "ITEM5", Qty = 0 },
         };
+
+        readonly IInventoryMasterDAL _inventoryDAL;
 
         #endregion
         // *******************************************************************************************************************************
@@ -78,11 +81,21 @@ namespace DataAccessTest.Inventory
 
         #endregion
         // *******************************************************************************************************************************
+        #region -  Constructor(s)  -
+
+        public MySqlTests()
+        {
+            _inventoryDAL = LogisticsMasterDALFactory.CreateInventoryDALAsync(MerchantID).Execute();
+        }
+
+        #endregion
+        // *******************************************************************************************************************************
         #region -  AllocateInventories  -
 
         [Test, Order(0)]
-        public void AllocateInventories()
+        public async Task AllocateInventories()
         {
+
             var items = _inventories.DeepClone();
             foreach (var item in items)
             {
@@ -97,7 +110,7 @@ namespace DataAccessTest.Inventory
                 Inventories = items
             };
 
-            var a = _InventoryMasterDAL.AllocateInventoriesAsync(cmd).Execute();
+            var a = await _inventoryDAL.AllocateInventoriesAsync(cmd).ConfigureAwait(false);
             _Logger.Debug("{@0}", a);
             Assert.IsTrue(a.Count > 0);
         }
@@ -107,7 +120,7 @@ namespace DataAccessTest.Inventory
         #region -  HoldInventories  -
 
         [Test, Order(10)]
-        public void HoldOrderInventories()
+        public async Task HoldOrderInventories()
         {
             var items = _inventories.DeepClone();
             foreach (var item in items)
@@ -123,7 +136,7 @@ namespace DataAccessTest.Inventory
                 Inventories = items
             };
 
-            var a = _InventoryMasterDAL.HoldOrderInventoriesAsync(cmd).Execute();
+            var a = await _inventoryDAL.HoldOrderInventoriesAsync(cmd).ConfigureAwait(false);
             _Logger.Debug("{@0}", a);
             Assert.IsTrue(a.Count > 0);
         }
@@ -133,7 +146,7 @@ namespace DataAccessTest.Inventory
         #region -  InventoryShipConfirm  -
 
         [Test, Order(20)]
-        public void InventoryShipConfirm()
+        public async Task InventoryShipConfirm()
         {
             var items = _inventories.DeepClone();
             foreach (var item in items)
@@ -149,7 +162,7 @@ namespace DataAccessTest.Inventory
                 Inventories = items
             };
 
-            var a = _InventoryMasterDAL.InventoryShipConfirmAsync(cmd).Execute();
+            var a = await _inventoryDAL.InventoryShipConfirmAsync(cmd).ConfigureAwait(false);
             _Logger.Debug("{@0}", a);
             Assert.IsTrue(a.Count > 0);
         }
@@ -159,7 +172,7 @@ namespace DataAccessTest.Inventory
         #region -  InventoryShipCancel  -
 
         [Test, Order(30)]
-        public void InventoryShipCancel()
+        public async Task InventoryShipCancel()
         {
             var items = _inventories.DeepClone();
             foreach (var item in items)
@@ -175,7 +188,7 @@ namespace DataAccessTest.Inventory
                 Inventories = items
             };
 
-            var a = _InventoryMasterDAL.InventoryShipCancelAsync(cmd).Execute();
+            var a = await _inventoryDAL.InventoryShipCancelAsync(cmd).ConfigureAwait(false);
             _Logger.Debug("{@0}", a);
             Assert.IsTrue(a.Count > 0);
         }
@@ -185,7 +198,7 @@ namespace DataAccessTest.Inventory
         #region -  UnholdOrderInventories  -
 
         [Test, Order(40)]
-        public void UnholdOrderInventories()
+        public async Task UnholdOrderInventories()
         {
             var items = _inventories.DeepClone();
 
@@ -197,7 +210,7 @@ namespace DataAccessTest.Inventory
                 Inventories = items
             };
 
-            var a = _InventoryMasterDAL.UnholdOrderInventoriesAsync(cmd).Execute();
+            var a = await _inventoryDAL.UnholdOrderInventoriesAsync(cmd).ConfigureAwait(false);
             _Logger.Debug("{@0}", a);
             Assert.IsTrue(a.Count > 0);
         }
@@ -207,11 +220,11 @@ namespace DataAccessTest.Inventory
         #region -  GetInventories  -
 
         [Test, Order(100)]
-        public void GetInventories()
+        public async Task GetInventories()
         {
             var list = _inventories.Select(x => x.ItemNo).ToList();
 
-            var a = _InventoryMasterDAL.GetInventoriesAsync(MerchantID, list.ToArray()).Execute();
+            var a = await _inventoryDAL.GetInventoriesAsync(MerchantID, list.ToArray()).ConfigureAwait(false);
 
             _Logger.Debug("{@a}", a);
         }
@@ -221,12 +234,12 @@ namespace DataAccessTest.Inventory
         #region -  GetAvailableInventories  -
 
         [Test, Order(110)]
-        public void GetAvailableInventories()
+        public async Task GetAvailableInventories()
         {
             var list = _inventories.Select(x => x.ItemNo).ToList();
             list.Add("ITEM99");
 
-            var a = _InventoryMasterDAL.GetAvailableInventoriesAsync(MerchantID, list.ToArray()).Execute();
+            var a = await _inventoryDAL.GetAvailableInventoriesAsync(MerchantID, list.ToArray()).ConfigureAwait(false);
 
             _Logger.Debug("{@a}", a);
 
@@ -236,14 +249,14 @@ namespace DataAccessTest.Inventory
         #endregion
 
         // *******************************************************************************************************************************
-        #region -  GetAvailableInventories  -
+        #region //-  GetAvailableInventories  -
 
-        [Test, Order(150)]
-        public void ClearOrderHeldInventories()
-        {
-            var msgCode = _InventoryMasterDAL.ClearOrderHeldInventoriesAsync().Execute();
-            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
-        }
+        //[Test, Order(150)]
+        //public async Task ClearOrderHeldInventories()
+        //{
+        //    var msgCode = await _inventoryDAL.ClearOrderHeldInventoriesAsync().ConfigureAwait(false);
+        //    Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+        //}
 
         #endregion
     }

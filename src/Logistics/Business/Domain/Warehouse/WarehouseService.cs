@@ -15,10 +15,10 @@ namespace SyncSoft.Future.Logistics.Domain.Warehouse
         #region -  Lazy Object(s)  -
 
         private static readonly Lazy<IWarehouseIdFactory> _lazyWarehouseIdFactory = ObjectContainer.LazyResolve<IWarehouseIdFactory>();
-        private IWarehouseIdFactory _WarehouseIdFactory => _lazyWarehouseIdFactory.Value;
+        private IWarehouseIdFactory WarehouseIdFactory => _lazyWarehouseIdFactory.Value;
 
         private static readonly Lazy<IMerchantSettingProvider> _lazyMerchantSettingProvider = ObjectContainer.LazyResolve<IMerchantSettingProvider>();
-        private IMerchantSettingProvider _MerchantSettingProvider => _lazyMerchantSettingProvider.Value;
+        private IMerchantSettingProvider MerchantSettingProvider => _lazyMerchantSettingProvider.Value;
 
         private static readonly Lazy<ILogisticsMasterDALFactory> _lazyLogisticsMasterDALFactory = ObjectContainer.LazyResolve<ILogisticsMasterDALFactory>();
         private ILogisticsMasterDALFactory LogisticsMasterDALFactory => _lazyLogisticsMasterDALFactory.Value;
@@ -44,7 +44,7 @@ namespace SyncSoft.Future.Logistics.Domain.Warehouse
             var count = await warehouseDAL.CountWarehouseAsync(countQuery).ConfigureAwait(false);
 
             // 获取商家设置信息
-            var merchantSetting = await _MerchantSettingProvider.GetAsync(dto.Merchant_ID).ConfigureAwait(false);
+            var merchantSetting = await MerchantSettingProvider.GetAsync(dto.Merchant_ID).ConfigureAwait(false);
             if (count >= merchantSetting.MaxWarehouseLimit) return MsgCodes.WH_0000000001;
             // ^^^^^^^^^^ 达到或超过允许的数量
 
@@ -57,7 +57,7 @@ namespace SyncSoft.Future.Logistics.Domain.Warehouse
             // 创建ID
             if (dto.ID.IsMissing())
             {
-                dto.ID = await _WarehouseIdFactory.CreateNewAsync().ConfigureAwait(false);
+                dto.ID = await WarehouseIdFactory.CreateNewAsync().ConfigureAwait(false);
             }
             // 插入数据库
             await warehouseDAL.InsertAsync(dto).ConfigureAwait(false);

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future", "..\Shared\Core\SyncSoft.Future.csproj", "{0360749E-7BEF-44FA-8FFC-5A4F798F2D8B}"
 EndProject
@@ -35,17 +35,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Serilog", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.NUnit", "..\Shared\Test\NUnit\SyncSoft.Future.NUnit.csproj", "{7793A965-C703-45ED-BD88-8A670C395A51}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Passport.IntegratedTest", "test\Integrated\SyncSoft.Future.Passport.IntegratedTest.csproj", "{3B305EBA-4B63-400E-9689-0BFCEAB22790}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedTest", "test\Integrated\IntegratedTest.csproj", "{3B305EBA-4B63-400E-9689-0BFCEAB22790}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Host", "..\Shared\Host\Core\SyncSoft.Future.Host.csproj", "{8D539056-9276-4654-A4E5-C3FC39BC4145}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Passport.DataAccessTest", "test\DataAccess\SyncSoft.Future.Passport.DataAccessTest.csproj", "{3A592DD6-18BD-47ED-A945-C2711C2CAB9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = ".DataAccessTest", "test\DataAccess\.DataAccessTest.csproj", "{3A592DD6-18BD-47ED-A945-C2711C2CAB9A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Passport.BusinessTest", "test\Business\SyncSoft.Future.Passport.BusinessTest.csproj", "{83D6372E-C263-4C13-9E3D-B8F4A7DAD595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessTest", "test\Business\BusinessTest.csproj", "{83D6372E-C263-4C13-9E3D-B8F4A7DAD595}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Passport.DataFacade", "DataAccess\DataFacade\SyncSoft.Future.Passport.DataFacade.csproj", "{B752673B-5566-4C8D-8727-EC95BB158D12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncSoft.Future.Password.WebApi", "Host\SyncSoft.Future.Password.WebApi\SyncSoft.Future.Password.WebApi.csproj", "{6A3F04E4-37E3-49AB-A0DE-1A3E15B6318D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Password.WebApi", "Host\SyncSoft.Future.Password.WebApi\SyncSoft.Future.Password.WebApi.csproj", "{6A3F04E4-37E3-49AB-A0DE-1A3E15B6318D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

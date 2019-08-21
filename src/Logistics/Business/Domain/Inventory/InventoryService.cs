@@ -1,6 +1,6 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.Future.Logistics.Command.Inventory;
-using SyncSoft.Future.Logistics.DataAccess.Inventory;
+using SyncSoft.Future.Logistics.DataAccess;
 using SyncSoft.Future.Logistics.Domain.Inventory.AllocateInventories;
 using SyncSoft.Future.Logistics.Domain.Inventory.HoldOrderInventories;
 using SyncSoft.Future.Logistics.Domain.Inventory.InventoryShipConfirm;
@@ -18,8 +18,9 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
         // *******************************************************************************************************************************
         #region -  Lazy Object(s)  -
 
-        private static readonly Lazy<IInventoryMasterDAL> _lazyInventoryMasterDAL = ObjectContainer.LazyResolve<IInventoryMasterDAL>();
-        private IInventoryMasterDAL _InventoryMasterDAL => _lazyInventoryMasterDAL.Value;
+
+        private static readonly Lazy<ILogisticsMasterDALFactory> _lazyLogisticsMasterDALFactory = ObjectContainer.LazyResolve<ILogisticsMasterDALFactory>();
+        private ILogisticsMasterDALFactory LogisticsMasterDALFactory => _lazyLogisticsMasterDALFactory.Value;
 
         #endregion
         // *******************************************************************************************************************************
@@ -117,13 +118,13 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
 
         #endregion
         // *******************************************************************************************************************************
-        #region -  MyRegion  -
+        #region //-  ClearOrderHeldInventories  -
 
-        /// <summary>
-        /// 清理数量为0的订单锁定库存数据
-        /// </summary>
-        public Task<string> ClearOrderHeldInventoriesAsync()
-            => _InventoryMasterDAL.ClearOrderHeldInventoriesAsync();
+        ///// <summary>
+        ///// 清理数量为0的订单锁定库存数据
+        ///// </summary>
+        //public Task<string> ClearOrderHeldInventoriesAsync()
+        //    => _InventoryMasterDAL.ClearOrderHeldInventoriesAsync();
 
         #endregion
         // *******************************************************************************************************************************
@@ -150,7 +151,9 @@ namespace SyncSoft.Future.Logistics.Domain.Inventory
         /// </summary>
         private async Task<string> EnsureInventoriesSufficientAsync(string merchantId, IEnumerable<InventoryDTO> operationInventories)
         {
-            var availableInventories = await _InventoryMasterDAL.GetAvailableInventoriesAsync(merchantId, operationInventories.Select(x => x.ItemNo)).ConfigureAwait(false);
+            var inventoryDAL = await LogisticsMasterDALFactory.CreateInventoryDALAsync(merchantId).ConfigureAwait(false);
+
+            var availableInventories = await inventoryDAL.GetAvailableInventoriesAsync(merchantId, operationInventories.Select(x => x.ItemNo)).ConfigureAwait(false);
             var hasInsufficientInventory = operationInventories.Any(x => x.Qty > availableInventories[x.ItemNo]);
             if (hasInsufficientInventory) return MsgCodes.WH_0000000007;
             // ^^^^^^^^^^ 库存不足

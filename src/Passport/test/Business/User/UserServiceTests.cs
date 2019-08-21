@@ -1,15 +1,15 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App.Components;
 using SyncSoft.ECP.DTOs.Account;
+using SyncSoft.ECP.Enums.Account;
+using SyncSoft.ECP.Enums.User;
 using SyncSoft.Future.DTO.User;
 using SyncSoft.Future.Passport.Command.User;
 using SyncSoft.Future.Passport.Domain.User;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.BusinessTest.User
+namespace BusinessTest.User
 {
     public class UserServiceTests
     {
@@ -23,7 +23,7 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
             LastName = "last",
             MiddleName = "middle",
             Email = "test@syncsoftinc.co",
-            Status = ECP.Enums.User.UserStatusEnum.Active,
+            Status = UserStatusEnum.Active,
             Roles = 68,
             PermissionLevel = 5
         };
@@ -36,7 +36,7 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
             PasswordSalt = "ABCDEFG",
             LoginFailedCount = 0,
             LastLoginIP = "127.0.0.1",
-            Status = ECP.Enums.Account.AccountStatusEnum.Active,
+            Status = AccountStatusEnum.Active,
             UpdatedOnUtc = DateTime.UtcNow,
             CreatedOnUtc = DateTime.UtcNow,
             LastLoginUtc = DateTime.UtcNow,
@@ -93,7 +93,7 @@ namespace SyncSoft.Future.Passport.BusinessTest.User
                 MiddleName = _userDto.MiddleName + "_UPDATE",
                 LastName = _userDto.LastName + "_UPDATE",
                 Email = _userDto.Email + "_UPDATE",
-                Status = (int)ECP.Enums.User.UserStatusEnum.Inactive,
+                Status = (int)UserStatusEnum.Inactive,
                 Roles = 5,
                 PermissionLevel = 1
             };

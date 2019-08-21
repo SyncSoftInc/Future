@@ -9,16 +9,15 @@ namespace SyncSoft.App
     {
         public static CommonConfigurator UseLogisticsDomain(this CommonConfigurator configurator)
         {
+            Engine.PreventDuplicateRegistration(nameof(UseLogisticsDomain));
+
             configurator.UseLogisticsCore();
 
-            if (!Engine.IsStarted)
+            configurator.Engine.Starting += (o, e) =>
             {
-                configurator.Engine.Starting += (o, e) =>
-                {
-                    ObjectContainer.Register<IInventoryService, InventoryService>(LifeCycleEnum.Singleton);
-                    ObjectContainer.Register<IWarehouseService, WarehouseService>(LifeCycleEnum.Singleton);
-                };
-            }
+                ObjectContainer.Register<IInventoryService, InventoryService>(LifeCycleEnum.Singleton);
+                ObjectContainer.Register<IWarehouseService, WarehouseService>(LifeCycleEnum.Singleton);
+            };
 
             return configurator;
         }

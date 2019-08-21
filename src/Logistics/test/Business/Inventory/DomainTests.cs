@@ -169,14 +169,14 @@ namespace BusinessTest.Inventory
 
         #endregion
         // *******************************************************************************************************************************
-        #region -  UnholdInventories  -
+        #region //-  UnholdInventories  -
 
-        [Test, Order(150)]
-        public void ClearOrderHeldInventories()
-        {
-            var msgCode = _InventoryService.ClearOrderHeldInventoriesAsync().Execute();
-            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
-        }
+        //[Test, Order(150)]
+        //public void ClearOrderHeldInventories()
+        //{
+        //    var msgCode = _InventoryService.ClearOrderHeldInventoriesAsync().Execute();
+        //    Assert.IsTrue(msgCode.IsSuccess(), msgCode);
+        //}
 
         #endregion
     }

@@ -12,20 +12,19 @@ namespace SyncSoft.App
             , Action<LogisticsMySqlOptions> configOptions = null
             , LogisticsMySqlOptions options = null)
         {
+            Engine.PreventDuplicateRegistration(nameof(UseLogisticsMySql));
+
             options = options ?? new LogisticsMySqlOptions();
             configOptions?.Invoke(options);
 
-            if (!Engine.IsStarted)
+            configurator.Engine.Starting += (o, e) =>
             {
-                configurator.Engine.Starting += (o, e) =>
-                {
                     //ObjectContainer.Register<ILogisticsDB>(() => new LogisticsDB(options.ConnStrName), LifeCycleEnum.Singleton);
 
                     //ObjectContainer.Register<IWarehouseDAL, WarehouseDAL>(LifeCycleEnum.Singleton);
                     //ObjectContainer.Register<IInventoryMasterDAL, InventoryDAL>(LifeCycleEnum.Singleton);
                     ObjectContainer.Register<ILogisticsMasterDALFactory>(() => new LogisticsMasterDALFactory(options.ConnStrName), LifeCycleEnum.Singleton);
-                };
-            }
+            };
 
             return configurator;
         }

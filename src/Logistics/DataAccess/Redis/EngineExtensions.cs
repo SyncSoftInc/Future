@@ -9,16 +9,15 @@ namespace SyncSoft.App
     {
         public static CommonConfigurator UseLogisticsRedis(this CommonConfigurator configurator)
         {
+            Engine.PreventDuplicateRegistration(nameof(UseLogisticsRedis));
+
             configurator.UseFutureRedis();
 
-            if (!Engine.IsStarted)
+            configurator.Engine.Starting += (o, e) =>
             {
-                configurator.Engine.Starting += (o, e) =>
-                {
-                    ObjectContainer.Register<IInventoryQueryDAL, InventoryDAL>(LifeCycleEnum.Singleton);
-                    ObjectContainer.Register<IInventoryDB>(() => new InventoryDB(CONSTANTS.CONNECTION_STRINGS.REDIS_DEFAULT), LifeCycleEnum.Singleton);
-                };
-            }
+                ObjectContainer.Register<IInventoryQueryDAL, InventoryDAL>(LifeCycleEnum.Singleton);
+                ObjectContainer.Register<IInventoryDB>(() => new InventoryDB(CONSTANTS.CONNECTION_STRINGS.REDIS_DEFAULT), LifeCycleEnum.Singleton);
+            };
 
             return configurator;
         }

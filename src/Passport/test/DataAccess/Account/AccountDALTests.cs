@@ -6,7 +6,7 @@ using SyncSoft.ECP.Enums.Account;
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Passport.DataAccessTest.Account
+namespace DataAccessTest.Account
 {
     public class AccountDALTests
     {
