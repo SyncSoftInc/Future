@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Warehouse.DataAccessTest.Inventory
+namespace DataAccessTest.Inventory
 {
     public class MySqlTests
     {

@@ -39,13 +39,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Logistics.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Logistics.Service", "Host\Service\SyncSoft.Future.Logistics.Service.csproj", "{A268F28C-D60E-4D4A-9252-CFE10A6A6E9F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Logistics.IntegratedTest", "test\Integrated\SyncSoft.Future.Logistics.IntegratedTest.csproj", "{0F432982-9C86-4225-A18E-B7B5955C2603}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegratedTest", "test\Integrated\IntegratedTest.csproj", "{0F432982-9C86-4225-A18E-B7B5955C2603}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Logistics.DataAccessTest", "test\DataAccess\SyncSoft.Future.Logistics.DataAccessTest.csproj", "{3E04A5D5-E677-498B-B6B6-FC36EAF452C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessTest", "test\DataAccess\DataAccessTest.csproj", "{3E04A5D5-E677-498B-B6B6-FC36EAF452C1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Host", "..\Shared\Host\Core\SyncSoft.Future.Host.csproj", "{C1C98460-61EB-452B-9AF2-6E0D1DCB72E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.Logistics.BusinessTest", "test\Business\SyncSoft.Future.Logistics.BusinessTest.csproj", "{ADBE356E-F34B-4397-8E02-A30254D757C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessTest", "test\Business\BusinessTest.csproj", "{ADBE356E-F34B-4397-8E02-A30254D757C3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncSoft.Future.NUnit", "..\Shared\Test\NUnit\SyncSoft.Future.NUnit.csproj", "{6D5DFE36-F451-40DF-8776-68C0D9CD0F49}"
 EndProject

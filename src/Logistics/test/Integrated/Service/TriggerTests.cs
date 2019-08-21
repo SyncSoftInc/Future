@@ -1,6 +1,6 @@
 ﻿using SyncSoft.Future.NUnit.ServiceTest;
 
-namespace SyncSoft.Future.Logistics.IntegratedTest.Service
+namespace IntegratedTest.Service
 {
     public class TriggerTests : SyncSoft.Future.NUnit.ServiceTest.TriggerTests
     {

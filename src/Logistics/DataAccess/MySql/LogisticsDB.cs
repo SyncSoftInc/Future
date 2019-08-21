@@ -1,4 +1,5 @@
 ﻿using SyncSoft.App.MySql;
+using SyncSoft.Future.Logistics.DataAccess;
 
 namespace SyncSoft.Future.Logistics.MySql
 {

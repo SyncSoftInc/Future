@@ -2,6 +2,7 @@
 using SyncSoft.App.Components;
 using SyncSoft.App.Utilities;
 using SyncSoft.Future.Logistics.Command.Inventory;
+using SyncSoft.Future.Logistics.DataAccess;
 using SyncSoft.Future.Logistics.DataAccess.Inventory;
 using SyncSoft.Future.Logistics.DTO.Inventory;
 using System;
@@ -181,7 +182,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
         {
             var parameters = createParameterFunc();
 
-            using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
+            using (var conn = await DB.CreateConnectionAsync().ConfigureAwait(false))
             using (var tran = conn.BeginTransaction())
             {
                 var commandDefinition = new CommandDefinition(commandText: sql
@@ -233,7 +234,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
         /// </summary>
         public async Task<IList<InventoryDTO>> GetInventoriesAsync(string merchantId, IEnumerable<string> itemNos)
         {
-            using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
+            using (var conn = await DB.CreateConnectionAsync().ConfigureAwait(false))
             {
                 return await conn.QueryListAsync<InventoryDTO>("SELECT ItemNo, Qty, SafeQty FROM Inventories WHERE Merchant_ID = @Merchant_ID AND ItemNo IN @ItemNos",
                     new
@@ -261,7 +262,7 @@ namespace SyncSoft.Future.Logistics.MySql.Inventory
             }
             itemNoQueryBuilder.Remove(itemNoQueryBuilder.Length - 2, 2);
 
-            using (var conn = await CreateConn(merchantId).ConfigureAwait(false))
+            using (var conn = await DB.CreateConnectionAsync().ConfigureAwait(false))
             {
                 var list = await conn.QueryListAsync<KeyValuePair<string, int>>("INVSP_GetAvailableInventories"
                     , new

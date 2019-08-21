@@ -1,4 +1,4 @@
-﻿namespace SyncSoft.Future.Logistics.IntegratedTest
+﻿namespace IntegratedTest
 {
     internal static class TestConstants
     {

@@ -1,7 +1,8 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App;
+using SyncSoft.Future;
 
-namespace SyncSoft.Future.Warehouse.DataAccessTest
+namespace DataAccessTest
 {
     [SetUpFixture]
     public class Setup
@@ -11,7 +12,9 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest
         {
             TestEngine.Init()
                 .UseLogisticsRedis()
-                .UseLogisticsMySql();
+                .UseLogisticsMySql()
+                .UseJsonConfiguration()
+                .Start();
         }
 
         //[OneTimeTearDown]

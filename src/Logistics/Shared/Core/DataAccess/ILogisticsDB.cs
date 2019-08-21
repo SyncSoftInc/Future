@@ -1,6 +1,6 @@
 ﻿using SyncSoft.App.DataAccess;
 
-namespace SyncSoft.Future.Logistics.MySql
+namespace SyncSoft.Future.Logistics.DataAccess
 {
     public interface ILogisticsDB : ISqlDatabase
     {

@@ -6,7 +6,7 @@ using SyncSoft.Future.Logistics.Domain.Warehouse;
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Logistics.IntegratedTest.Warehouse
+namespace IntegratedTest.Warehouse
 {
     public class WarehouseApiTests
     {

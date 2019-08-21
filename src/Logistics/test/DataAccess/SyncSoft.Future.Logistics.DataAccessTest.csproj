@@ -1,25 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
-
-        <IsPackable>false</IsPackable>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <Content Include="..\Integrated\appsettings.json" Link="appsettings.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\Shared\Test\NUnit\SyncSoft.Future.NUnit.csproj" />
-        <ProjectReference Include="..\..\DataAccess\MySql\SyncSoft.Future.Logistics.MySql.csproj" />
-        <ProjectReference Include="..\..\DataAccess\Redis\SyncSoft.Future.Logistics.Redis.csproj" />
-    </ItemGroup>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
 </Project>

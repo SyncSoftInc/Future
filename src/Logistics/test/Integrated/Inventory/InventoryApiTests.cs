@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Logistics.IntegratedTest.Inventory
+namespace IntegratedTest.Inventory
 {
     public class InventoryApiTests
     {

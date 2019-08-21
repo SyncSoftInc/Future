@@ -1,19 +1,19 @@
 using NUnit.Framework;
 using SyncSoft.App.Components;
-using SyncSoft.Future.Logistics.DataAccess.Warehouse;
+using SyncSoft.Future.Logistics.DataAccess;
 using SyncSoft.Future.Logistics.DTO.Warehouse;
 using System;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Warehouse.DataAccessTest.Warehouse
+namespace DataAccessTest.Warehouse
 {
     public class MySqlTests
     {
         // *******************************************************************************************************************************
         #region -  Lazy Object(s)  -
 
-        private static readonly Lazy<IWarehouseDAL> _lazyWarehouseDAL = ObjectContainer.LazyResolve<IWarehouseDAL>();
-        private IWarehouseDAL _WarehouseDAL => _lazyWarehouseDAL.Value;
+        private static readonly Lazy<ILogisticsMasterDALFactory> _lazyLogisticsMasterDALFactory = ObjectContainer.LazyResolve<ILogisticsMasterDALFactory>();
+        private ILogisticsMasterDALFactory LogisticsMasterDALFactory => _lazyLogisticsMasterDALFactory.Value;
 
         #endregion
         // *******************************************************************************************************************************
@@ -52,8 +52,10 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest.Warehouse
         #endregion
 
         [Test, Order(0)]
-        public void Insert()
+        public async Task Insert()
         {
+            var warehouseDAL = await LogisticsMasterDALFactory.CreateWarehouseDALAsync(MerchantID).ConfigureAwait(false);
+
             var dto = new MerchantWarehouseDTO
             {
                 Merchant_ID = MerchantID,
@@ -61,20 +63,22 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest.Warehouse
                 Name = $"Warehouse {WarehouseID}"
             };
 
-            var msgCode = _WarehouseDAL.InsertAsync(dto).Execute();
+            var msgCode = await warehouseDAL.InsertAsync(dto).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(1)]
-        public void GetSingle()
+        public async Task GetSingle()
         {
-            var dto = _WarehouseDAL.GetAsync(MerchantID, WarehouseID).Execute();
+            var warehouseDAL = await LogisticsMasterDALFactory.CreateWarehouseDALAsync(MerchantID).ConfigureAwait(false);
+            var dto = await warehouseDAL.GetAsync(MerchantID, WarehouseID).ConfigureAwait(false);
             Assert.IsNotNull(dto);
         }
 
         [Test, Order(2)]
-        public void Update()
+        public async Task Update()
         {
+            var warehouseDAL = await LogisticsMasterDALFactory.CreateWarehouseDALAsync(MerchantID).ConfigureAwait(false);
             var dto = new MerchantWarehouseDTO
             {
                 Merchant_ID = MerchantID,
@@ -82,19 +86,20 @@ namespace SyncSoft.Future.Warehouse.DataAccessTest.Warehouse
                 Name = "Warehouse.updated"
             };
 
-            var msgCode = _WarehouseDAL.UpdateAsync(dto).Execute();
+            var msgCode = await warehouseDAL.UpdateAsync(dto).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(3)]
-        public void Delete()
+        public async Task Delete()
         {
+            var warehouseDAL = await LogisticsMasterDALFactory.CreateWarehouseDALAsync(MerchantID).ConfigureAwait(false);
             var dto = new MerchantWarehouseDTO
             {
                 Merchant_ID = MerchantID,
                 ID = WarehouseID,
             };
-            var msgCode = _WarehouseDAL.DeleteAsync(dto).Execute();
+            var msgCode = await warehouseDAL.DeleteAsync(dto).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
     }

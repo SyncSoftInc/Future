@@ -1,7 +1,8 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App;
+using SyncSoft.Future;
 
-namespace SyncSoft.Future.Logistics.IntegratedTest
+namespace IntegratedTest
 {
     [SetUpFixture]
     public class Setup
@@ -12,7 +13,9 @@ namespace SyncSoft.Future.Logistics.IntegratedTest
             TestEngine.Init()
                 .UseLogisticsRedis()
                 .UseLogisticsApi()
-                .UseLogisticsCore();
+                .UseLogisticsCore()
+                .UseJsonConfiguration()
+                .Start();
         }
 
         //[OneTimeTearDown]

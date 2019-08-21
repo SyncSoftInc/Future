@@ -1,7 +1,8 @@
 ﻿using NUnit.Framework;
 using SyncSoft.App;
+using SyncSoft.Future;
 
-namespace SyncSoft.Future.Logistics.BusinessTest
+namespace BusinessTest
 {
     [SetUpFixture]
     public class Setup
@@ -12,7 +13,9 @@ namespace SyncSoft.Future.Logistics.BusinessTest
             TestEngine.Init()
                 .UseLogisticsDomain()
                 .UseLogisticsRedis()
-                .UseLogisticsMySql();
+                .UseLogisticsMySql()
+                .UseJsonConfiguration()
+                .Start();
         }
 
         //[OneTimeTearDown]

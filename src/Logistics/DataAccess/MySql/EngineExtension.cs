@@ -1,10 +1,7 @@
 ﻿using SyncSoft.App.Components;
 using SyncSoft.App.EngineConfigs;
-using SyncSoft.Future.Logistics.DataAccess.Inventory;
-using SyncSoft.Future.Logistics.DataAccess.Warehouse;
+using SyncSoft.Future.Logistics.DataAccess;
 using SyncSoft.Future.Logistics.MySql;
-using SyncSoft.Future.Logistics.MySql.Inventory;
-using SyncSoft.Future.Logistics.MySql.Warehouse;
 using System;
 
 namespace SyncSoft.App
@@ -22,10 +19,11 @@ namespace SyncSoft.App
             {
                 configurator.Engine.Starting += (o, e) =>
                 {
-                    ObjectContainer.Register<ILogisticsDB>(() => new LogisticsDB(options.ConnStrName), LifeCycleEnum.Singleton);
+                    //ObjectContainer.Register<ILogisticsDB>(() => new LogisticsDB(options.ConnStrName), LifeCycleEnum.Singleton);
 
-                    ObjectContainer.Register<IWarehouseDAL, WarehouseDAL>(LifeCycleEnum.Singleton);
-                    ObjectContainer.Register<IInventoryMasterDAL, InventoryDAL>(LifeCycleEnum.Singleton);
+                    //ObjectContainer.Register<IWarehouseDAL, WarehouseDAL>(LifeCycleEnum.Singleton);
+                    //ObjectContainer.Register<IInventoryMasterDAL, InventoryDAL>(LifeCycleEnum.Singleton);
+                    ObjectContainer.Register<ILogisticsMasterDALFactory>(() => new LogisticsMasterDALFactory(options.ConnStrName), LifeCycleEnum.Singleton);
                 };
             }
 

@@ -1,5 +1,4 @@
-﻿using SyncSoft.App;
-using SyncSoft.Future.Logistics.DTO.Warehouse;
+﻿using SyncSoft.Future.Logistics.DTO.Warehouse;
 using SyncSoft.Future.Logistics.Query.Warehouse;
 using System.Threading.Tasks;
 
@@ -11,6 +10,6 @@ namespace SyncSoft.Future.Logistics.DataAccess.Warehouse
         Task<string> InsertAsync(MerchantWarehouseDTO dto);
         Task<string> UpdateAsync(MerchantWarehouseDTO dto);
         Task<string> DeleteAsync(MerchantWarehouseDTO dto);
-        Task<MsgResult<int>> CountWarehouseAsync(CountWarehouseQuery query);
+        Task<int> CountWarehouseAsync(CountWarehouseQuery query);
     }
 }

@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SyncSoft.Future.Logistics.BusinessTest.Inventory
+namespace BusinessTest.Inventory
 {
     public class DomainTests
     {

@@ -11,6 +11,7 @@ namespace SyncSoft.Future
                 .UseSimpleInjector()
                 .UseAppDefaultComponents()
                 .UseJsonNet()
+                .UseSerilog()
                 .UseUnitTestApiClient();
         }
     }
