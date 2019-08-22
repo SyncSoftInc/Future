@@ -1,4 +1,5 @@
 ﻿using SyncSoft.App.Components;
+using SyncSoft.Future.Logistics.DataAccess;
 using SyncSoft.Future.Logistics.DataAccess.Warehouse;
 using SyncSoft.Future.Logistics.DTO.Warehouse;
 using System;
@@ -11,16 +12,17 @@ namespace SyncSoft.Future.Logistics.DataFacade.Warehouse
         // *******************************************************************************************************************************
         #region -  Lazy Object(s)  -
 
-        private static readonly Lazy<IWarehouseDAL> _lazyWarehouseDAL = ObjectContainer.LazyResolve<IWarehouseDAL>();
-        private IWarehouseDAL _WarehouseDAL => _lazyWarehouseDAL.Value;
+        private static readonly Lazy<ILogisticsMasterDALFactory> _lazyLogisticsMasterDALFactory = ObjectContainer.LazyResolve<ILogisticsMasterDALFactory>();
+        private ILogisticsMasterDALFactory LogisticsMasterDALFactory => _lazyLogisticsMasterDALFactory.Value;
 
         #endregion
         // *******************************************************************************************************************************
         #region -  Get  -
 
-        public Task<MerchantWarehouseDTO> GetSingleAsync(string merchantId, string warehouseId)
+        public async Task<MerchantWarehouseDTO> GetSingleAsync(string merchantId, string warehouseId)
         {
-            return _WarehouseDAL.GetAsync(merchantId, warehouseId);
+            var warehouseDAL = await LogisticsMasterDALFactory.CreateWarehouseDALAsync(merchantId).ConfigureAwait(false);
+            return await warehouseDAL.GetAsync(merchantId, warehouseId).ConfigureAwait(false);
         }
 
         #endregion

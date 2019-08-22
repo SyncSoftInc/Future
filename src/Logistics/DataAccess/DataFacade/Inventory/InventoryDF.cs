@@ -14,8 +14,12 @@ namespace SyncSoft.Future.Logistics.DataFacade.Inventory
         private IInventoryQueryDAL _InventoryQueryDAL => _lazyInventoryQueryDAL.Value;
 
         #endregion
+        // *******************************************************************************************************************************
+        #region -  GetAvailableInventory  -
 
         public Task<int> GetAvailableInventoryAsync(string merchantId, string itemNo)
             => _InventoryQueryDAL.GetAvailableInventoryAsync(merchantId, itemNo);
+
+        #endregion
     }
 }

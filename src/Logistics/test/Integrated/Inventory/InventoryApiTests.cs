@@ -83,7 +83,7 @@ namespace IntegratedTest.Inventory
         #region -  AllocateInventories  -
 
         [Test]
-        public void AllocateInventories()
+        public async Task AllocateInventories()
         {
             var items = _inventories.DeepClone();
             foreach (var item in items)
@@ -100,11 +100,12 @@ namespace IntegratedTest.Inventory
             };
 
             var correlationId = Guid.NewGuid();
-            var msgCode = _InventoryApi.AllocateInventoriesAsync(cmd, correlationId).ResultForTest();
+            var hr = await _InventoryApi.AllocateInventoriesAsync(cmd, correlationId).ConfigureAwait(false);
+            var msgCode = await hr.GetMsgCodeAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess(), mr);
+            var mr = await _MsgResultStore.WaitForResultAsync<HandleResult>(correlationId).ConfigureAwait(false);
+            Assert.IsTrue(mr.Result.IsSuccess(), mr.Result);
         }
 
         #endregion
@@ -112,7 +113,7 @@ namespace IntegratedTest.Inventory
         #region -  HoldOrderInventories  -
 
         [Test, Order(10)]
-        public void HoldOrderInventories()
+        public async Task HoldOrderInventories()
         {
             var items = _inventories.DeepClone();
             foreach (var item in items)
@@ -129,11 +130,12 @@ namespace IntegratedTest.Inventory
             };
 
             var correlationId = Guid.NewGuid();
-            var msgCode = _InventoryApi.HoldOrderInventoriesAsync(cmd, correlationId).ResultForTest();
+            var hr = await _InventoryApi.HoldOrderInventoriesAsync(cmd, correlationId).ConfigureAwait(false);
+            var msgCode = await hr.GetMsgCodeAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess(), mr);
+            var mr = await _MsgResultStore.WaitForResultAsync<HandleResult>(correlationId).ConfigureAwait(false);
+            Assert.IsTrue(mr.Result.IsSuccess(), mr.Result);
         }
 
         #endregion
@@ -141,7 +143,7 @@ namespace IntegratedTest.Inventory
         #region -  InventoryShipConfirm  -
 
         [Test, Order(20)]
-        public void InventoryShipConfirm()
+        public async Task InventoryShipConfirm()
         {
             var items = _inventories.DeepClone();
             foreach (var item in items)
@@ -158,11 +160,12 @@ namespace IntegratedTest.Inventory
             };
 
             var correlationId = Guid.NewGuid();
-            var msgCode = _InventoryApi.InventoryShipConfirmAsync(cmd, correlationId).ResultForTest();
+            var hr = await _InventoryApi.InventoryShipConfirmAsync(cmd, correlationId).ConfigureAwait(false);
+            var msgCode = await hr.GetMsgCodeAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess(), mr);
+            var mr = await _MsgResultStore.WaitForResultAsync<HandleResult>(correlationId).ConfigureAwait(false);
+            Assert.IsTrue(mr.Result.IsSuccess(), mr.Result);
         }
 
         #endregion
@@ -170,7 +173,7 @@ namespace IntegratedTest.Inventory
         #region -  UnholdOrderInventories  -
 
         [Test, Order(30)]
-        public void UnholdOrderInventories()
+        public async Task UnholdOrderInventories()
         {
             var items = _inventories.DeepClone();
 
@@ -183,11 +186,12 @@ namespace IntegratedTest.Inventory
             };
 
             var correlationId = Guid.NewGuid();
-            var msgCode = _InventoryApi.UnholdOrderInventoriesAsync(cmd, correlationId).ResultForTest();
+            var hr = await _InventoryApi.UnholdOrderInventoriesAsync(cmd, correlationId).ConfigureAwait(false);
+            var msgCode = await hr.GetMsgCodeAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess(), mr);
+            var mr = await _MsgResultStore.WaitForResultAsync<HandleResult>(correlationId).ConfigureAwait(false);
+            Assert.IsTrue(mr.Result.IsSuccess(), mr.Result);
         }
 
         #endregion
@@ -195,15 +199,16 @@ namespace IntegratedTest.Inventory
         #region -  GetAvailableInventory  -
 
         [Test]
-        public void GetAvailableInventory()
+        public async Task GetAvailableInventory()
         {
             var merchantId = "46e02472512f4ed1b388665fa2a1ea7c";
 
-            var a = _InventoryApi.GetAvailableInventoryAsync(merchantId, "ITEM1").Execute();
+            var a = await _InventoryApi.GetAvailableInventoryAsync(merchantId, "ITEM1").ConfigureAwait(false);
+            var msgCode = await a.GetMsgCodeAsync().ConfigureAwait(false);
 
             _Logger.Debug("{0}", a);
 
-            Assert.IsTrue(a.IsSuccess, a.GetMsgCodeAsync().Execute());
+            Assert.IsTrue(a.IsSuccess, msgCode);
         }
 
         #endregion
