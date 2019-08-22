@@ -22,6 +22,8 @@ namespace SyncSoft.Future.Passport.Api
         private IUserDF _UserDF => _lazyUserDF.Value;
 
         #endregion
+        // *******************************************************************************************************************************
+        #region -  GetSingleUser  -
 
         /// <summary>
         /// Get single user
@@ -37,11 +39,19 @@ namespace SyncSoft.Future.Passport.Api
             return null;
         }
 
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  CreateUser  -
+
         /// <summary>
         /// Create user
         /// </summary>
         [HttpPost("user")]
         public Task<string> CreateUserAsync(CreateUserCommand cmd) => RequestAsync(cmd);
+
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  UpdateUser  -
 
         /// <summary>
         /// Update user
@@ -49,11 +59,19 @@ namespace SyncSoft.Future.Passport.Api
         [HttpPut("user")]
         public Task<string> UpdateUserAsync(UpdateUserCommand cmd) => RequestAsync(cmd);
 
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  UserSaveProfile  -
+
         /// <summary>
         /// User save profile
         /// </summary>
         [HttpPut("user/profile")]
         public Task<string> UserSaveProfileAsync(UserSaveProfileCommand cmd) => RequestAsync(cmd);
+
+        #endregion
+        // *******************************************************************************************************************************
+        #region -  DeleteUser  -
 
         /// <summary>
         /// Delete user
@@ -68,5 +86,7 @@ namespace SyncSoft.Future.Passport.Api
 
             return MsgCODES.FUT_0000000002;
         }
+
+        #endregion
     }
 }

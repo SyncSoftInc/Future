@@ -26,16 +26,16 @@ namespace DataAccessTest.User
         };
 
         [Test, Order(0)]
-        public void InsertUser()
+        public async Task InsertUser()
         {
             var dto = _userDto.DeepClone();
 
-            var msgCode = _UserDAL.InsertUserAsync(dto).Execute();
+            var msgCode = await  _UserDAL.InsertUserAsync(dto).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(10)]
-        public void UpdateUser()
+        public async Task UpdateUser()
         {
             var dto = _userDto.DeepClone();
             dto.FirstName = "updated first";
@@ -45,14 +45,14 @@ namespace DataAccessTest.User
             dto.Status = UserStatusEnum.Inactive;
             dto.PermissionLevel = 0;
 
-            var msgCode = _UserDAL.UpdateUserAsync(dto).Execute();
+            var msgCode = await  _UserDAL.UpdateUserAsync(dto).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(100)]
-        public void DeleteUser()
+        public async Task DeleteUser()
         {
-            var msgCode = _UserDAL.DeleteUserAsync(_userDto.ID).Execute();
+            var msgCode = await  _UserDAL.DeleteUserAsync(_userDto.ID).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
     }

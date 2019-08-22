@@ -28,8 +28,8 @@ namespace BusinessTest.Account
             LastLoginUtc = DateTime.UtcNow,
         };
 
-        [Test]
-        public void InsertAccount()
+        [Test, Order(0)]
+        public async Task InsertAccount()
         {
             var cmd = new CreateAccountCommand
             {
@@ -39,15 +39,18 @@ namespace BusinessTest.Account
                 Status = _accountDto.Status,
             };
 
-            var msgCode = _AccountService.CreateAsync(cmd).Execute();
+            var msgCode = await _AccountService.CreateAsync(cmd).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
-        [Test]
-        public void VerifyUsernamePassword()
+        [Test, Order(1)]
+        public async Task DeleteAccount()
         {
-            var dto = _AccountService.VerifyUsernamePasswordAsync(_accountDto.Username, _accountDto.Password).Execute();
+            var dto = await _AccountService.VerifyUsernamePasswordAsync(_accountDto.Username, _accountDto.Password).ConfigureAwait(false);
             Assert.IsNotNull(dto);
+
+            var msgCode = await _AccountService.DeleteAsync(new DeleteAccountCommand { ID = dto.ID }).ConfigureAwait(false);
+            Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
     }
 }

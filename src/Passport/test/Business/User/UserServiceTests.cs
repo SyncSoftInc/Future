@@ -43,7 +43,7 @@ namespace BusinessTest.User
         };
 
         [Test, Order(0)]
-        public void InsertUser()
+        public async Task InsertUser()
         {
             var cmd = new CreateUserCommand
             {
@@ -59,12 +59,12 @@ namespace BusinessTest.User
                 PermissionLevel = _userDto.PermissionLevel
             };
 
-            var msgCode = _UserService.CreateUserAsync(cmd).Execute();
+            var msgCode = await _UserService.CreateUserAsync(cmd).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(50)]
-        public void UserSaveProfile()
+        public async Task UserSaveProfile()
         {
             var cmd = new UserSaveProfileCommand
             {
@@ -77,12 +77,12 @@ namespace BusinessTest.User
                 Email = _userDto.Email + "_UPDATE",
             };
 
-            var msgCode = _UserService.UserSaveProfileAsync(cmd).Execute();
+            var msgCode = await _UserService.UserSaveProfileAsync(cmd).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(75)]
-        public void UpdateUser()
+        public async Task UpdateUser()
         {
             var cmd = new UpdateUserCommand
             {
@@ -98,15 +98,15 @@ namespace BusinessTest.User
                 PermissionLevel = 1
             };
 
-            var msgCode = _UserService.UpdateUserAsync(cmd).Execute();
+            var msgCode = await _UserService.UpdateUserAsync(cmd).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(100)]
-        public void DeleteUser()
+        public async Task DeleteUser()
         {
             var cmd = new DeleteUserCommand { ID = _userDto.ID, };
-            var msgCode = _UserService.DeleteUserAsync(cmd).Execute();
+            var msgCode = await _UserService.DeleteUserAsync(cmd).ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
     }

@@ -42,7 +42,7 @@ namespace IntegratedTest.User
         };
 
         [Test, Order(0)]
-        public void CreateUser()
+        public async Task CreateUser()
         {
             var cmd = new
             {
@@ -58,12 +58,14 @@ namespace IntegratedTest.User
                 PermissionLevel = _userDto.PermissionLevel
             };
 
-            var msgCode = _UserApi.CreateUserAsync(cmd).ResultForTest();
+            var hr = await _UserApi.CreateUserAsync(cmd).ConfigureAwait(false);
+            var msgCode = await hr.GetMsgCodeAsync().ConfigureAwait(false);
+
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(25)]
-        public void UpdateUser()
+        public async Task UpdateUser()
         {
             var cmd = new
             {
@@ -79,12 +81,13 @@ namespace IntegratedTest.User
                 PermissionLevel = 1
             };
 
-            var msgCode = _UserApi.UpdateUserAsync(cmd).ResultForTest();
+            var hr = await _UserApi.UpdateUserAsync(cmd).ConfigureAwait(false);
+            var msgCode = await hr.GetMsgCodeAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(50)]
-        public void UserSaveProfile()
+        public async Task UserSaveProfile()
         {
             var cmd = new
             {
@@ -97,14 +100,16 @@ namespace IntegratedTest.User
                 Email = _userDto.Email + "_UPDATE",
             };
 
-            var msgCode = _UserApi.UserSaveProfileAsync(cmd).ResultForTest();
+            var hr = await _UserApi.UserSaveProfileAsync(cmd).ConfigureAwait(false);
+            var msgCode = await hr.GetMsgCodeAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
 
         [Test, Order(75)]
-        public void DeleteUser()
+        public async Task DeleteUser()
         {
-            var msgCode = _UserApi.DeleteUserAsync(_userDto.ID).ResultForTest();
+            var hr = await _UserApi.DeleteUserAsync(_userDto.ID).ConfigureAwait(false);
+            var msgCode = await hr.GetMsgCodeAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
         }
     }

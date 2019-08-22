@@ -19,18 +19,22 @@ namespace SyncSoft.Future.Passport.Domain.User.DeleteUser
             var cmd = Context.Get<DeleteUserCommand>(DeleteUserTransaction.Parameters_Command);
 
             var oldDto = await _AccountDAL.GetAccountAsync(cmd.ID).ConfigureAwait(false);
-            if (oldDto.IsNull()) throw new Exception(MsgCODES.FUT_0000000002);
-            Context.Set(DeleteUserTransaction.Parameters_Account_BackUp, oldDto);
-
-            var msgCode = await _AccountDAL.DeleteAccountAsync(cmd.ID).ConfigureAwait(false);
-            if (!msgCode.IsSuccess()) throw new Exception(msgCode);
+            if (oldDto.IsNotNull())
+            {// 有数据才删除
+                Context.Set(DeleteUserTransaction.Parameters_Account_BackUp, oldDto);
+                var msgCode = await _AccountDAL.DeleteAccountAsync(cmd.ID).ConfigureAwait(false);
+                if (!msgCode.IsSuccess()) throw new Exception(msgCode);
+            }
         }
 
         protected override async Task RollbackAsync()
         {
             var dto = Context.Get<AccountDTO>(DeleteUserTransaction.Parameters_Account_BackUp);
-            var msgCode = await _AccountDAL.InsertAccountAsync(dto).ConfigureAwait(false);
-            if (!msgCode.IsSuccess()) throw new Exception(msgCode);
+            if (dto.IsNotNull())
+            {// 有备份才恢复
+                var msgCode = await _AccountDAL.InsertAccountAsync(dto).ConfigureAwait(false);
+                if (!msgCode.IsSuccess()) throw new Exception(msgCode);
+            }
         }
     }
 }

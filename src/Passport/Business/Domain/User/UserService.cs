@@ -37,7 +37,7 @@ namespace SyncSoft.Future.Passport.Domain.User
             // 开始创建事务
             var tran = new CreateUserTransaction(cmd);
             await tran.RunAsync().ConfigureAwait(false);
-            return MsgCodes.SUCCESS;
+            return tran.IsSuccess ? MsgCODES.SUCCESS : tran.ReadLogs().JointStrings();
         }
 
         #endregion
@@ -59,7 +59,7 @@ namespace SyncSoft.Future.Passport.Domain.User
         {
             var tran = new UserSaveProfileTransaction(cmd);
             await tran.RunAsync().ConfigureAwait(false);
-            return MsgCodes.SUCCESS;
+            return tran.IsSuccess ? MsgCODES.SUCCESS : tran.ReadLogs().JointStrings();
         }
 
         #endregion
@@ -70,7 +70,7 @@ namespace SyncSoft.Future.Passport.Domain.User
         {
             var tran = new DeleteUserTransaction(cmd);
             await tran.RunAsync().ConfigureAwait(false);
-            return MsgCodes.SUCCESS;
+            return tran.IsSuccess ? MsgCODES.SUCCESS : tran.ReadLogs().JointStrings();
         }
 
         #endregion
