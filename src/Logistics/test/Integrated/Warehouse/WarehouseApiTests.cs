@@ -83,7 +83,7 @@ namespace IntegratedTest.Warehouse
         public async Task GetSingle()
         {
             var hr = await _WarehouseApi.GetSingleAsync(MerchantID, WarehouseID).ConfigureAwait(false);
-            var dto = await hr.GetMsgCodeAsync().ConfigureAwait(false);
+            var dto = await hr.GetResultAsync().ConfigureAwait(false);
             Assert.IsNotNull(dto);
         }
 

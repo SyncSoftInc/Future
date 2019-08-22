@@ -22,9 +22,9 @@ namespace BusinessTest.User
             FirstName = "first",
             LastName = "last",
             MiddleName = "middle",
-            Email = "test@syncsoftinc.co",
+            Email = "test@syncsoftinc.com",
             Status = UserStatusEnum.Active,
-            Roles = 68,
+            Roles = (int)UserRoleEnum.Admin,
             PermissionLevel = 5
         };
 
@@ -33,18 +33,21 @@ namespace BusinessTest.User
             ID = new Guid("{2FA77635-63E4-493C-8930-BCC186AD0326}"),
             Username = "unittest",
             Password = "Famous901",
-            PasswordSalt = "ABCDEFG",
-            LoginFailedCount = 0,
-            LastLoginIP = "127.0.0.1",
             Status = AccountStatusEnum.Active,
-            UpdatedOnUtc = DateTime.UtcNow,
             CreatedOnUtc = DateTime.UtcNow,
-            LastLoginUtc = DateTime.UtcNow,
         };
 
         [Test, Order(0)]
         public async Task InsertUser()
         {
+            //// 建立SA用户用，去掉注释
+            //_userDto.ID = new Guid("{00000000-0000-0000-0000-000000000001}");
+            //_userDto.FirstName = "Super";
+            //_userDto.LastName = "Admin";
+            //_userDto.MiddleName = null;
+            //_userDto.Email = "sa@syncsoftinc.com";
+            //_accountDto.Username = "sa";
+
             var cmd = new CreateUserCommand
             {
                 ID = _userDto.ID,

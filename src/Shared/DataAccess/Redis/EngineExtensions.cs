@@ -16,10 +16,7 @@ namespace SyncSoft.App
             {
                 ObjectContainer.Register<IMerchantSettingProvider, RedisMerchantSettingProvider>(LifeCycleEnum.Singleton);
                 ObjectContainer.Register<IMerchantSettingDB>(() => new MerchantSettingDB(CONSTANTS.CONNECTION_STRINGS.REDIS_DEFAULT), LifeCycleEnum.Singleton);
-
-                    //ObjectContainer.Register<IShowConnStrProvider, RedisShowConnStrProvider>(LifeCycleEnum.Singleton);
-                    //ObjectContainer.Register<IConnStrDB>(() => new ConnStrDB(CONSTANTS.CONNECTION_STRINGS.REDIS_DEFAULT), LifeCycleEnum.Singleton);
-                };
+            };
 
             return configurator;
         }
