@@ -5,10 +5,10 @@ using SyncSoft.Future;
 namespace DataAccessTest
 {
     [SetUpFixture]
-    public class Setup
+    public class Startup
     {
         [OneTimeSetUp]
-        public static void Startup()
+        public static void Start()
         {
             TestEngine.Init()
                 .UseLogisticsRedis()

@@ -60,7 +60,7 @@ namespace IntegratedTest.Warehouse
 
 
         [Test, Order(0)]
-        public void Create()
+        public async Task Create()
         {
             var cmd = new
             {
@@ -71,22 +71,24 @@ namespace IntegratedTest.Warehouse
 
             var correlationId = Guid.NewGuid();
 
-            var msgCode = _WarehouseApi.CreateAsync(cmd, correlationId).ResultForTest();
+            var hr = await _WarehouseApi.CreateAsync(cmd, correlationId).ConfigureAwait(false);
+            var msgCode = await hr.GetResultAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess(), mr);
+            var mr = await _MsgResultStore.WaitForResultAsync<HandleResult>(correlationId).ConfigureAwait(false);
+            Assert.IsTrue(mr.Result.IsSuccess(), mr.Result);
         }
 
         [Test, Order(1)]
-        public void GetSingle()
+        public async Task GetSingle()
         {
-            var dto = _WarehouseApi.GetSingleAsync(MerchantID, WarehouseID).ResultForTest();
+            var hr = await _WarehouseApi.GetSingleAsync(MerchantID, WarehouseID).ConfigureAwait(false);
+            var dto = await hr.GetResultAsync().ConfigureAwait(false);
             Assert.IsNotNull(dto);
         }
 
         [Test, Order(2)]
-        public void Update()
+        public async Task Update()
         {
             var cmd = new
             {
@@ -97,15 +99,16 @@ namespace IntegratedTest.Warehouse
 
             var correlationId = Guid.NewGuid();
 
-            var msgCode = _WarehouseApi.UpdateAsync(cmd, correlationId).ResultForTest();
+            var hr = await _WarehouseApi.UpdateAsync(cmd, correlationId).ConfigureAwait(false);
+            var msgCode = await hr.GetResultAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess(), mr);
+            var mr = await _MsgResultStore.WaitForResultAsync<HandleResult>(correlationId).ConfigureAwait(false);
+            Assert.IsTrue(mr.Result.IsSuccess(), mr.Result);
         }
 
         [Test, Order(3)]
-        public void Delete()
+        public async Task Delete()
         {
             var cmd = new
             {
@@ -114,11 +117,12 @@ namespace IntegratedTest.Warehouse
             };
             var correlationId = Guid.NewGuid();
 
-            var msgCode = _WarehouseApi.DeleteAsync(cmd, correlationId).ResultForTest();
+            var hr = await _WarehouseApi.DeleteAsync(cmd, correlationId).ConfigureAwait(false);
+            var msgCode = await hr.GetResultAsync().ConfigureAwait(false);
             Assert.IsTrue(msgCode.IsSuccess(), msgCode);
 
-            var mr = _MsgResultStore.WaitForResultAsync<string>(correlationId).Execute();
-            Assert.IsTrue(mr.IsSuccess(), mr);
+            var mr = await _MsgResultStore.WaitForResultAsync<HandleResult>(correlationId).ConfigureAwait(false);
+            Assert.IsTrue(mr.Result.IsSuccess(), mr.Result);
         }
     }
 }

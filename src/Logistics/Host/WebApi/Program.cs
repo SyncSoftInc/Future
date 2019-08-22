@@ -12,6 +12,8 @@ namespace SyncSoft.Future.Logistics.WebApi
                 .UseMessageQueue()
                 .UseRabbitMQ()
                 .UseLogisticsRedis()
+                .UseLogisticsMySql()
+                .UseLogisticsDF()
                 .UseJsonConfiguration()
                 .Start();
 

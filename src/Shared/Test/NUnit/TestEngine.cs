@@ -1,5 +1,6 @@
 ﻿using SyncSoft.App;
 using SyncSoft.App.EngineConfigs;
+using SyncSoft.App.Redis.Messaging;
 
 namespace SyncSoft.Future
 {
@@ -9,9 +10,13 @@ namespace SyncSoft.Future
         {
             return Engine.Init()
                 .UseSimpleInjector()
-                .UseAppDefaultComponents()
+                .UseAppDefaultComponents(options =>
+                {
+                    options.MsgResultStoreType = typeof(RedisMsgResultStore);
+                })
                 .UseJsonNet()
                 .UseSerilog()
+                .UseECPRedis()
                 .UseUnitTestApiClient();
         }
     }

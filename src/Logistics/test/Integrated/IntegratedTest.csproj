@@ -11,15 +11,16 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\Shared\DataAccess\Redis\SyncSoft.Future.Redis.csproj" />
         <ProjectReference Include="..\..\..\Shared\Test\NUnit\SyncSoft.Future.NUnit.csproj" />
         <ProjectReference Include="..\..\Client\API\SyncSoft.Future.Logistics.API.csproj" />
         <ProjectReference Include="..\..\DataAccess\Redis\SyncSoft.Future.Logistics.Redis.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="appsettings.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
